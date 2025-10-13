@@ -24,6 +24,7 @@ body {
     overflow: hidden;
 }
 
+
 .screen {
     width: 100vw; height: 100vh;
     display: flex; flex-direction: column;
@@ -694,25 +695,25 @@ label {
     font-size: 1rem;
 }
 #show-instructions-btn:hover {
-    border-color: var(--color-gold);
-    color: var(--color-gold);
+    /* border-color: var(--color-gold);
+    color: var(--color-gold); */
 }
 
 /* Scrollbar personalizado para el contenido de instrucciones */
-.instructions-content::-webkit-scrollbar {
+.modal-content::-webkit-scrollbar {
     width: 8px;
 }
 
-.instructions-content::-webkit-scrollbar-track {
+.modal-content::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0.3);
 }
 
-.instructions-content::-webkit-scrollbar-thumb {
+.modal-content::-webkit-scrollbar-thumb {
     background: var(--color-gold);
     border-radius: 4px;
 }
 
-.instructions-content::-webkit-scrollbar-thumb:hover {
+.modal-content::-webkit-scrollbar-thumb:hover {
     background: #b8941f;
 }
 
