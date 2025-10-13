@@ -2,29 +2,40 @@
 // CONFIGURACIÓN - ¡AQUÍ ES DONDE PONÉS TUS DATOS!
 // ===================================================================================
 const JEFES = [
-    { 
+    {   
+        id: 'horrax',
         nombre: "Horrax, el Vástago de la Escoria", 
         imagenUrl: 'img/horrax1.png',
         fondoUrl: 'img/horraxBg.png',
         lore: "Horrax no fue derrotado por un enemigo, sino por su propio martillo. En su obsesión por la rutina inquebrantable, trató su espíritu como hierro y su voluntad como fuego, golpeándose a sí mismo hasta quebrarse. Representa el burnout y la disciplina tóxica, el recordatorio de que la verdadera fuerza no reside en la resistencia infinita, sino en el equilibrio entre el esfuerzo y el descanso."
     },
     { 
+        id: 'alberic',
         nombre: "Alberic, el Escriba sin Rostro", 
         imagenUrl: 'img/alberic.png',        
         fondoUrl: 'img/albericBg.png',
         lore:'Alberic fue un erudito que buscó el conocimiento absoluto, pero en su afán olvidó que el saber no es un tesoro para ser acumulado, sino una herramienta para ser usada. Ahora es una prisión de su propia biblioteca, un eco de la procrastinación que nace de la sobrecarga de información. Cada golpe contra él es un acto de decisión, una página leída en lugar de apilada, una idea ejecutada en lugar de solo pensada.'
     },
     { 
+        id: 'morwenna',
         nombre: "Morwenna, Madre de los Brotes Marchitos", 
         imagenUrl: 'img/morwenna.png',        
         fondoUrl: 'img/morwennaBg.png',
         lore:'Morwenna fue una vez la guardiana de las pasiones y los sueños incipientes. Pero por cada talento no cultivado, por cada idea abandonada, una de sus flores se marchitó. Ahora es un monumento al potencial perdido y a la apatía que crece sobre los jardines descuidados del alma. Derrotarla es un acto de reencuentro: regar las semillas de la vieja inspiración o arrancar las malas hierbas del arrepentimiento para plantar algo nuevo.'
     },
     { 
+        id: 'lysandra',
         nombre: "Lysandra, la Vidente Estancada", 
         imagenUrl: 'img/lysandra.png',        
         fondoUrl: 'img/lysandraBg.png',
         lore:'Condenada a ver todos los hilos del tiempo, Lysandra se ahogó en ellos. Obsesionada con los errores del pasado y aterrorizada por las infinitas posibilidades del futuro, perdió la capacidad de existir en el único momento que importa: el ahora. Luchar contra ella es un ejercicio de presencia, un juramento para anclar la mente en el presente y actuar, sin el peso de lo que fue ni la ansiedad de lo que será.'
+    },
+    { 
+        id: 'aurelian',
+        nombre: "Aurelian, El Juez Saliente", 
+        imagenUrl: 'img/aurelian.png',        
+        fondoUrl: 'img/aurelianBg.png',
+        lore:'Aurelian es la manifestación del Síndrome del Impostor y el miedo paralizante al juicio ajeno. No te ataca directamente, sino que te aplasta con el peso de tu propia autocrítica. Es el miedo a no ser suficiente, a ser "descubierto" como un fraude. Se sienta en silencio, observando, y su arma principal es un gran espejo que no refleja tu imagen, sino una versión grotesca y fallida de tus mayores inseguridades. La batalla contra él es una prueba de confianza en tu propio trabajo y en tu propio valor, a pesar de las imperfecciones.'
     },
 ];
 
@@ -63,19 +74,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const bossImage = document.getElementById('boss-image');
     const sparksContainer = document.getElementById('sparks-container');
     const pauseBtn = document.getElementById('pause-btn');
+    const bestiaryBtn = document.getElementById('bestiary-btn');
+    const bestiaryModal = document.getElementById('bestiary-modal');
+    const closeBestiaryBtn = document.getElementById('close-bestiary-btn');
+    const bestiaryStats = document.getElementById('bestiary-stats');
     // --- NUEVAS VARIABLES PARA PARTÍCULAS DEL TIMER ---
     const timerParticlesContainer = document.getElementById('timer-particles-container');
     let timerParticlesInterval = null;
 
     // --- NUEVOS ELEMENTOS PARA LORE ---
-const bossInfoBtn = document.getElementById('boss-info-btn');
-const loreScreen = document.getElementById('lore-screen');
-const loreTitle = document.getElementById('lore-title');
-const loreImage = document.getElementById('lore-image');
-const loreText = document.getElementById('lore-text');
-const closeLoreBtn = document.getElementById('close-lore-btn');
+    const bossInfoBtn = document.getElementById('boss-info-btn');
+    const loreScreen = document.getElementById('lore-screen');
+    const loreTitle = document.getElementById('lore-title');
+    const loreImage = document.getElementById('lore-image');
+    const loreText = document.getElementById('lore-text');
+    const closeLoreBtn = document.getElementById('close-lore-btn');
 
-let currentBoss = null; // Para guardar el jefe actual
+    let currentBoss = null; // Para guardar el jefe actual
     
     // Elementos de audio
     const hoverSound = document.getElementById('hover-sound');
@@ -97,7 +112,59 @@ let currentBoss = null; // Para guardar el jefe actual
     let selectedHours = 0;
     let sparksInterval = null;
     const BREAK_DURATION = 5 * 60;
+    let minuteSaveCounter = 0;
+    let currentBossId = null; // Guardará el ID del jefe actual
 
+
+    // --- LOCAL STORAGE FUNCTIONS ---
+    function getStats() {
+        const statsString = localStorage.getItem('focusSoulStats');
+        let parsedStats;
+
+        try {
+            parsedStats = statsString ? JSON.parse(statsString) : {};
+        } catch (e) {
+            console.error("Error al parsear focusSoulStats del localStorage:", e);
+            parsedStats = {}; // Si hay error, inicializa vacío
+        }
+
+        // Garantiza que totalMinutos siempre es un número, por defecto 0
+        parsedStats.totalMinutos = typeof parsedStats.totalMinutos === 'number' ? parsedStats.totalMinutos : 0;
+        
+        // Garantiza que bestiasMatadas siempre es un objeto
+        parsedStats.bestiasMatadas = typeof parsedStats.bestiasMatadas === 'object' && parsedStats.bestiasMatadas !== null ? parsedStats.bestiasMatadas : {};
+
+        return parsedStats;
+    }
+
+    function saveStats(stats) {
+        localStorage.setItem('focusSoulStats', JSON.stringify(stats));
+    }
+
+function getRank(totalMinutos) {
+        const safeTotalMinutos = typeof totalMinutos === 'number' ? totalMinutos : 0;
+        const totalHours = safeTotalMinutos / 60;
+
+        // El orden de los IF es crucial, de mayor a menor.
+        // El caso base (menos de 1 hora) DEBE ser el último `return` o el primer `if` con `totalHours < 1`
+        if (totalHours >= 1000) return { rango: "Entidad Cósmica", lore: "Has trascendido las barreras del tiempo y la mente, fundiéndote con la esencia del foco eterno.", icon: "✨" };
+        if (totalHours >= 750) return { rango: "Mente Ancestral", lore: "Tu voluntad es tan antigua como el primer pensamiento. Nada escapa a tu concentración.", icon: "🧠" };
+        if (totalHours >= 500) return { rango: "Heraldo del Abismo", lore: "Has dominado los vacíos de la distracción. El abismo te obedece.", icon: "🌌" };
+        if (totalHours >= 400) return { rango: "Alma Trascendida", lore: "Tu espíritu se ha elevado más allá de las limitaciones mundanas. La concentración es tu estado natural.", icon: "🌀" };
+        if (totalHours >= 300) return { rango: "Iluminado", lore: "La luz de tu enfoque es una guía para otros. Has encontrado la claridad perfecta.", icon: "🌟" };
+        if (totalHours >= 200) return { rango: "Arconte del Silencio", lore: "Gobiernas los dominios de la calma. El ruido del mundo se disipa ante tu presencia.", icon: "🦉" };
+        if (totalHours >= 150) return { rango: "Señor del Pacto", lore: "Los rituales del foco son tu dominio. Comandas la voluntad con maestría absoluta.", icon: "👑" };
+        if (totalHours >= 100) return { rango: "Maestro del Ritual", lore: "Tu disciplina es un arma legendaria. Has convertido el tiempo en tu mayor aliado.", icon: "⚖️" };
+        if (totalHours >= 75) return { rango: "Cazador de Ecos", lore: "Dominas el arte de rastrear y someter las distracciones más escurridizas.", icon: "🗡️" };
+        if (totalHours >= 50) return { rango: "Veterano de la Forja", lore: "Has resistido innumerables batallas. La Forja es tu segundo hogar.", icon: "🔥" };
+        if (totalHours >= 25) return { rango: "Guardián del Conocimiento", lore: "Proteges las verdades con tu atención inquebrantable. Tu foco es un escudo.", icon: "🛡️" };
+        if (totalHours >= 10) return { rango: "Erudito", lore: "Has comenzado a desentrañar los misterios del saber. Tu curiosidad es insaciable.", icon: "📖" };
+        if (totalHours >= 5) return { rango: "Acólito", lore: "Los primeros ritos han sido aprendidos. La disciplina comienza a tomar forma.", icon: "📜" };
+        if (totalHours >= 1) return { rango: "Iniciado", lore: "Has sellado tu primer pacto. La aventura apenas comienza.", icon: "🕯️" };
+        
+        // ESTE ES EL CASO BASE CORREGIDO que faltaba para 0 minutos
+        return { rango: "Neófito", lore: "Un alma nueva en la senda del foco. El camino se abre ante ti.", icon: "🌑" };
+    }
     // --- INITIALIZATION ---
     function initialize() {
             // Inicializar opciones de horas en el SELECT
@@ -127,12 +194,39 @@ let currentBoss = null; // Para guardar el jefe actual
         });
         updateTabTitle(0, 'lobby');
         updateFavicon('lobby');
-        bossInfoBtn.addEventListener('click', showLore);
         bossImage.addEventListener('click', showLore); // ← AGREGAR ESTA LÍNEA
         closeLoreBtn.addEventListener('click', hideLore);
         // Event listeners para pausa
         pauseBtn.addEventListener('click', togglePause);
+        bestiaryBtn.addEventListener('click', showBestiary);
+        closeBestiaryBtn.addEventListener('click', () => {
+            bestiaryModal.classList.add('hidden');
+        });
     }
+    // --- LOCAL STORAGE & BESTIARY FUNCTIONS ---
+
+
+    function findFavoriteVictim(bestiasMatadas) {
+        if (!bestiasMatadas || Object.keys(bestiasMatadas).length === 0) return null;
+        
+        let favoriteId = null;
+        let maxKills = 0;
+
+        for (const bossId in bestiasMatadas) {
+            if (bestiasMatadas[bossId] > maxKills) {
+                maxKills = bestiasMatadas[bossId];
+                favoriteId = bossId;
+            }
+        }
+        
+        // Buscar el nombre completo del jefe usando su ID
+        const favoriteBoss = JEFES.find(jefe => jefe.id === favoriteId);
+        if (favoriteBoss) {
+            return { id: favoriteId, nombre: favoriteBoss.nombre, kills: maxKills };
+        }
+        return null;
+    }
+
 
     // Función para actualizar el título de la pestaña
     function updateTabTitle(seconds, state = 'battle') {
@@ -342,6 +436,7 @@ function createTimerSpark() {
         
         // Elegir un jefe aleatorio y guardarlo
         currentBoss = JEFES[Math.floor(Math.random() * JEFES.length)];
+        currentBossId = currentBoss.id; 
         backgroundContainer.style.backgroundImage = `url('${currentBoss.fondoUrl}')`;
         bossImage.src = currentBoss.imagenUrl;
         bossName.textContent = currentBoss.nombre;
@@ -415,6 +510,7 @@ function createTimerSpark() {
         add10MinBtn.disabled = false;
         
         targetTime = Date.now() + duration * 1000;
+        minuteSaveCounter = 0; // Reiniciamos el contador
         
         clearInterval(timerInterval);
         timerInterval = setInterval(() => {
@@ -423,8 +519,19 @@ function createTimerSpark() {
                 return;
             }
             const timeRemaining = Math.round((targetTime - Date.now()) / 1000);
+            
+            // --- LÓGICA DE GUARDADO CADA MINUTO (AÑADIR ESTO) ---
+            minuteSaveCounter++;
+            if (minuteSaveCounter >= 60) {
+                const stats = getStats();
+                stats.totalMinutos = (stats.totalMinutos || 0) + 1;
+                saveStats(stats);
+                minuteSaveCounter = 0;
+            }
+            // --- FIN DEL BLOQUE AÑADIDO ---
+
             updateTimerDisplay(timeRemaining);
-            updateTabTitle(timeRemaining, 'battle'); // ← AGREGAR ESTA LÍNEA
+            updateTabTitle(timeRemaining, 'battle');
             
             if (timeRemaining <= 0) {
                 clearInterval(timerInterval);
@@ -440,6 +547,12 @@ function createTimerSpark() {
         playSound(impactSound);
         isTimerRunning = false;
         battleScreen.classList.remove('timer-running');
+
+        // LÓGICA DEL BESTIARIO AÑADIDA AQUÍ
+        const stats = getStats();
+        // stats.totalAtaques += 1;
+        saveStats(stats);
+
         dealtSeconds += loadedSeconds;
         
         // EFECTO DE IMPACTO VISUAL ÉPICO
@@ -572,7 +685,86 @@ function createTimerSpark() {
         // DETENER PARTÍCULAS DEL TIMER
         stopTimerParticles();
         battleScreen.classList.add('hidden');
+
+        if (currentBoss) { // Nos aseguramos de que haya un jefe actual
+        const stats = getStats();
+        // Si el jefe no existe en el bestiario, lo inicializa. Si existe, le suma 1.
+
+        // LÓGICA DEL BESTIARIO: Usar currentBossId
+        if (currentBossId) { // Nos aseguramos de que haya un jefe actual
+            const stats = getStats();
+            stats.bestiasMatadas[currentBossId] = (stats.bestiasMatadas[currentBossId] || 0) + 1;
+            saveStats(stats);
+        }
+        stats.bestiasMatadas[currentBoss.nombre] = (stats.bestiasMatadas[currentBoss.nombre] || 0) + 1;
+        saveStats(stats);
+    }
         showMessage("PACTO CUMPLIDO", 0, () => setTimeout(() => location.reload(), 3000));
+    }
+
+    // --- AÑADIR ESTA NUEVA FUNCIÓN ---
+    function showBestiary() {
+        const stats = getStats();
+        const favorite = findFavoriteVictim(stats.bestiasMatadas);
+        const rank = getRank(stats.totalMinutos);
+        const totalHours = (stats.totalMinutos / 60).toFixed(1);
+
+        let content = `
+            <div class="bestiary-header">
+                <span class="rank-icon">${rank.icon}</span>
+                <div class="rank-info">
+                    <h3 class="rank-title">${rank.rango}</h3>
+                    <p class="rank-lore"><i>"${rank.lore}"</i></p>
+                </div>
+            </div>
+            <hr class="bestiary-divider">
+            <div class="bestiary-stats-grid">
+                <div>
+                    <h4>Tiempo Bajo Tensión</h4>
+                    <p>${totalHours} horas</p>
+                </div>
+                <div>
+                    <h4>Bestias Cazadas Totales</h4>
+                    <p>${Object.values(stats.bestiasMatadas).reduce((sum, current) => sum + current, 0)}</p>
+                </div>
+            </div>
+            <hr class="bestiary-divider">
+        `;
+        
+        if (favorite && favorite.kills > 0) {
+            content += `
+                <div class="favorite-victim">
+                    <h4>Tu Víctima Favorita:</h4>
+                    <p>${favorite.nombre} (${favorite.kills} ${favorite.kills > 1 ? 'veces' : 'vez'})</p>
+                    </div>
+                <hr class="bestiary-divider">
+            `;
+        }
+
+        content += `
+            <h4 id="boss-kill-title">Conteo de Caza Detallado:</h4>
+            <ul class="boss-kill-list">
+        `;
+        
+        if (Object.keys(stats.bestiasMatadas).length === 0) {
+            content += "<li>Aún no has cazado ninguna bestia.</li>";
+        } else {
+            // Aseguramos que se muestren todos los jefes, incluso si tienen 0 kills
+            JEFES.forEach(jefe => {
+                const count = stats.bestiasMatadas[jefe.id] || 0;
+                if (count > 0) {
+                    content += `<li>${jefe.nombre}: ${count} ${count === 1 ? 'vez' : 'veces'}</li>`;
+                } else {
+                    content += `<li class="unhunted-boss">${jefe.nombre}: (No cazado aún)</li>`;
+                }
+            });
+        }
+        content += `</ul>
+        <hr class="bestiary-divider">
+        `;
+        
+        bestiaryStats.innerHTML = content;
+        bestiaryModal.classList.remove('hidden');
     }
 
     function updateUI() {

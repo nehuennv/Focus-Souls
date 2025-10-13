@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Focus Soul</title>
+    <title>Focus Souls</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <main id="lobby-screen" class="screen">
-        <h1 class="main-title">FOCUS SOUL</h1>
+        <h1 class="main-title">FOCUS SOULS</h1>
         <label for="hours-offering">SELLA TU PACTO: ¿CUÁL ES TU OFRENDA?</label>
         
         <div class="menu-options">
@@ -20,12 +20,14 @@
             </div>
             <button id="start-battle-btn">COMENZAR RITUAL</button>
             <button id="show-instructions-btn">RITUAL DE INICIACIÓN</button>
+            <button id="bestiary-btn">BESTIARIO</button> </div>
+
         </div>
+        
         
         <!-- CRÉDITOS -->
         <div class="credits">
-            Creado por [Tu Nombre] | 
-            <a href="https://instagram.com/tuinstagram" target="_blank">Instagram</a>
+            FOCUS SOULS™ & <a href="https://www.instagram.com/nehuenvg/">©NEHUEN VILLAVICENCIO</a> Entertaiment Inc/ © 2005-2025 Software Inc
         </div>
         
         <!-- Efecto de chispas -->
@@ -67,9 +69,9 @@
                 <div id="boss-name-container">
                     <div class="boss-name-wrapper">
                         <span id="boss-name"></span>
-                        <button id="boss-info-btn" class="info-btn" title="Conocer el lore del jefe">
+                        <!-- <button id="boss-info-btn" class="info-btn" title="Conocer el lore del jefe">
                             <span>ⓘ</span>
-                        </button>
+                        </button> -->
                     </div>
                 </div>
                 <div id="health-bar-container">
@@ -156,7 +158,15 @@
     <audio id="break-sound" preload="auto">
         <source src="sounds/break.mp3" type="audio/mpeg">
     </audio>
-
+    <div id="bestiary-modal" class="screen hidden message-screen">
+        <div class="modal-content instructions-modal-content"> <h2 id="bestiary-title" class="modal-title">Bestiario del Pacto</h2>
+            
+            <div id="bestiary-stats">
+                </div>
+            
+            <button id="close-bestiary-btn" class="close-modal-btn">Cerrar Bestiario</button>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
