@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Soul</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main id="lobby-screen" class="screen">
+        <h1 class="main-title">FOCUS SOUL</h1>
+        <label for="hours-offering">SELLA TU PACTO: ¿CUÁL ES TU OFRENDA?</label>
+        
+        <div class="menu-options">
+            <div class="select-wrapper">
+                <select id="hours-offering">
+                    <option value="" disabled selected>SELECCIONA TU OFRENDA</option>
+                </select>
+            </div>
+            <button id="start-battle-btn">COMENZAR RITUAL</button>
+            <button id="show-instructions-btn">RITUAL DE INICIACIÓN</button>
+        </div>
+        
+        <!-- CRÉDITOS -->
+        <div class="credits">
+            Creado por [Tu Nombre] | 
+            <a href="https://instagram.com/tuinstagram" target="_blank">Instagram</a>
+        </div>
+        
+        <!-- Efecto de chispas -->
+        <div id="sparks-container"></div>
+    </main>
+
+    <main id="battle-screen" class="screen hidden">
+        <div id="background-container" class="background-container"></div>
+        <div class="vignette"></div>  <!-- ← AGREGAR ESTA LÍNEA -->
+
+        <div class="battle-container">
+            <nav id="action-navbar" class="action-navbar">
+                <button id="back-to-menu-btn">Romper Pacto</button>
+                <div class="load-time-controls">
+                    <button class="load-time-btn" data-time="10">+10 MIN</button>
+                    <button class="load-time-btn" data-time="30">+30 MIN</button>
+                    <button class="load-time-btn" data-time="60">+60 MIN</button>
+                </div>
+                <button id="launch-attack-btn" disabled>LANZAR ATAQUE</button>
+            </nav>
+        <section class="center-area">
+            <div id="boss-image-container">
+                <img id="boss-image" src="" alt="Jefe de Batalla">
+            </div>
+            <button id="pause-btn" class="pause-button hidden" title="Pausar ritual">
+                ⏸️
+            </button>
+            <!-- CONTENEDOR DE PARTÍCULAS DEL TIMER -->
+            <div id="timer-particles-container" class="timer-particles-container"></div>
+            
+            <div class="timer-display">
+                <span class="timer-minutes">00</span>
+                <span class="timer-colon">:</span>
+                <span class="timer-seconds">00</span>
+            </div>
+        </section>
+
+            <footer class="battle-footer">
+                <div id="boss-name-container">
+                    <div class="boss-name-wrapper">
+                        <span id="boss-name"></span>
+                        <button id="boss-info-btn" class="info-btn" title="Conocer el lore del jefe">
+                            <span>ⓘ</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="health-bar-container">
+                    <div id="health-bar-inner"></div>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <div id="message-screen" class="screen hidden message-screen">
+        <h2 id="message-title"></h2>
+        
+        <!-- CONTENEDOR DE FOGATA Y TIMER -->
+        <div id="bonfire-container" class="bonfire-container hidden">
+            <div class="bonfire-content">
+                <img src="img/dark-souls-bonfire.gif" alt="Fogata" class="bonfire-gif">
+                <div class="break-timer-wrapper">
+                    <div class="break-timer-display">
+                        <span id="break-timer">05:00</span>
+                    </div>
+                    <p class="break-text">DESCANSO DEL GUERRERO</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="confirmation-buttons" class="confirmation-buttons hidden">
+            <button id="confirm-yes-btn"></button>
+            <button id="confirm-no-btn"></button>
+        </div>
+    </div>
+
+    <div id="instructions-screen" class="screen hidden instructions-modal">
+        <div class="modal-content">
+            <h2>RITUAL DE INICIACIÓN</h2>
+            <div class="instructions-content">
+                <div class="instruction-step">
+                    <h3>PRIMER SACRIFICIO</h3>
+                    <p>Elegí cuántas horas ofrendarás a los dioses del conocimiento</p>
+                </div>
+                <div class="instruction-step">
+                    <h3>FORJA TU ATAQUE</h3>
+                    <p>Cargá minutos de concentración pura (+10, +30, +60) para tu primer asalto</p>
+                </div>
+                <div class="instruction-step">
+                    <h3>INVOCA EL RITUAL</h3>
+                    <p>Al lanzar el ataque, el tiempo se convierte en daño contra la bestia</p>
+                </div>
+                <div class="instruction-step">
+                    <h3>EXTIENDE LA OFENSIVA</h3>
+                    <p>Mientras combates, podés cargar +10min adicionales para golpes críticos</p>
+                </div>
+                <div class="instruction-step">
+                    <h3>RESPIRA EN LA BATALLA</h3>
+                    <p>Tras cada impacto, el descanso de 5 minutos regenera tu espíritu</p>
+                </div>
+                <div class="instruction-step">
+                    <h3>JURAMENTO SAGRADO</h3>
+                    <p>Romper el pacto conlleva consecuencias... piensa dos veces antes de rendirte</p>
+                </div>
+            </div>
+            <button id="close-instructions-btn" class="modal-close-btn">ENTENDIDO, INICIARÉ MI VIAJE</button>
+        </div>
+    </div>
+    <div id="lore-screen" class="screen hidden instructions-modal">
+        <div class="modal-content">
+            <h2 id="lore-title"></h2>
+            <div class="lore-content">
+                <p id="lore-text"></p>
+            </div>
+            <button id="close-lore-btn" class="modal-close-btn">VOLVER AL RITUAL</button>
+        </div>
+    </div>
+
+    <!-- Audio elements -->
+    <audio id="hover-sound" preload="auto">
+        <source src="sounds/hover.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="click-sound" preload="auto">
+        <source src="sounds/click.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="impact-sound" preload="auto">
+        <source src="sounds/impact.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="break-sound" preload="auto">
+        <source src="sounds/break.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
