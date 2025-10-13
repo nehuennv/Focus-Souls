@@ -37,6 +37,13 @@ const JEFES = [
         fondoUrl: 'img/aurelianBg.png',
         lore:'Aurelian es la manifestación del Síndrome del Impostor y el miedo paralizante al juicio ajeno. No te ataca directamente, sino que te aplasta con el peso de tu propia autocrítica. Es el miedo a no ser suficiente, a ser "descubierto" como un fraude. Se sienta en silencio, observando, y su arma principal es un gran espejo que no refleja tu imagen, sino una versión grotesca y fallida de tus mayores inseguridades. La batalla contra él es una prueba de confianza en tu propio trabajo y en tu propio valor, a pesar de las imperfecciones.'
     },
+    { 
+        id: 'maro',
+        nombre: "Maro, el Bufón Dorado", 
+        imagenUrl: 'img/maro.png',        
+        fondoUrl: 'img/maroBg.png',
+        lore:'Maro es la encarnación de la distracción y la gratificación instantánea. No es un monstruo de fuerza bruta, sino un ladrón sutil que roba tu recurso más preciado: el tiempo y el foco. Se presenta como una figura juguetona y brillante, ofreciendo baratijas luminosas (el equivalente a notificaciones, videos cortos y el scroll infinito) que son placenteras en el momento pero te dejan vacío y con el día perdido. Su batalla no es un combate directo, sino una lucha por mantener la atención en tu objetivo mientras él llena la arena con señuelos irresistibles.'
+    },
 ];
 
 // Configuración de sonidos (agregá tus archivos en la carpeta sounds/)
@@ -167,6 +174,30 @@ function getRank(totalMinutos) {
     }
     // --- INITIALIZATION ---
     function initialize() {
+            // Pantalla de bienvenida inteligente
+    const splashScreen = document.getElementById('splash-screen');
+    const firstVisit = !sessionStorage.getItem('focusSoulSplashSeen');
+    
+    if (firstVisit) {
+        splashScreen.classList.remove('hidden');
+        
+        const hideSplash = () => {
+            playSound(clickSound);
+            splashScreen.classList.add('hidden');
+            sessionStorage.setItem('focusSoulSplashSeen', 'true');
+            // Remover listeners
+            document.removeEventListener('click', hideSplash);
+            document.removeEventListener('keydown', hideSplash);
+            splashScreen.removeEventListener('click', hideSplash);
+        };
+        
+        document.addEventListener('click', hideSplash);
+        document.addEventListener('keydown', hideSplash);
+        splashScreen.addEventListener('click', hideSplash);
+    } else {
+        splashScreen.classList.add('hidden');
+    }
+    
             // Inicializar opciones de horas en el SELECT
         const hoursSelect = document.getElementById('hours-offering');
         for (let i = 1; i <= 8; i++) {
@@ -253,11 +284,11 @@ function togglePause() {
     playSound(clickSound);
     
     if (isPaused) {
-        pauseBtn.textContent = "▶️";
+        pauseBtn.textContent = "▶";
         pauseBtn.classList.add('paused');
         pauseBtn.title = "Reanudar ritual";
     } else {
-        pauseBtn.textContent = "⏸️";
+        pauseBtn.textContent = "❚❚";
         pauseBtn.classList.remove('paused');
         pauseBtn.title = "Pausar ritual";
     }
@@ -499,7 +530,7 @@ function createTimerSpark() {
         
         // MOSTRAR BOTÓN DE PAUSA
         pauseBtn.classList.remove('hidden');
-        pauseBtn.textContent = "⏸️";
+        pauseBtn.textContent = "❚❚";
         pauseBtn.classList.remove('paused');
         battleScreen.classList.add('timer-running');
         updateTabTitle(duration, 'battle');

@@ -25,6 +25,63 @@ body {
 }
 
 
+/* PANTALLA SPLASH INMERSIVA */
+#splash-screen {
+    background: radial-gradient(circle at center, #000000 0%, #0b0701 100%);
+    z-index: 1000;
+    cursor: pointer;
+}
+
+.splash-content {
+    text-align: center;
+    position: relative;
+    z-index: 1001;
+}
+
+.splash-title {
+    font-size: clamp(3rem, 10vw, 6rem);
+    color: var(--color-gold);
+    text-shadow: 0 0 30px var(--color-gold);
+    margin-bottom: 2rem;
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+.splash-subtitle {
+    color: var(--color-parchment);
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    animation: subtitlePulse 3s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+.splash-aura {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: auraPulse 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes titleGlow {
+    0% { text-shadow: 0 0 20px var(--color-gold); }
+    100% { text-shadow: 0 0 40px var(--color-gold), 0 0 60px rgba(212, 175, 55, 0.5); }
+}
+
+@keyframes subtitlePulse {
+    0%, 100% { opacity: 0.6; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-5px); }
+}
+
+@keyframes auraPulse {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.3; }
+    50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.6; }
+}
+
 .screen {
     width: 100vw; height: 100vh;
     display: flex; flex-direction: column;
@@ -34,7 +91,42 @@ body {
     transition: opacity 0.5s ease-in-out;
 }
 
-.hidden { opacity: 0; pointer-events: none; }
+/* VERSIÓN SIMPLIFICADA - GARANTIZADA */
+.dynamic-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(
+            circle at 30% 100%,
+            rgba(212, 175, 55, 0.25) 0%,
+            transparent 50%
+        );
+    pointer-events: none;
+    z-index: -1;
+    animation: simpleBreath 15s ease-in-out infinite;
+}
+
+@keyframes simpleBreath {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.1);
+    }
+}
+
+/* Reset del fondo del body para que se vea el efecto */
+body {
+    background: #000000;
+    position: relative;
+}
+
+.hidden { opacity: 0; pointer-events: none; display: none;}
 h1, h2 { font-family: var(--font-title); color: var(--color-gold); }
 .main-title { 
     font-size: clamp(3rem, 10vw, 6rem); 
@@ -133,9 +225,7 @@ h1, h2 { font-family: var(--font-title); color: var(--color-gold); }
     color: var(--color-gold);
     text-shadow: 0 0 20px currentColor;
     background: rgba(0, 0, 0, 0.7);
-    padding: 1rem 2rem;
     border-radius: 10px;
-    border: 2px solid var(--color-gold);
 }
 
 .break-text {
@@ -562,7 +652,7 @@ label {
     height: 15px; 
     background-color: rgba(0,0,0,0.5); 
     /* border: 2px solid var(--color-gold); */
-    border: 2px solid var(--color-dark-bg);
+    border: 1px solid var(--color-dark-bg);
     box-shadow: 0 0 20px rgba(28, 23, 4, 0.3);
 }
 #health-bar-inner { 
@@ -1035,19 +1125,18 @@ label {
 /* BOTÓN DE PAUSA DISCRETO */
 .pause-button {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    border: 1px solid var(--color-gold);
-    color: var(--color-gold);
-    width: 50px;
-    height: 50px;
+    top: 50px;
+    /* right: 20px; */
+    border: none;
+    width: 60px;
+    color: #FFFAD0;
+    height:60px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 5;
     opacity: 0.6;
     transition: all 0.3s ease;
-    font-size: 1.2rem;
+    font-size: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1055,15 +1144,15 @@ label {
 
 .pause-button:hover {
     opacity: 1;
-    background: rgba(0, 0, 0, 0.9);
-    box-shadow: 0 0 15px var(--color-gold);
+    background: rgba(0, 0, 0, 0.0);
+    box-shadow: 0 0 0px var(--color-gold);
     transform: scale(1.1);
 }
 
-.pause-button.paused {
+/* .pause-button.paused {
     background: rgba(184, 0, 0, 0.3);
     border-color: var(--color-health-red);
-}
+} */
 
 /* MOSTRAR SOLO CUANDO EL TIMER ESTÁ CORRIENDO */
 .timer-running .pause-button {
