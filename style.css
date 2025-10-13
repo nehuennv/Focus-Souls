@@ -43,14 +43,14 @@ body {
     color: var(--color-gold);
     text-shadow: 0 0 30px var(--color-gold);
     margin-bottom: 2rem;
-    animation: titleGlow 2s ease-in-out infinite alternate;
+    animation: titleEntrance 1.5s ease-out !important;
 }
 
 .splash-subtitle {
     color: var(--color-parchment);
     font-family: var(--font-body);
     font-size: 1.5rem;
-    animation: subtitlePulse 3s ease-in-out infinite;
+    animation: titleEntrance 1.2s ease-out !important;
     opacity: 0.8;
 }
 
@@ -88,7 +88,14 @@ body {
     justify-content: center; align-items: center;
     padding: 1rem; position: absolute;
     top: 0; left: 0;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out !important;
+
+}
+#furnace-background {
+    z-index: -2 !important; /* Detrás de TODO */
+}
+#pact-modal {
+    z-index: 100;
 }
 
 /* VERSIÓN SIMPLIFICADA - GARANTIZADA */
@@ -126,12 +133,26 @@ body {
     position: relative;
 }
 
-.hidden { opacity: 0; pointer-events: none; display: none;}
+.hidden { opacity: 0; pointer-events: none;}
 h1, h2 { font-family: var(--font-title); color: var(--color-gold); }
 .main-title { 
     font-size: clamp(3rem, 10vw, 6rem); 
     margin-bottom: 2rem;
     text-shadow: 0 0 20px var(--color-gold);
+    animation: titleEntrance 1.2s ease-out !important;
+
+}
+@keyframes titleEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+        text-shadow: 0 0 0px var(--color-gold);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        text-shadow: 0 0 20px var(--color-gold);
+    }
 }
 
 /* SELECT NORMAL Y SIMPLE */
@@ -162,7 +183,7 @@ h1, h2 { font-family: var(--font-title); color: var(--color-gold); }
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: -1;
+    z-index: -1 !important;
 }
 
 .spark {
@@ -357,7 +378,7 @@ label {
         rgba(0, 0, 0, 0.5) 100%
     );
     pointer-events: none;
-    z-index: 1;
+    z-index: 0 !important;
 }
 
 /* VIÑETA MÁS FUERTE DURANTE DESCANSO */
@@ -672,6 +693,7 @@ label {
     text-align: center;
     /* border: 3px solid var(--color-gold); */
     box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+    
 }
 .message-screen h2 { 
     font-size: clamp(2rem, 8vw, 4rem); 
@@ -722,6 +744,8 @@ label {
     border: 1px solid var(--color-gold); /* Un pequeño toque dorado */
     max-height: 90vh; /* Limita la altura del modal */
     overflow-y: auto; /* Permite scroll si el contenido es muy largo */
+    animation: modalAppear 0.6s ease-out !important;
+
 }
 
 .modal-content h2 {
@@ -730,6 +754,16 @@ label {
     font-size: clamp(2rem, 5vw, 3rem);
 
     text-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+}
+@keyframes modalAppear {
+    0% {
+        opacity: 0;
+        transform: scale(0.9) translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .instructions-content {
@@ -913,6 +947,20 @@ label {
 #lobby-screen {
     gap: 1.5rem;
     justify-content: center;
+}
+#lobby-screen:not(.hidden) {
+    animation: lobbyEntrance 1s ease-out !important;
+}
+
+@keyframes lobbyEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .menu-options {
@@ -1288,5 +1336,156 @@ label {
     }
     #boss-image {
         max-height: 60vh;
+    }
+}
+/* ============================================= */
+/* NUEVO MENÚ PRINCIPAL MINIMALISTA */
+/* ============================================= */
+
+.lobby-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin: 3rem 0;
+    align-items: center;
+}
+
+.menu-option {
+    background: transparent;
+    border: none;
+    color: var(--color-parchment);
+    font-family: var(--font-body);
+    font-size: 1.8rem;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    text-align: center;
+    opacity: 0.8;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    min-width: 300px;
+    animation: menuItemEntrance 0.8s ease-out backwards !important;
+
+}
+.menu-option:nth-child(1) { animation-delay: 0.1s !important; }
+.menu-option:nth-child(2) { animation-delay: 0.3s !important; }
+.menu-option:nth-child(3) { animation-delay: 0.5s !important; }
+
+@keyframes menuItemEntrance {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 0.8;
+        transform: translateX(0);
+    }
+}
+/* EFECTO DE AURA/LUZ AL HOVER */
+.menu-option::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at center,
+        rgba(212, 175, 55, 0) 0%,
+        rgba(212, 175, 55, 0.15) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+    border-radius: 5px;
+}
+
+.menu-option:hover {
+    color: var(--color-gold);
+    opacity: 1;
+    transform: translateX(15px) scale(1.05);
+}
+
+.menu-option:hover::before {
+    opacity: 1;
+}
+
+/* LÍNEA DORADA ANIMADA AL HOVER */
+.menu-option::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+    transition: width 0.4s ease;
+}
+
+.menu-option:hover::after {
+    width: 100%;
+}
+
+/* BOTONES DEL MODAL DE PACTO */
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.gold-button {
+    background: rgba(212, 175, 55, 0.1);
+    border: 2px solid var(--color-gold);
+    color: var(--color-gold);
+    padding: 1rem 2rem;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.gold-button:hover {
+    background: rgba(212, 175, 55, 0.2);
+    box-shadow: 0 0 15px var(--color-gold);
+}
+
+.ghost-button {
+    background: transparent;
+    border: 2px solid var(--color-parchment);
+    color: var(--color-parchment);
+    padding: 1rem 2rem;
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+
+.ghost-button:hover {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* RESPONSIVE PARA EL NUEVO MENÚ */
+@media (max-width: 768px) {
+    .menu-option {
+        font-size: 1.5rem;
+        min-width: 250px;
+        padding: 0.8rem 1.5rem;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .gold-button, .ghost-button {
+        width: 100%;
+        max-width: 250px;
     }
 }

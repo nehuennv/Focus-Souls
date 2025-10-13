@@ -174,65 +174,208 @@ function getRank(totalMinutos) {
     }
     // --- INITIALIZATION ---
     function initialize() {
-            // Pantalla de bienvenida inteligente
-    const splashScreen = document.getElementById('splash-screen');
-    const firstVisit = !sessionStorage.getItem('focusSoulSplashSeen');
-    
-    if (firstVisit) {
-        splashScreen.classList.remove('hidden');
+        // ============================================
+        // PANTALLA DE BIENVENIDA MEJORADA CON ANIMACIONES
+        // ============================================
+        const splashScreen = document.getElementById('splash-screen');
+        const firstVisit = !sessionStorage.getItem('focusSoulSplashSeen');
         
-        const hideSplash = () => {
-            playSound(clickSound);
+        if (firstVisit) {
+            splashScreen.classList.remove('hidden');
+            
+            const hideSplash = () => {
+                playSound(clickSound);
+                
+                // Animación de salida del splash
+                splashScreen.style.transition = 'opacity 0.8s ease-in-out';
+                splashScreen.classList.add('hidden');
+                
+                sessionStorage.setItem('focusSoulSplashSeen', 'true');
+                
+                // Mostrar lobby con animación después del splash
+                setTimeout(() => {
+                    lobbyScreen.style.transition = 'opacity 1s ease-in-out';
+                    lobbyScreen.classList.remove('hidden');
+                }, 500);
+                
+                // Remover listeners
+                document.removeEventListener('click', hideSplash);
+                document.removeEventListener('keydown', hideSplash);
+                splashScreen.removeEventListener('click', hideSplash);
+            };
+            
+            document.addEventListener('click', hideSplash);
+            document.addEventListener('keydown', hideSplash);
+            splashScreen.addEventListener('click', hideSplash);
+        } else {
             splashScreen.classList.add('hidden');
-            sessionStorage.setItem('focusSoulSplashSeen', 'true');
-            // Remover listeners
-            document.removeEventListener('click', hideSplash);
-            document.removeEventListener('keydown', hideSplash);
-            splashScreen.removeEventListener('click', hideSplash);
-        };
+            lobbyScreen.classList.remove('hidden');
+        }
         
-        document.addEventListener('click', hideSplash);
-        document.addEventListener('keydown', hideSplash);
-        splashScreen.addEventListener('click', hideSplash);
-    } else {
-        splashScreen.classList.add('hidden');
-    }
-    
-            // Inicializar opciones de horas en el SELECT
+        createSparks();
+        
+        // ============================================
+        // NUEVO SISTEMA DE MENÚ MINIMALISTA
+        // ============================================
+        
+        // 1. Inicializar elementos del nuevo sistema
+        const menuOptions = document.querySelectorAll('.menu-option');
+        const pactModal = document.getElementById('pact-modal');
+        const confirmPactBtn = document.getElementById('confirm-pact-btn');
+        const cancelPactBtn = document.getElementById('cancel-pact-btn');
         const hoursSelect = document.getElementById('hours-offering');
+        
+        // 2. Cargar opciones de horas en el modal (no en el menú principal)
+        hoursSelect.innerHTML = '<option value="" disabled selected>SELECCIONA TU OFRENDA</option>';
         for (let i = 1; i <= 8; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = `${i} HORA${i > 1 ? 'S' : ''}`;
-        hoursSelect.appendChild(option);
-    }
-    createSparks();
-        // Event listeners
-        startBattleBtn.addEventListener('click', startBattle);
-        showInstructionsBtn.addEventListener('click', showInstructions);
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = `${i} HORA${i > 1 ? 'S' : ''}`;
+            hoursSelect.appendChild(option);
+        }
+        
+        // 3. Manejar clic en opciones del menú principal
+        menuOptions.forEach(option => {
+            option.addEventListener('mouseenter', () => playSound(hoverSound));
+            option.addEventListener('click', handleMenuSelection);
+        });
+        
+        function handleMenuSelection(e) {
+            playSound(clickSound);
+            const action = e.target.dataset.action;
+            
+            switch(action) {
+                case 'start':
+                    showPactModal();
+                    break;
+                case 'instructions':
+                    showInstructions();
+                    break;
+                case 'bestiary':
+                    showBestiary();
+                    break;
+            }
+        }
+        
+        function showPactModal() {
+            pactModal.style.transition = 'opacity 0.5s ease-in-out';
+            pactModal.classList.remove('hidden');
+        }
+        
+        function hidePactModal() {
+            pactModal.style.transition = 'opacity 0.5s ease-in-out';
+            pactModal.classList.add('hidden');
+        }
+        
+        // 4. Configurar botones del modal de pacto
+        confirmPactBtn.addEventListener('click', () => {
+            const selectedValue = parseInt(hoursSelect.value);
+            if (isNaN(selectedValue) || selectedValue === 0) {
+                alert('Por favor, selecciona una duración para tu pacto.');
+                return;
+            }
+            playSound(clickSound);
+            hidePactModal();
+            startBattleFromModal(selectedValue);
+        });
+        
+        cancelPactBtn.addEventListener('click', () => {
+            playSound(clickSound);
+            hidePactModal();
+        });
+        
+        // 5. Función modificada para empezar batalla desde el modal
+        function startBattleFromModal(selectedHours) {
+            pactInitialSeconds = selectedHours * 3600;
+            unallocatedSeconds = pactInitialSeconds;
+            loadedSeconds = 0;
+            dealtSeconds = 0;
+            
+            // Elegir un jefe aleatorio
+            currentBoss = JEFES[Math.floor(Math.random() * JEFES.length)];
+            currentBossId = currentBoss.id; 
+            backgroundContainer.style.backgroundImage = `url('${currentBoss.fondoUrl}')`;
+            bossImage.src = currentBoss.imagenUrl;
+            bossName.textContent = currentBoss.nombre;
+        
+            // Transición suave al cambiar de pantalla
+            lobbyScreen.style.transition = 'opacity 0.8s ease-in-out';
+            battleScreen.style.transition = 'opacity 0.8s ease-in-out';
+            
+            lobbyScreen.classList.add('hidden');
+            battleScreen.classList.remove('hidden');
+            
+            startTimerParticles();
+            resetForNextRound();
+        }
+    
+        // ============================================
+        // SISTEMA EXISTENTE (MANTENER IGUAL)
+        // ============================================
+        
         closeInstructionsBtn.addEventListener('click', hideInstructions);
+        
         loadTimeBtns.forEach(btn => {
             btn.addEventListener('click', () => modifyLoadedTime(parseInt(btn.dataset.time) * 60, btn));
             btn.addEventListener('mouseenter', () => playSound(hoverSound));
         });
+        
         launchAttackBtn.addEventListener('click', launchAttack);
         backToMenuBtn.addEventListener('click', confirmAbandon);
         
-        // Efectos de sonido para botones principales
-        [startBattleBtn, showInstructionsBtn, launchAttackBtn, backToMenuBtn].forEach(btn => {
+        // Efectos de sonido para botones de batalla
+        [launchAttackBtn, backToMenuBtn].forEach(btn => {
             btn.addEventListener('mouseenter', () => playSound(hoverSound));
             btn.addEventListener('click', () => playSound(clickSound));
         });
+        
         updateTabTitle(0, 'lobby');
         updateFavicon('lobby');
-        bossImage.addEventListener('click', showLore); // ← AGREGAR ESTA LÍNEA
+        bossImage.addEventListener('click', showLore);
         closeLoreBtn.addEventListener('click', hideLore);
+        
         // Event listeners para pausa
         pauseBtn.addEventListener('click', togglePause);
-        bestiaryBtn.addEventListener('click', showBestiary);
+        // bestiaryBtn.addEventListener('click', showBestiary);
         closeBestiaryBtn.addEventListener('click', () => {
             bestiaryModal.classList.add('hidden');
         });
+    
+        // ============================================
+        // NUEVA FUNCIÓN returnToMenu MEJORADA
+        // ============================================
+        window.returnToMenu = function() {
+            // Primero detener todas las animaciones y partículas
+            stopTimerParticles();
+            clearInterval(timerInterval);
+            clearInterval(breakInterval);
+            
+            // Agregar transición suave
+            battleScreen.style.transition = 'opacity 0.8s ease-in-out';
+            messageScreen.style.transition = 'opacity 0.8s ease-in-out';
+            
+            // Ocultar pantallas con animación
+            battleScreen.classList.add('hidden');
+            messageScreen.classList.add('hidden');
+            
+            // Mostrar lobby con delay para la animación
+            setTimeout(() => {
+                lobbyScreen.style.transition = 'opacity 0.8s ease-in-out';
+                lobbyScreen.classList.remove('hidden');
+                
+                // RESETEAR ESTADOS
+                isTimerRunning = false;
+                isPaused = false;
+                loadedSeconds = 0;
+                unallocatedSeconds = 0;
+                dealtSeconds = 0;
+                pactInitialSeconds = 0;
+                
+                updateTimerDisplay(0);
+                updateTabTitle(0, 'lobby');
+                updateFavicon('lobby');
+            }, 400);
+        };
     }
     // --- LOCAL STORAGE & BESTIARY FUNCTIONS ---
 
@@ -296,26 +439,36 @@ function togglePause() {
 
 // --- VOLVER AL MENÚ MEJORADO ---
 function returnToMenu() {
-    messageScreen.classList.add('hidden');
-
+    // Primero detener todas las animaciones y partículas
     stopTimerParticles();
     clearInterval(timerInterval);
     clearInterval(breakInterval);
     
+    // Agregar transición suave
+    battleScreen.style.transition = 'opacity 0.8s ease-in-out';
+    messageScreen.style.transition = 'opacity 0.8s ease-in-out';
+    
+    // Ocultar pantallas con animación
     battleScreen.classList.add('hidden');
-    lobbyScreen.classList.remove('hidden');
+    messageScreen.classList.add('hidden');
     
-    // RESETEAR ESTADOS
-    isTimerRunning = false;
-    isPaused = false;
-    loadedSeconds = 0;
-    unallocatedSeconds = 0;
-    dealtSeconds = 0;
-    pactInitialSeconds = 0;
-    
-    updateTimerDisplay(0);
-    updateTabTitle(0, 'lobby');
-    updateFavicon('lobby');
+    // Mostrar lobby con delay para la animación
+    setTimeout(() => {
+        lobbyScreen.style.transition = 'opacity 0.8s ease-in-out';
+        lobbyScreen.classList.remove('hidden');
+        
+        // RESETEAR ESTADOS
+        isTimerRunning = false;
+        isPaused = false;
+        loadedSeconds = 0;
+        unallocatedSeconds = 0;
+        dealtSeconds = 0;
+        pactInitialSeconds = 0;
+        
+        updateTimerDisplay(0);
+        updateTabTitle(0, 'lobby');
+        updateFavicon('lobby');
+    }, 400);
 }
 // Función para actualizar favicon dinámicamente
 function updateFavicon(state) {

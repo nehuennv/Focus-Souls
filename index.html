@@ -20,31 +20,45 @@
 
     
 
-    <main id="lobby-screen" class="screen">
-        <h1 class="main-title">FOCUS SOULS</h1>
-        <label for="hours-offering">SELLA TU PACTO: ¿CUÁL ES TU OFRENDA?</label>
-        
-        <div class="menu-options">
+<!-- PANTALLA PRINCIPAL MINIMALISTA -->
+<main id="lobby-screen" class="screen">
+    <h1 class="main-title">FOCUS SOULS</h1>
+    
+    <!-- NUEVO MENÚ MINIMALISTA -->
+    <div class="lobby-menu">
+        <button class="menu-option" data-action="start">COMENZAR RITUAL</button>
+        <button class="menu-option" data-action="instructions">RITUAL DE INICIACIÓN</button>
+        <button class="menu-option" data-action="bestiary">BESTIARIO</button>
+    </div>
+
+    <!-- MODAL PARA SELECCIONAR HORAS (OCULTO INICIALMENTE) -->
+    <div id="pact-modal" class="screen hidden message-screen">
+        <div class="modal-content">
+            <h2>SELLA TU PACTO</h2>
+            <label for="hours-offering">¿CUÁL ES TU OFRENDA?</label>
+            
             <div class="select-wrapper">
                 <select id="hours-offering">
                     <option value="" disabled selected>SELECCIONA TU OFRENDA</option>
+                    <!-- Las horas se cargan automáticamente por JavaScript -->
                 </select>
             </div>
-            <button id="start-battle-btn">COMENZAR RITUAL</button>
-            <button id="show-instructions-btn">RITUAL DE INICIACIÓN</button>
-            <button id="bestiary-btn">BESTIARIO</button> </div>
-
+            
+            <div class="modal-actions">
+                <button id="confirm-pact-btn" class="gold-button">INICIAR RITUAL</button>
+                <button id="cancel-pact-btn" class="ghost-button">CANCELAR</button>
+            </div>
         </div>
-        
-        
-        <!-- CRÉDITOS -->
-        <div class="credits">
-            FOCUS SOULS™ & <a href="https://www.instagram.com/nehuenvg/">©NEHUEN VILLAVICENCIO</a> Entertaiment Inc/ © 2005-2025 Software Inc
-        </div>
-        
-        <!-- Efecto de chispas -->
-        <div id="sparks-container"></div>
-    </main>
+    </div>
+    
+    <!-- CRÉDITOS (SE MANTIENE IGUAL) -->
+    <div class="credits">
+        FOCUS SOULS™ & <a href="https://www.instagram.com/nehuenvg/">©NEHUEN VILLAVICENCIO</a> Entertaiment Inc/ © 2005-2025 Software Inc
+    </div>
+    
+    <!-- EFECTO DE CHISPAS (SE MANTIENE IGUAL) -->
+    <div id="sparks-container"></div>
+</main>
 
     <main id="battle-screen" class="screen hidden">
         <div id="background-container" class="background-container"></div>
