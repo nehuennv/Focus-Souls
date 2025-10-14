@@ -43,7 +43,7 @@
                     <!-- Las horas se cargan automáticamente por JavaScript -->
                 </select>
             </div>
-            
+            <hr class="bestiary-divider">
             <div class="modal-actions">
                 <button id="confirm-pact-btn" class="gold-button">INICIAR RITUAL</button>
                 <button id="cancel-pact-btn" class="ghost-button">REPLEGARSE </button>
@@ -71,16 +71,18 @@
                     <button class="load-time-btn" data-time="10">+10 MIN</button>
                     <button class="load-time-btn" data-time="30">+30 MIN</button>
                     <button class="load-time-btn" data-time="60">+60 MIN</button>
+                    <button id="launch-attack-btn" disabled>LANZAR ATAQUE</button>
                 </div>
-                <button id="launch-attack-btn" disabled>LANZAR ATAQUE</button>
+                <button id="pause-btn" class="load-time-btn">❚❚</button>
+
             </nav>
         <section class="center-area">
             <div id="boss-image-container">
                 <img id="boss-image" src="" alt="Jefe de Batalla">
             </div>
-            <button id="pause-btn" class="pause-button hidden" title="Pausar ritual">
+            <!-- <button id="pause-btn" class="pause-button hidden" title="Pausar ritual">
                 <span>❚❚</span>
-            </button>
+            </button> -->
             <!-- CONTENEDOR DE PARTÍCULAS DEL TIMER -->
             <div id="timer-particles-container" class="timer-particles-container"></div>
             
@@ -132,39 +134,36 @@
     <div id="instructions-screen" class="screen hidden instructions-modal">
         <div class="modal-content instructions-modal-content">
             <h2 class="modal-title">EL PACTO DE LA VOLUNTAD</h2>
+            
             <div class="instructions-content">
+                <hr class="bestiary-divider">
+
                 <div class="instruction-step">
-                    <h3>I. LA OFRENDA DEL TIEMPO</h3>
-                    <p>Antes de forjar tu espíritu, elige la duración del ritual. Cada hora sellada será un juramento inquebrantable a la disciplina.</p>
+                    <h3>I. EL JURAMENTO</h3>
+                    <p>La esencia de nuestro mundo es el <strong>Foco</strong>. Sella un pacto, jurando una <strong>Ofrenda de Horas</strong> a tu concentración. Cada hora comprometida es un juramento; romperlo trae consecuencias.</p>
                 </div>
                 <div class="instruction-step">
-                    <h3>II. CARGA DE ESENCIA</h3>
-                    <p>Reúne fragmentos de tu concentración pura. Cada (+10, +30, +60) minutos cargados alimentará tu primer asalto contra la Bestia.</p>
+                    <h3>II. LA CAZA ETERNA</h3>
+                    <p>Tu voluntad invoca una <strong>Bestia de la Distracción</strong>. Carga tu <strong>Esencia</strong> (minutos de foco puro) y <strong>Lanza un Ataque</strong> para mermar su vitalidad. Si la batalla se extiende, canaliza <strong>+10 minutos</strong> para golpes continuos.</p>
                 </div>
                 <div class="instruction-step">
-                    <h3>III. LA INVOCACIÓN</h3>
-                    <p>Al consumir tu carga, el ritual invoca una Bestia de la distracción. Tu foco se convierte en daño, mermando su esencia vital.</p>
+                    <h3>III. EL REPOSO Y LA PERSEVERANCIA</h3>
+                    <p>Tras cada golpe, concede a tu espíritu un <strong>descanso de 5 minutos</strong> junto a la fogata. Medita, recupera fuerzas, y prepárate para la siguiente embestida. La perseverancia forja el espíritu.</p>
                 </div>
                 <div class="instruction-step">
-                    <h3>IV. FURIA CONTINUA</h3>
-                    <p>Mientras la Bestia persista, podrás canalizar +10 minutos adicionales. Estos golpes menores mantienen la presión y evitan su recuperación.</p>
+                    <h3>IV. LA ASCENSIÓN</h3>
+                    <p>Cada minuto de foco acumulado te acerca a la victoria y forja tu leyenda. Tu progreso en la <strong>Senda del Foco</strong> se registrará en el <strong>Bestiario del Pacto</strong>, revelando tu Rango y las Bestias caídas.</p>
                 </div>
-                <div class="instruction-step">
-                    <h3>V. PAUSA Y REFLEXIÓN</h3>
-                    <p>Cada vez que tu asalto finaliza, concede a tu espíritu un breve descanso de 5 minutos. Medita, respira, y prepárate para la siguiente embestida.</p>
-                </div>
-                <div class="instruction-step">
-                    <h3>VI. EL JURAMENTO</h3>
-                    <p>Romper el pacto antes de tiempo conlleva una grave penalidad. Considera bien tu ofrenda, pues la voluntad débil trae consecuencias.</p>
-                </div>
+                <hr class="bestiary-divider">
             </div>
-            <button id="close-instructions-btn" class="modal-close-btn">ENTENDIDO, FORJARÉ MI DESTINO</button>
+
+            <button id="close-instructions-btn" class="modal-close-btn">INICIAR VIAJE            </button>
         </div>
     </div>
     <div id="lore-screen" class="screen hidden instructions-modal">
         <div class="modal-content">
             <h2 id="lore-title"></h2>
-            <div class="lore-content">
+            <div class="lore-content" >
                 <p id="lore-text"></p>
             </div>
             <button id="close-lore-btn" class="modal-close-btn">VOLVER AL RITUAL</button>
@@ -186,13 +185,70 @@
     </audio>
     <div id="bestiary-modal" class="screen hidden message-screen">
         <div class="modal-content instructions-modal-content"> <h2 id="bestiary-title" class="modal-title">Bestiario del Pacto</h2>
-            
+
+
             <div id="bestiary-stats">
+                
                 </div>
             
-            <button id="close-bestiary-btn" class="close-modal-btn">Cerrar Bestiario</button>
+            <button id="close-bestiary-btn" class="modal-close-btn">Cerrar Bestiario</button>
         </div>
     </div>
     <script src="script.js"></script>
 </body>
+<!-- PANEL DE DEBUG - TESTER HELPER -->
+<!-- <div id="debug-panel" class="debug-panel hidden">
+    <div class="debug-header">
+        <h3>🧪 MODO TESTER</h3>
+        <button id="debug-close" class="debug-close">×</button>
+    </div>
+    
+    <div class="debug-section">
+        <h4>Configuración Rápida</h4>
+        <div class="debug-buttons">
+            <button class="debug-btn" data-action="quick-test">🚀 Test Rápido</button>
+            <button class="debug-btn" data-action="instant-victory">🏆 Victoria Instantánea</button>
+            <button class="debug-btn" data-action="reset-game">🔄 Reiniciar</button>
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h4>Vida del Jefe</h4>
+        <div class="debug-input-group">
+            <input type="number" id="debug-boss-health" value="5" min="1" max="480">
+            <span>minutos</span>
+            <button class="debug-btn small" data-action="set-boss-health">Aplicar</button>
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h4>Ataque Cargado</h4>
+        <div class="debug-input-group">
+            <input type="number" id="debug-loaded-time" value="10" min="1" max="120">
+            <span>minutos</span>
+            <button class="debug-btn small" data-action="set-loaded-time">Aplicar</button>
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h4>Estado Actual</h4>
+        <div id="debug-status" class="debug-status">
+            Esperando inicio de batalla...
+        </div>
+    </div>
+
+    <div class="debug-section">
+        <h4>Bestiario (Debug)</h4>
+        <div class="debug-buttons">
+            <button class="debug-btn" data-action="add-random-kills">🎯 Agregar Kills Random</button>
+            <button class="debug-btn" data-action="clear-stats">🗑️ Limpiar Stats</button>
+            <button class="debug-btn" data-action="show-stats">📊 Ver Stats</button>
+        </div>
+    </div>
+</div> -->
+
+<!-- Botón flotante para abrir el panel de debug -->
+<!-- <button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
+    🐛
+</button> -->
 </html>

@@ -1,8 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=EB+Garamond&display=swap');
+/* ====================================================== */
+/* --- DECLARACIÓN DE FUENTES PROPIAS (@font-face) --- */
+/* ====================================================== */
+
+/* --- CINZEL (Google Fonts) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400..900&display=swap');
+
+/* --- TRAJAN PRO (Regular) --- */
+@font-face {
+    font-family: 'Trajan Pro';
+    src: url('fonts/trajanpro-regular-webfont.woff2') format('woff2'),
+         url('fonts/trajanpro-regular-webfont.woff') format('woff');
+    font-weight: normal; /* o 400 */
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- TRAJAN PRO (Bold) --- */
+@font-face {
+    font-family: 'Trajan Pro';
+    src: url('fonts/trajanpro-bold-webfont.woff2') format('woff2'),
+         url('fonts/trajanpro-bold-webfont.woff') format('woff');
+    font-weight: bold; /* o 700 */
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- ADOBE GARAMOND PRO (Regular) --- */
+@font-face {
+    font-family: 'Adobe Garamond Pro';
+    src: url('fonts/agaramondpro-regular-webfont.woff2') format('woff2'),
+         url('fonts/agaramondpro-regular-webfont.woff') format('woff');
+    font-weight: normal; /* o 400 */
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- ADOBE GARAMOND PRO (Bold) --- */
+@font-face {
+    font-family: 'Adobe Garamond Pro';
+    src: url('fonts/agaramondpro-bold-webfont.woff2') format('woff2'),
+         url('fonts/agaramondpro-bold-webfont.woff') format('woff');
+    font-weight: bold; /* o 700 */
+    font-style: normal;
+    font-display: swap;
+}
 
 :root {
-    --font-title: 'Cinzel', serif;
-    --font-body: 'EB Garamond', serif;
+    --font-title: 'Trajan Pro', serif; /* Para los grandes títulos de impacto */
+    --font-body: 'Adobe Garamond Pro', serif; /* Para descripciones, texto general */
     --color-gold: #D4AF37;
     --color-dark-bg: #000;
     --color-health-red: #B80000;
@@ -10,6 +55,8 @@
     --color-text: #F5F5F5;
     --color-parchment: #F5E6CA;
 }
+
+
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -86,7 +133,8 @@ body {
     width: 100vw; height: 100vh;
     display: flex; flex-direction: column;
     justify-content: center; align-items: center;
-    padding: 1rem; position: absolute;
+    /* padding: 1rem; */
+    position: absolute;
     top: 0; left: 0;
     transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out !important;
 
@@ -174,14 +222,33 @@ h1, h2 { font-family: var(--font-title); color: var(--color-gold); }
     background: rgba(0, 0, 0, 0.0); 
     border: 1px solid var(--color-gold);
     color: var(--color-gold);
-    padding: 1rem 2rem;
-    width: 55% !important;
-    margin-top: 1rem;
-    font-size: 1rem;
-    font-family: var(--font-title);
+    padding: .3rem 4.2899rem;
+    /* padding: .3rem 4.2899rem; */
+
+
+    font-size: 1.1rem;
+    font-family: var(--font-body);
     cursor: pointer;
     /* margin: 1.5rem 0; */
     /* text-align: center; */
+
+    appearance: none; /* Elimina la flecha por defecto del navegador */
+    -webkit-appearance: none; /* Para Safari y Chrome antiguos */
+    -moz-appearance: none; /* Para Firefox */
+
+    /* Centra el texto dentro del select */
+    text-align: center;
+    text-align-last: center; /* Para IE/Edge y algunos otros, asegura el centrado cuando hay pocas opciones */
+
+    
+    /* Box model para asegurar que el padding/border no interfiera con el ancho */
+    box-sizing: border-box; 
+
+    
+    /* Eliminar posibles márgenes/paddings problemáticos */
+    margin: 0;
+    /* padding-left: 0; 
+    padding-right: 0;  */
 }
 #hours-offering:hover, select:hover {
     color: var(--color-gold);
@@ -189,7 +256,12 @@ h1, h2 { font-family: var(--font-title); color: var(--color-gold); }
 #hours-offering option {
     background: var(--color-dark-bg);
     color: var(--color-gold);
-    padding: 0.5rem;
+    text-align: left;
+    font-size: .8rem;
+    width: 60px;
+
+
+    /* padding: 0.5rem; */
 }
 
 /* EFECTO DE CHISPAS */
@@ -299,11 +371,11 @@ h1, h2 { font-family: var(--font-title); color: var(--color-gold); }
 
 button, select {
     font-family: var(--font-body);
-    font-weight: 700; 
+    font-weight: 300; 
     background: none;
     /* border: 2px solid var(--color-gold);  */
     color: var(--color-gold);
-    padding: 0.8rem 1.5rem; 
+    /* padding: 0.8rem 1.5rem;  */
     font-size: 0.9rem; 
     cursor: pointer;
     transition: all 0.3s ease; 
@@ -312,11 +384,12 @@ button, select {
     overflow: hidden;
 }
 button:hover, select:hover { 
-    /* background-color: rgba(212, 175, 55, 0.1); 
-    box-shadow: 0 0 15px var(--color-gold); */
-    transform: translateY(-2px);
+
 }
-button:disabled { border-color: #555; color: #555; cursor: not-allowed; }
+button:disabled { 
+    opacity: 0.4;
+    color: #ffffff; 
+    cursor: not-allowed; }
 button:disabled:hover { 
     background-color: transparent; 
     box-shadow: none; 
@@ -336,7 +409,7 @@ select {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    padding: 1rem 2rem;    /* ← PADDING NORMAL */
+
 }
 
 label { 
@@ -434,9 +507,39 @@ label {
     align-items: center;
     gap: 0;
     padding: 1rem;
-    width: 100%;
+    padding-inline: 2rem;
+    align-self: center;
+    backdrop-filter: blur(2px) brightness(0.8);
     position: relative;
+    background-color: #381b0028;
+    border: 1px solid #b8941f68;
+    
+    border-top: none;
+    border-radius: 0 0 4px 4px ;
 }
+/* .action-navbar::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* GRADIENTE RADIAL: Empieza casi transparente en el centro y se oscurece hacia los bordes */
+    /* Los porcentajes controlan la difusión y el tamaño del "círculo" oscuro */
+    background: radial-gradient(
+        ellipse at center,
+        rgba(0, 0, 0, 0.5) 0%,      /* Empieza oscuro en el centro (70% de opacidad) */
+        rgba(0, 0, 0, 0.25) 30%,     /* Se vuelve menos oscuro a los 30% del radio */
+        rgba(0, 0, 0, 0.05) 50%,     /* Casi transparente a los 50% */
+        rgba(0, 0, 0, 0) 100%       /* Completamente transparente en los bordes */
+    );
+    
+    /* Asegura que la sombra esté justo detrás del contenido de la navbar pero encima del fondo de la página */
+    z-index: -1; 
+    pointer-events: none; /* Crucial: asegura que el gradiente no capture eventos de mouse */
+
+} */
 /* .action-navbar > *:not(:last-child)::after {
     content: "";
     position: absolute;
@@ -451,27 +554,36 @@ label {
 .load-time-controls { display: flex; gap: 1rem; }
 
 #back-to-menu-btn {
-    filter: drop-shadow(0 0 1px #000);
-    color: var(--color-abandon-grey);
+    filter: drop-shadow(0 0 1px #000) !important; 
+    color: var(--color-text);
+    /* opacity: 0.5; */
+    /* mix-blend-mode: difference; */
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    border-right: 2px solid rgba(255, 255, 255, 0.2);
-}
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+
+}   
 /* #back-to-menu-btn::after {
     right: -2rem;
 } */
 #back-to-menu-btn:hover {
-    color: var(--color-health-red);
+    mix-blend-mode: normal;
+    opacity: 1;
+
+    color: #ff3030;
+    /* filter: drop-shadow(0 0 1px #000) !important; */
+
+    
 }
 
 
 #launch-attack-btn {
     filter: drop-shadow(0 0 1px #000);
-
-    color: var(--color-parchment);
-    font-size: 1.1rem;
+    font-family: var(--font-body);
+    color: var(--color-text);
+    font-size: 1rem;
     padding: 0.5rem 1.5rem;
-    opacity: 0.8;
+    /* opacity: 0.8; */
 }
 
 #launch-attack-btn:hover:not(:disabled) {
@@ -480,11 +592,14 @@ label {
 }
 
 #launch-attack-btn:disabled {
-    color: #555;
-    cursor: not-allowed;
+    color: #ffffff;
+    opacity: 0.4;
+    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgc3Ryb2tlPSIjRDRBRjM3IiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KPC9zdmc+') 16 16, auto !important;
+
 }
-.gold-button, .ghost-button {
-    border: none;
+.gold-button, .ghost-button, .red-button {
+    padding: 0.3rem 7rem !important;
+
 }
 .center-area { 
     flex-grow: 1; 
@@ -606,10 +721,10 @@ label {
     color: #FFFAD0; 
     font-weight: bold; 
     opacity: 0.5; 
-    font-family: var(--font-title);
+    font-family: 'Cinzel Decorative', serif;
     text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
     pointer-events: none;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.0em;
 }
 
 /* Tamaños responsive para el timer */
@@ -707,7 +822,7 @@ label {
 
 #boss-name { 
     /* border: #000 solid 2px; */
-    filter: drop-shadow(0 0 1px #000);
+    text-shadow: 0px 0px 4px black;
 
 
 }
@@ -721,17 +836,24 @@ label {
 }
 #health-bar-container { 
     width: 100%; 
-    height: 15px; 
+    height: 12px; 
     background-color: rgba(0,0,0,0.5); 
     /* border: 2px solid var(--color-gold); */
-    border: 1px solid var(--color-dark-bg);
+    border-bottom: 1px solid #4D443C;
+    border-left: 3px solid #4D443C;
+    border-right: 3px solid #4D443C;
     box-shadow: 0 0 20px rgba(28, 23, 4, 0.3);
+    border-radius: 2px;
+    
 }
 #health-bar-inner { 
     height: 100%; 
 
-    background: linear-gradient(180deg, rgba(115, 91, 88, 1) 0%, rgba(71, 6, 6, 1) 51%, rgba(54, 0, 0, 1) 100%);
+    /* background: linear-gradient(180deg, rgba(115, 91, 88, 1) 0%, rgba(71, 6, 6, 1) 51%, rgba(54, 0, 0, 1) 100%); */
+    background: linear-gradient(90deg,#4D0604 98%, #7A534C );
     width: 100%;
+    border-right: 1px solid #ffffffb9;
+    border-radius: 2px 0px 0px 2px;
     transition: all 0.3s ease;
     /* box-shadow: 0 0 10px rgba(184, 0, 0, 0.5); */
 }
@@ -739,8 +861,8 @@ label {
 /* PANTALLA DE MENSAJES ESTILO DARK SOULS */
 .message-screen { 
     background-color: rgba(0,0,0,0.95); 
+    backdrop-filter: blur(5px);
     z-index: 10; 
-    padding: 3rem;
     text-align: center;
     /* border: 3px solid var(--color-gold); */
     box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
@@ -756,13 +878,16 @@ label {
 
 .confirmation-buttons { 
     display: flex; 
-    gap: 2rem; 
+    flex-direction:column-reverse;
+    gap: 1rem; 
     justify-content: center;
     margin-top: 2rem;
 }
 .confirmation-buttons button { 
     font-size: 1.2rem; 
     min-width: 150px;
+    padding: 0.3rem 1.5rem;
+    
 }
 #confirm-yes-btn { 
     border-color: var(--color-health-red); 
@@ -770,31 +895,33 @@ label {
 }
 #confirm-yes-btn:hover {
     /* box-shadow: 0 0 15px var(--color-health-red); */
-    transform: translateY(-2px);
 }
 
 /* MODAL DE INSTRUCCIONES MEJORADO */
 .instructions-modal {
     background-color: rgba(0,0,0,0.9);
+    backdrop-filter: blur(5px);
     z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    /* padding: 2rem; */
 }
 
 .modal-content {
-    background-color: var(--color-dark-bg);
-    padding: 3rem;
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    max-width: 800px;
-    width: 90%;
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); */
+    /* max-width: 800px; */
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     position: relative;
     z-index: 1001; /* Asegura que esté por encima de la opacidad */
-    border: 1px solid var(--color-gold); /* Un pequeño toque dorado */
-    max-height: 90vh; /* Limita la altura del modal */
+    /* border: 1px solid var(--color-gold); */
+    height: 100%; /* Limita la altura del modal */
     overflow-y: auto; /* Permite scroll si el contenido es muy largo */
     animation: modalAppear 0.6s ease-out !important;
 
@@ -819,17 +946,53 @@ label {
 }
 
 .instructions-content {
-    flex: 1;
     overflow-y: auto;
+
+    width: 65%; 
     padding: 1rem;
-    /* margin-bottom: 1.5rem; */
+    max-height: 70vh; 
+    scrollbar-width: none; /* Para Firefox */
+    -ms-overflow-style: none;  /* Para IE y Edge */
+}
+.instructions-content::-webkit-scrollbar {
+    display: none; 
+    width: 0;    
+    height: 0;     
+}
+
+@media (min-width: 1600px) {
+    .instructions-content {
+        width: 65%; 
+    }
+}
+
+
+@media (max-width: 1024px) {
+    .instructions-content {
+        width: 90%; 
+        padding: 0.8rem; 
+    }
+}
+/* @media (max-width: 768px) {
+    .instructions-content {
+        width: 90%; 
+        padding: 0.8rem; 
+    }
+} */
+
+
+@media (max-width: 480px) {
+    .instructions-content {
+        width: 95%; 
+        padding: 0.5rem;
+    }
 }
 
 .instruction-step {
     margin: 1.5rem 0;
     padding: 1.5rem;
     border-left: 3px solid var(--color-gold);
-    background: linear-gradient(90deg, rgba(212, 175, 55, 0.1), transparent);
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.05), transparent);
     text-align: left;
     border-radius: 0 8px 8px 0;
 }
@@ -852,14 +1015,20 @@ label {
     color: var(--color-text);
     /* margin-top: 1rem; */
     font-size: 1.1rem;
-    /* padding: 1rem 2rem; */
-    border-width: 3px;
+    white-space: nowrap;
+    padding: .3rem 7rem;
+    /* width: 90%; */
+    /* max-width: 300px;  */
+    border-radius: 3px;
+    /* border-width: 3px; */
+    border:solid 1px var(--color-parchment) ;
     align-self: center;
     /* min-width: 250px; */
 }
 .modal-close-btn:hover {
     color: var(--color-gold);
-    filter: drop-shadow(0 0 10px var(--color-gold));
+    filter: drop-shadow(0 0 20px var(--color-gold));
+    border: solid 1px var(--color-gold);
 }
 
 /* BOTÓN DE INSTRUCCIONES EN LOBBY */
@@ -953,6 +1122,7 @@ label {
 
 /* MODAL DE LORE */
 .lore-content {
+    width: 60%;
     text-align: center;
     margin: 2rem 0;
 }
@@ -966,13 +1136,21 @@ label {
 }
 
 .lore-text-container {
-    flex: 1;
+    /* flex: 1; */
     background: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
     border-radius: 8px;
     border-left: 3px solid var(--color-gold);
 }
 
+#lore-title{
+    font-family: var(--font-title);
+    color: var(--color-gold);
+    font-size: 3rem;
+    width: 80%;
+
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
+}
 #lore-text {
     color: var(--color-parchment);
     font-size: 1.2rem;
@@ -1029,7 +1207,7 @@ label {
     align-items: center;
 }
 
-#hours-offering, #start-battle-btn, #show-instructions-btn {
+#start-battle-btn, #show-instructions-btn {
     width: 100%;
     min-width: 300px;
     padding: 1rem 1.5rem;
@@ -1047,7 +1225,7 @@ label {
 }
 
 #bestiary-stats {
-    width: 100%;
+    padding-inline: 2rem;
     font-family: var(--font-body);
     font-size: 1.2rem;
     line-height: 1.8;
@@ -1219,7 +1397,7 @@ label {
     font-family: var(--font-body);
     color: var(--color-abandon-grey);
     opacity: 0.7;
-    transition: all .2s;
+    transition: all.5s;
     cursor: default;
 }
 
@@ -1355,19 +1533,19 @@ label {
 }
 
 .load-time-btn {
-    color: var(--color-parchment);
+    color: var(--color-text);
     font-size: 1rem;
     padding: 0.5rem 1rem;
     transition: all 0.3s ease;
-    opacity: 0.8;
     filter: drop-shadow(0 0 1px #000);
-
+}
+.load-time-btn:disabled :hover {
+    color: var(--color-health-red) !important;
 }
 
 .load-time-btn:hover {
     color: var(--color-gold);
     opacity: 1;
-    transform: translateY(-2px);
 }
 
 /* Responsive general mejorado */
@@ -1414,8 +1592,8 @@ label {
     
     .modal-close-btn {
         font-size: 1rem;
-        padding: 0.8rem 1.5rem;
-        min-width: 200px;
+        /* padding: 0.8rem 1.5rem; */
+        /* min-width: 200px; */
     }
 }
 
@@ -1522,9 +1700,10 @@ label {
 /* BOTONES DEL MODAL DE PACTO */
 .modal-actions {
     display: flex;
+    flex-direction: column;
     gap: 1rem;
     justify-content: center;
-    margin-top: 2rem;
+    /* margin-top: 2rem; */
     flex-wrap: wrap;
 }
 
@@ -1532,7 +1711,7 @@ label {
     background: rgba(212, 175, 55, 0.1);
     border: 1px solid var(--color-gold);
     color: var(--color-gold);
-    padding: 1rem 2rem;
+    padding: .3rem 1rem;
     font-family: var(--font-body);
     font-size: 1.1rem;
     cursor: pointer;
@@ -1542,7 +1721,7 @@ label {
 
 .gold-button:hover {
     background: rgba(212, 175, 55, 0.2);
-    box-shadow: 0 0 15px var(--color-gold);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
 }
 
 .ghost-button {
@@ -1560,9 +1739,23 @@ label {
 .ghost-button:hover {
     border-color: var(--color-gold);
     color: var(--color-gold);
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
 }
 
+.red-button{
+    background: rgba(184, 0, 0, 0.1);
+    border: 1px solid var(--color-health-red);
+    color: var(--color-health-red);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+}
+.red-button:hover {
+    background: rgba(184, 0, 0, 0.15);
+    box-shadow: 0 0 25px #500000;
+}
 /* RESPONSIVE PARA EL NUEVO MENÚ */
 @media (max-width: 768px) {
     .menu-option {
@@ -1580,4 +1773,290 @@ label {
         width: 100%;
         max-width: 250px;
     }
+}
+
+/* ============================================= */
+/* PANTALLA DE VICTORIA ESTILO DARK SOULS */
+/* ============================================= */
+.victory-screen {
+    background: radial-gradient(circle, rgba(0,0,0,0.9) 0%, rgba(17, 14, 6, 0.95) 100%);
+    z-index: 20;
+}
+
+.victory-title {
+    font-size: clamp(3rem, 12vw, 8rem) !important;
+    color: var(--color-gold) !important;
+    text-align: center;
+    text-shadow: 
+        0 0 20px var(--color-gold),
+        0 0 40px var(--color-gold),
+        0 0 60px var(--color-gold) !important;
+    animation: victoryGlow 3s ease-in-out infinite alternate !important;
+    margin-bottom: 1rem !important;
+    text-transform: uppercase;
+
+}
+
+@keyframes victoryGlow {
+    0% {
+        text-shadow: 
+            0 0 20px var(--color-gold),
+            0 0 40px var(--color-gold),
+            0 0 60px var(--color-gold);
+        transform: scale(1);
+    }
+    100% {
+        text-shadow: 
+            0 0 30px var(--color-gold),
+            0 0 60px var(--color-gold),
+            0 0 90px var(--color-gold);
+        transform: scale(1.01);
+    }
+}
+
+.victory-subtitle {
+    color: #f5e6ca65;
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    text-align: center;
+    position: relative;
+    top: 50%;
+    opacity: 0.9;
+    /* margin-top: 1rem; */
+    animation: fadeIn 1.5s ease-out 0.5s both;
+}
+
+
+
+.victory-boss-name{
+    color: var(--color-parchment);
+    font-family: var(--font-title);
+    font-size: 2.5rem;
+    text-align: center;
+    opacity: 0.9;
+    margin-top: 0.5rem;
+    animation: fadeIn 1.5s ease-out 0.5s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 0.9;
+        transform: translateY(0);
+    }
+}
+
+/* Asegurar que el mensaje de victoria se vea bien */
+#message-screen:has(.victory-title) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+/* ============================================= */
+/* PANEL DE DEBUG - TESTER HELPER */
+/* ============================================= */
+.debug-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.95);
+    border: 2px solid var(--color-gold);
+    border-radius: 10px;
+    padding: 1.5rem;
+    z-index: 10000;
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+}
+
+.debug-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-gold);
+    padding-bottom: 0.5rem;
+}
+
+.debug-header h3 {
+    color: var(--color-gold);
+    margin: 0;
+    font-family: var(--font-title);
+}
+
+.debug-close {
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.debug-close:hover {
+    color: var(--color-gold);
+}
+
+.debug-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(212, 175, 55, 0.05);
+    border-radius: 5px;
+    border-left: 3px solid var(--color-gold);
+}
+
+.debug-section h4 {
+    color: var(--color-gold);
+    margin: 0 0 0.8rem 0;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+
+.debug-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.debug-btn {
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid var(--color-gold);
+    color: var(--color-text);
+    padding: 0.7rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.debug-btn:hover {
+    background: rgba(212, 175, 55, 0.2);
+    transform: translateX(5px);
+}
+
+.debug-btn.small {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.debug-input-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.debug-input-group input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--color-gold);
+    color: var(--color-text);
+    padding: 0.5rem;
+    border-radius: 3px;
+    width: 80px;
+    font-family: var(--font-body);
+}
+
+.debug-input-group span {
+    color: var(--color-parchment);
+    font-size: 0.9rem;
+}
+
+.debug-status {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.8rem;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: var(--color-parchment);
+    min-height: 40px;
+}
+
+/* Botón flotante para abrir debug */
+.debug-toggle {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--color-gold);
+    border: none;
+    color: black;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    transition: all 0.3s ease;
+}
+
+.debug-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.8);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .debug-panel {
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    .debug-input-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .debug-input-group input {
+        width: 100%;
+    }
+}
+/* ============================================= */
+/* CURSORES CIRCULARES SIMPLES Y ELEGANTES */
+/* ============================================= */
+
+/* --- CURSO BASE: CÍRCULO DORADO HUECO --- */
+html, body, * {
+    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgc3Ryb2tlPSIjRDRBRjM3IiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KPC9zdmc+') 16 16, auto !important;
+}
+
+/* --- CURSO INTERACTIVO: CÍRCULO DORADO RELLENO --- */
+button, select, a, [data-action], .menu-option, 
+input, textarea, .gold-button, .ghost-button {
+    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iI0Q0QUYzNyIvPgo8L3N2Zz4=') 16 16, pointer !important;
+}
+
+/* --- CURSO PELIGROSO: CÍRCULO ROJO --- */
+.danger-element, .critical-action, .red-button {
+    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iI0I4MDAwMCIvPgo8L3N2Zz4=') 16 16, not-allowed !important;
+}
+
+/* --- CURSO MÁGICO: CÍRCULO PÚRPURA --- */
+.magic-item, .spell-button, .rune-element {
+    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iIzhiMDBmZiIvPgo8L3N2Zz4=') 16 16, pointer !important;
+}
+
+/* --- CURSO INFORMACIÓN: CÍRCULO AZUL --- */
+.info-element, .lore-item {
+    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI4IiBmaWxsPSIjMDA3N2ZmIi8+Cjwvc3ZnPg==') 16 16, help !important;
+}
+
+/* --- CURSO ESPERA: CÍRCULO GRIS --- */
+.wait-element, .loading-item {
+    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iIzY2NjY2NiIvPgo8L3N2Zz4=') 16 16, wait !important;
 }

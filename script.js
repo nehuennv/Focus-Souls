@@ -54,6 +54,23 @@ const SOUNDS = {
     break: 'sounds/break.mp3',
     victory: 'sounds/victory.mp3'
 };
+
+const healthLowPulseCSS = `
+@keyframes healthLowPulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(184, 0, 0, 0.5);
+    }
+    50% {
+        opacity: 0.7;
+        box-shadow: 0 0 20px rgba(184, 0, 0, 0.8);
+    }
+}
+
+`;
+const style = document.createElement('style');
+style.textContent = healthLowPulseCSS;
+document.head.appendChild(style);
 // ===================================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -149,9 +166,9 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('focusSoulStats', JSON.stringify(stats));
     }
 
-function getRank(totalMinutos) {
-        const safeTotalMinutos = typeof totalMinutos === 'number' ? totalMinutos : 0;
-        const totalHours = safeTotalMinutos / 60;
+    function getRank(totalMinutos) {
+            const safeTotalMinutos = typeof totalMinutos === 'number' ? totalMinutos : 0;
+            const totalHours = safeTotalMinutos / 60;
 
         // El orden de los IF es crucial, de mayor a menor.
         // El caso base (menos de 1 hora) DEBE ser el último `return` o el primer `if` con `totalHours < 1`
@@ -676,6 +693,59 @@ function createTimerSpark() {
         }
     }
 
+// ===================================================================================
+// NUEVA FUNCIÓN: MOSTRAR VICTORIA ESTILO DARK SOULS
+// ===================================================================================
+function showVictoryScreen() {
+    // Detener todo
+    stopTimerParticles();
+    clearInterval(timerInterval);
+    clearInterval(breakInterval);
+    
+    // ACTUALIZAR ESTADÍSTICAS
+    if (currentBossId) {
+        const stats = getStats();
+        stats.bestiasMatadas[currentBossId] = (stats.bestiasMatadas[currentBossId] || 0) + 1;
+        stats.totalMinutos = (stats.totalMinutos || 0) + Math.floor(dealtSeconds / 60);
+        saveStats(stats);
+    }
+    
+    // Crear pantalla de victoria específica
+    const victoryScreen = document.createElement('div');
+    victoryScreen.id = 'victory-screen';
+    victoryScreen.className = 'screen victory-screen';
+    victoryScreen.innerHTML = `
+        <div class="victory-content">
+            <div class="victory-boss-name">${currentBoss ? currentBoss.nombre : ""}</div>
+                <h2 class="victory-title">BESTIA CAZADA</h2>
+
+            <div class="victory-subtitle">PULSA CUALQUIER TECLA PARA CONTINUAR</div>
+        </div>
+    `;
+    
+    document.body.appendChild(victoryScreen);
+    
+    // Efectos de sonido
+    if (SOUNDS.victory) {
+        const victorySound = new Audio(SOUNDS.victory);
+        victorySound.play().catch(e => console.log("Sonido de victoria no pudo reproducirse:", e));
+    }
+    
+    // Ocultar otras pantallas
+    battleScreen.classList.add('hidden');
+    messageScreen.classList.add('hidden');
+    
+    // Actualizar título y favicon
+    updateTabTitle(0, 'victory');
+    updateFavicon('victory');
+    
+    // Después de 3 segundos, volver al menú automáticamente
+    // setTimeout(() => {
+    //     victoryScreen.remove();
+    //     returnToMenu();
+    // }, 3000);
+}
+
     function launchAttack() {
         playSound(clickSound);
         if (loadedSeconds > 0) {
@@ -689,20 +759,20 @@ function createTimerSpark() {
         isPaused = false;
         battleScreen.classList.add('timer-running');
         
-        // MOSTRAR BOTÓN DE PAUSA
         pauseBtn.classList.remove('hidden');
         pauseBtn.textContent = "❚❚";
         pauseBtn.classList.remove('paused');
-        battleScreen.classList.add('timer-running');
+        
         updateTabTitle(duration, 'battle');
         updateFavicon('battle');
-        battleScreen.classList.add('timer-running');
+        
+        // Deshabilitar botones excepto +10min
         document.querySelectorAll('.load-time-controls button, #launch-attack-btn').forEach(b => b.disabled = true);
         const add10MinBtn = document.querySelector('.load-time-btn[data-time="10"]');
-        add10MinBtn.disabled = false;
+        if (add10MinBtn) add10MinBtn.disabled = false;
         
         targetTime = Date.now() + duration * 1000;
-        minuteSaveCounter = 0; // Reiniciamos el contador
+        minuteSaveCounter = 0;
         
         clearInterval(timerInterval);
         timerInterval = setInterval(() => {
@@ -710,9 +780,10 @@ function createTimerSpark() {
                 targetTime += 1000;
                 return;
             }
+            
             const timeRemaining = Math.round((targetTime - Date.now()) / 1000);
             
-            // --- LÓGICA DE GUARDADO CADA MINUTO (AÑADIR ESTO) ---
+            // Guardar progreso cada minuto
             minuteSaveCounter++;
             if (minuteSaveCounter >= 60) {
                 const stats = getStats();
@@ -720,8 +791,7 @@ function createTimerSpark() {
                 saveStats(stats);
                 minuteSaveCounter = 0;
             }
-            // --- FIN DEL BLOQUE AÑADIDO ---
-
+    
             updateTimerDisplay(timeRemaining);
             updateTabTitle(timeRemaining, 'battle');
             
@@ -734,19 +804,13 @@ function createTimerSpark() {
     
     function handleImpact() {
         isTimerRunning = false;
-        // OCULTAR BOTÓN DE PAUSA
         pauseBtn.classList.add('hidden');
         playSound(impactSound);
-        isTimerRunning = false;
         battleScreen.classList.remove('timer-running');
-
-        // LÓGICA DEL BESTIARIO AÑADIDA AQUÍ
-        const stats = getStats();
-        // stats.totalAtaques += 1;
-        saveStats(stats);
-
+    
+        // Sumar los segundos cargados a los segundos infligidos
         dealtSeconds += loadedSeconds;
-        
+    
         // EFECTO DE IMPACTO VISUAL ÉPICO
         bossImage.style.filter = 'brightness(2) sepia(1)';
         healthBarInner.style.background = '#FF0000';
@@ -758,7 +822,15 @@ function createTimerSpark() {
             healthBarInner.style.boxShadow = '0 0 10px rgba(184, 0, 0, 0.5)';
             loadedSeconds = 0;
             updateHealthBarImpact();
-            showBreakScreen();
+            
+            // ¡VERIFICACIÓN CLAVE! - ¿Matamos al jefe?
+            if (unallocatedSeconds <= 0) {
+                // ¡VICTORIA! El jefe fue derrotado
+                showVictoryScreen();
+            } else {
+                // Ataque normal, ir a descanso
+                showBreakScreen();
+            }
         }, 500);
     }
     function showBreakScreen() {
@@ -860,15 +932,32 @@ function createTimerSpark() {
         
         // SI ESTÁ CORRIENDO, PREGUNTAR CONFIRMACIÓN
         isPaused = true;
-        showMessage("¿ROMPER EL PACTO SAGRADO?", 0, null, {
-            yesText: "RENDIRME AL TEMOR",
-            noText: "SEGUIR EN BATALLA",
-            onYes: returnToMenu,
-            onNo: () => {
-                isPaused = false;
-                messageScreen.classList.add('hidden');
-            }
-        });
+        
+        // Crear modal específico para romper pacto
+        const abandonModal = document.createElement('div');
+        abandonModal.id = 'abandon-modal';
+        abandonModal.className = 'screen message-screen abandon-modal';
+        abandonModal.innerHTML = `
+            <div class="modal-content">
+                <h2>¿ROMPER EL PACTO SAGRADO?</h2>
+                <div class="confirmation-buttons">
+                    <button id="confirm-abandon-btn" class="red-button">RENDIRME AL TEMOR</button>
+                    <button id="cancel-abandon-btn" class="gold-button">SEGUIR EN BATALLA</button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(abandonModal);
+        
+        // Configurar eventos
+        document.getElementById('confirm-abandon-btn').onclick = ()=>{
+            returnToMenu();
+            abandonModal.remove();
+        }
+        document.getElementById('cancel-abandon-btn').onclick = () => {
+            isPaused = false;
+            abandonModal.remove();
+        };
     }
     
     function showFinalVictory() {
@@ -900,6 +989,7 @@ function createTimerSpark() {
         const totalHours = (stats.totalMinutos / 60).toFixed(1);
 
         let content = `
+                    <hr class="bestiary-divider">
             <div class="bestiary-header">
                 <span class="rank-icon">${rank.icon}</span>
                 <div class="rank-info">
@@ -960,8 +1050,11 @@ function createTimerSpark() {
     function updateUI() {
         launchAttackBtn.disabled = loadedSeconds === 0;
         updateHealthBarPreview();
-        const displaySeconds = isTimerRunning ? Math.round((targetTime - Date.now())/1000) : loadedSeconds;
-        updateTimerDisplay(displaySeconds);
+        
+        // Solo actualizar el timer display si no está corriendo
+        if (!isTimerRunning) {
+            updateTimerDisplay(loadedSeconds);
+        }
     }
 
     function updateHealthBarPreview() {
@@ -972,7 +1065,17 @@ function createTimerSpark() {
     }
 
     function updateHealthBarImpact() {
-        updateHealthBarPreview();
+        if (pactInitialSeconds === 0) return;
+        
+        const healthPercent = (unallocatedSeconds / pactInitialSeconds) * 100;
+        healthBarInner.style.width = `${healthPercent}%`;
+        
+        // Efecto visual cuando la vida es baja
+        if (healthPercent < 30) {
+            healthBarInner.style.animation = 'healthLowPulse 1.5s infinite';
+        } else {
+            healthBarInner.style.animation = 'none';
+        }
     }
 
     function updateTimerDisplay(seconds, prefix = "") {
@@ -1017,4 +1120,196 @@ function createTimerSpark() {
     }
 
     initialize();
+
+    // ===================================================================================
+// SISTEMA DE DEBUG - TESTER HELPER
+// ===================================================================================
+function initializeDebugPanel() {
+    const debugPanel = document.getElementById('debug-panel');
+    const debugToggle = document.getElementById('debug-toggle');
+    const debugClose = document.getElementById('debug-close');
+    const debugStatus = document.getElementById('debug-status');
+
+    // Mostrar/ocultar panel
+    debugToggle.addEventListener('click', () => {
+        debugPanel.classList.remove('hidden');
+        updateDebugStatus();
+    });
+
+    debugClose.addEventListener('click', () => {
+        debugPanel.classList.add('hidden');
+    });
+
+    // Configurar botones de debug
+    document.querySelectorAll('.debug-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const action = e.target.dataset.action;
+            handleDebugAction(action);
+        });
+    });
+
+    // Actualizar estado cada segundo
+    setInterval(updateDebugStatus, 1000);
+}
+
+function handleDebugAction(action) {
+    switch(action) {
+        case 'quick-test':
+            quickTestSetup();
+            break;
+        case 'instant-victory':
+            instantVictory();
+            break;
+        case 'reset-game':
+            resetGameState();
+            break;
+        case 'set-boss-health':
+            setBossHealth();
+            break;
+        case 'set-loaded-time':
+            setLoadedTime();
+            break;
+        case 'add-random-kills':
+            addRandomKills();
+            break;
+        case 'clear-stats':
+            clearStats();
+            break;
+        case 'show-stats':
+            showStats();
+            break;
+    }
+    updateDebugStatus();
+}
+
+function quickTestSetup() {
+    if (!currentBoss) {
+        alert('Primero inicia una batalla desde el menú principal');
+        return;
+    }
+    
+    // Configurar para prueba rápida: jefe con 2min de vida, ataque de 5min
+    unallocatedSeconds = 2 * 60;
+    loadedSeconds = 5 * 60;
+    
+    updateHealthBarImpact();
+    updateUI();
+    
+    console.log('🚀 Test rápido configurado:');
+    console.log('- Vida del jefe: 2 minutos');
+    console.log('- Ataque cargado: 5 minutos');
+    console.log('¡Haz clic en "LANZAR ATAQUE"!');
+}
+
+function instantVictory() {
+    if (!currentBoss) {
+        alert('No hay jefe activo');
+        return;
+    }
+    
+    unallocatedSeconds = 0;
+    dealtSeconds = pactInitialSeconds;
+    showVictoryScreen();
+    
+    console.log('🏆 Victoria instantánea activada');
+}
+
+function resetGameState() {
+    unallocatedSeconds = pactInitialSeconds;
+    loadedSeconds = 0;
+    dealtSeconds = 0;
+    
+    updateHealthBarImpact();
+    updateUI();
+    
+    console.log('🔄 Estado del juego reiniciado');
+}
+
+function setBossHealth() {
+    const input = document.getElementById('debug-boss-health');
+    const minutes = parseInt(input.value);
+    
+    if (isNaN(minutes) || minutes < 1) {
+        alert('Ingresa un número válido de minutos');
+        return;
+    }
+    
+    unallocatedSeconds = minutes * 60;
+    updateHealthBarImpact();
+    
+    console.log(`🩸 Vida del jefe establecida a: ${minutes} minutos`);
+}
+
+function setLoadedTime() {
+    const input = document.getElementById('debug-loaded-time');
+    const minutes = parseInt(input.value);
+    
+    if (isNaN(minutes) || minutes < 1) {
+        alert('Ingresa un número válido de minutos');
+        return;
+    }
+    
+    loadedSeconds = minutes * 60;
+    updateUI();
+    
+    console.log(`⚔️ Ataque cargado: ${minutes} minutos`);
+}
+
+function addRandomKills() {
+    const stats = getStats();
+    JEFES.forEach(jefe => {
+        const randomKills = Math.floor(Math.random() * 3) + 1;
+        stats.bestiasMatadas[jefe.id] = (stats.bestiasMatadas[jefe.id] || 0) + randomKills;
+    });
+    
+    // Agregar tiempo aleatorio también
+    stats.totalMinutos = (stats.totalMinutos || 0) + Math.floor(Math.random() * 500) + 100;
+    
+    saveStats(stats);
+    
+    console.log('🎯 Kills aleatorios agregados al bestiario');
+    showBestiary();
+}
+
+function clearStats() {
+    if (confirm('¿Estás seguro de que querés limpiar todas las estadísticas?')) {
+        localStorage.removeItem('focusSoulStats');
+        console.log('🗑️ Estadísticas limpiadas');
+    }
+}
+
+function showStats() {
+    const stats = getStats();
+    console.log('📊 Estadísticas actuales:', stats);
+    alert('Estadísticas mostradas en consola (F12)');
+}
+
+function updateDebugStatus() {
+    const statusElement = document.getElementById('debug-status');
+    
+    if (!statusElement) return;
+    
+    let status = '';
+    
+    if (currentBoss) {
+        status += `<strong>Jefe Actual:</strong> ${currentBoss.nombre}<br>`;
+        status += `<strong>Vida del Jefe:</strong> ${Math.floor(unallocatedSeconds / 60)} minutos<br>`;
+        status += `<strong>Ataque Cargado:</strong> ${Math.floor(loadedSeconds / 60)} minutos<br>`;
+        status += `<strong>Pacto Total:</strong> ${Math.floor(pactInitialSeconds / 60)} minutos<br>`;
+        status += `<strong>Daño Infligido:</strong> ${Math.floor(dealtSeconds / 60)} minutos`;
+    } else {
+        status += 'No hay batalla activa. Inicia una desde el menú principal.';
+    }
+    
+    // Mostrar stats del localStorage
+    const stats = getStats();
+    status += `<br><br><strong>Bestias Matadas:</strong> ${Object.values(stats.bestiasMatadas).reduce((sum, val) => sum + val, 0)}`;
+    status += `<br><strong>Tiempo Total:</strong> ${(stats.totalMinutos / 60).toFixed(1)} horas`;
+    
+    statusElement.innerHTML = status;
+}
+
+// Inicializar el panel de debug (agregar esta línea al final del DOMContentLoaded)
+initializeDebugPanel();
 });
+
