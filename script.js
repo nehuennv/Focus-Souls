@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentBoss = null; // Para guardar el jefe actual
     
+    
     // Elementos de audio
     const hoverSound = document.getElementById('hover-sound');
     const clickSound = document.getElementById('click-sound');
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const BREAK_DURATION = 5 * 60;
     let minuteSaveCounter = 0;
     let currentBossId = null; // Guardará el ID del jefe actual
-
+    let breakRemaining = 0;
 
     // --- LOCAL STORAGE FUNCTIONS ---
     function getStats() {
@@ -308,17 +309,18 @@ function getRank(totalMinutos) {
             startTimerParticles();
             resetForNextRound();
         }
-    
+        
+
+        loadTimeBtns.forEach(btn => {
+            btn.addEventListener('click', () => modifyLoadedTime(parseInt(btn.dataset.time) * 60, btn));
+            btn.addEventListener('mouseenter', () => playSound(hoverSound));
+        });
         // ============================================
         // SISTEMA EXISTENTE (MANTENER IGUAL)
         // ============================================
         
         closeInstructionsBtn.addEventListener('click', hideInstructions);
         
-        loadTimeBtns.forEach(btn => {
-            btn.addEventListener('click', () => modifyLoadedTime(parseInt(btn.dataset.time) * 60, btn));
-            btn.addEventListener('mouseenter', () => playSound(hoverSound));
-        });
         
         launchAttackBtn.addEventListener('click', launchAttack);
         backToMenuBtn.addEventListener('click', confirmAbandon);
@@ -653,6 +655,12 @@ function createTimerSpark() {
 
     function modifyLoadedTime(seconds, buttonElement = null) {
         playSound(clickSound);
+        
+        // ⚠️ AGREGAR VERIFICACIÓN PARA EVITAR DUPLICACIÓN CUANDO EL TIMER ESTÁ CORRIENDO
+        if (isTimerRunning && seconds !== 600) { // 600 segundos = 10 minutos
+            return; // Solo permitir +10min cuando el timer está corriendo
+        }
+        
         if (unallocatedSeconds >= seconds) {
             unallocatedSeconds -= seconds;
             loadedSeconds += seconds;
@@ -758,7 +766,7 @@ function createTimerSpark() {
         updateFavicon('break');
         
         playSound(breakSound);
-        let breakRemaining = BREAK_DURATION;
+        breakRemaining = BREAK_DURATION; // ← USAR LA VARIABLE GLOBAL
         breakExtended = false;
         
         // OCULTAR TIMER PRINCIPAL Y MOSTRAR FOGATA
@@ -768,9 +776,9 @@ function createTimerSpark() {
         // USAR TIMER DE DESCANSO EN VEZ DEL PRINCIPAL
         updateBreakTimerDisplay(breakRemaining);
         
-        showMessage("", 0, null, {  // Título vacío porque lo movimos al timer
+        showMessage("", 0, null, {
             yesText: "Extender Descanso (+5min)",
-            noText: "Saltar Descanso",
+            noText: "Saltar Descanso", 
             onYes: extendBreak,
             onNo: skipBreak
         });
@@ -800,11 +808,9 @@ function createTimerSpark() {
         playSound(clickSound);
         if (!breakExtended) {
             breakExtended = true;
-            // Extender el descanso usando el break timer
-            const currentBreakTime = parseInt(document.getElementById('break-timer').textContent.split(':')[0]) * 60 + 
-                                    parseInt(document.getElementById('break-timer').textContent.split(':')[1]);
-            const newBreakTime = currentBreakTime + (5 * 60);
-            updateBreakTimerDisplay(newBreakTime);
+            // Extender el descanso sumando 300 segundos (5 minutos)
+            breakRemaining += 300; // ← CORREGIDO: sumar directamente a la variable
+            updateBreakTimerDisplay(breakRemaining);
             confirmYesBtn.disabled = true;
             confirmYesBtn.textContent = "Descanso Extendido";
         }
@@ -897,7 +903,7 @@ function createTimerSpark() {
             <div class="bestiary-header">
                 <span class="rank-icon">${rank.icon}</span>
                 <div class="rank-info">
-                    <h3 class="rank-title">${rank.rango}</h3>
+                    <h3 class="rank-title"> <b>Rango:</b> ${rank.rango}</h3>
                     <p class="rank-lore"><i>"${rank.lore}"</i></p>
                 </div>
             </div>
