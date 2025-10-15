@@ -54,6 +54,251 @@ const SOUNDS = {
     break: 'sounds/break.mp3',
     victory: 'sounds/victory.mp3'
 };
+// ===================================================================================
+// FUNCIÓN GETRANK - MOVER AL INICIO (ANTES DE LOGROS)
+// ===================================================================================
+function getRank(totalMinutos) {
+    const safeTotalMinutos = typeof totalMinutos === 'number' ? totalMinutos : 0;
+    const totalHours = safeTotalMinutos / 60;
+
+    if (totalHours >= 1000) return { rango: "Entidad Cósmica", lore: "Has trascendido las barreras del tiempo y la mente, fundiéndote con la esencia del foco eterno.", icon: "✨" };
+    if (totalHours >= 750) return { rango: "Mente Ancestral", lore: "Tu voluntad es tan antigua como el primer pensamiento. Nada escapa a tu concentración.", icon: "🧠" };
+    if (totalHours >= 500) return { rango: "Heraldo del Abismo", lore: "Has dominado los vacíos de la distracción. El abismo te obedece.", icon: "🌌" };
+    if (totalHours >= 400) return { rango: "Alma Trascendida", lore: "Tu espíritu se ha elevado más allá de las limitaciones mundanas. La concentración es tu estado natural.", icon: "🌀" };
+    if (totalHours >= 300) return { rango: "Iluminado", lore: "La luz de tu enfoque es una guía para otros. Has encontrado la claridad perfecta.", icon: "🌟" };
+    if (totalHours >= 200) return { rango: "Arconte del Silencio", lore: "Gobiernas los dominios de la calma. El ruido del mundo se disipa ante tu presencia.", icon: "🦉" };
+    if (totalHours >= 150) return { rango: "Señor del Pacto", lore: "Los rituales del foco son tu dominio. Comandas la voluntad con maestría absoluta.", icon: "👑" };
+    if (totalHours >= 100) return { rango: "Maestro del Ritual", lore: "Tu disciplina es un arma legendaria. Has convertido el tiempo en tu mayor aliado.", icon: "⚖️" };
+    if (totalHours >= 75) return { rango: "Cazador de Ecos", lore: "Dominas el arte de rastrear y someter las distracciones más escurridizas.", icon: "🗡️" };
+    if (totalHours >= 50) return { rango: "Veterano de la Forja", lore: "Has resistido innumerables batallas. La Forja es tu segundo hogar.", icon: "🔥" };
+    if (totalHours >= 25) return { rango: "Guardián del Conocimiento", lore: "Proteges las verdades con tu atención inquebrantable. Tu foco es un escudo.", icon: "🛡️" };
+    if (totalHours >= 10) return { rango: "Erudito", lore: "Has comenzado a desentrañar los misterios del saber. Tu curiosidad es insaciable.", icon: "📖" };
+    if (totalHours >= 5) return { rango: "Acólito", lore: "Los primeros ritos han sido aprendidos. La disciplina comienza a tomar forma.", icon: "📜" };
+    if (totalHours >= 1) return { rango: "Iniciado", lore: "Has sellado tu primer pacto. La aventura apenas comienza.", icon: "🕯️" };
+    
+    return { rango: "Neófito", lore: "Un alma nueva en la senda del foco. El camino se abre ante ti.", icon: "🌑" };
+}
+// ===================================================================================
+// SISTEMA DE LOGROS / TROFEOS
+// ===================================================================================
+// ===================================================================================
+// SISTEMA DE 30 LOGROS / TROFEOS
+// ===================================================================================
+const LOGROS = [
+    // === PROGRESO GENERAL ===
+    {
+        id: 'primer_minuto',
+        titulo: 'Primer Minuto',
+        descripcion: 'Completa tu primer minuto de enfoque',
+        icono: '⚡',
+        condicion: (stats) => stats.totalMinutos >= 1
+    },
+    {
+        id: 'primera_hora',
+        titulo: 'Primera Hora',
+        descripcion: 'Completa una hora total de enfoque',
+        icono: '🕐',
+        condicion: (stats) => stats.totalMinutos >= 60
+    },
+    {
+        id: 'maraton_focus',
+        titulo: 'Maratón de Foco',
+        descripcion: 'Alcanza 10 horas de enfoque total',
+        icono: '🏁',
+        condicion: (stats) => stats.totalMinutos >= 600
+    },
+    {
+        id: 'leyenda_focus',
+        titulo: 'Leyenda del Foco',
+        descripcion: 'Alcanza 100 horas de enfoque total',
+        icono: '🌟',
+        condicion: (stats) => stats.totalMinutos >= 6000
+    },
+
+    // === BESTIAS GENERAL ===
+    {
+        id: 'primera_bestia',
+        titulo: 'Primera Sangre',
+        descripcion: 'Derrota a tu primera bestia',
+        icono: '🩸',
+        condicion: (stats) => Object.values(stats.bestiasMatadas).reduce((a, b) => a + b, 0) >= 1
+    },
+    {
+        id: 'cazador_novato',
+        titulo: 'Cazador Novato',
+        descripcion: 'Derrota 5 bestias en total',
+        icono: '🗡️',
+        condicion: (stats) => Object.values(stats.bestiasMatadas).reduce((a, b) => a + b, 0) >= 5
+    },
+    {
+        id: 'cazador_experto',
+        titulo: 'Cazador Experto',
+        descripcion: 'Derrota 25 bestias en total',
+        icono: '⚔️',
+        condicion: (stats) => Object.values(stats.bestiasMatadas).reduce((a, b) => a + b, 0) >= 25
+    },
+    {
+        id: 'cazador_maestro',
+        titulo: 'Cazador Maestro',
+        descripcion: 'Derrota 100 bestias en total',
+        icono: '🏹',
+        condicion: (stats) => Object.values(stats.bestiasMatadas).reduce((a, b) => a + b, 0) >= 100
+    },
+
+    // === BESTIAS ESPECÍFICAS ===
+    {
+        id: 'domador_horrax',
+        titulo: 'Domador de Horrax',
+        descripcion: 'Derrota a Horrax 3 veces',
+        icono: '🔥',
+        condicion: (stats) => (stats.bestiasMatadas['horrax'] || 0) >= 3
+    },
+    {
+        id: 'vencedor_alberic',
+        titulo: 'Vencedor de Alberic',
+        descripcion: 'Derrota a Alberic 3 veces',
+        icono: '📚',
+        condicion: (stats) => (stats.bestiasMatadas['alberic'] || 0) >= 3
+    },
+    {
+        id: 'jardinero_morwenna',
+        titulo: 'Jardinero de Morwenna',
+        descripcion: 'Derrota a Morwenna 3 veces',
+        icono: '🌸',
+        condicion: (stats) => (stats.bestiasMatadas['morwenna'] || 0) >= 3
+    },
+    {
+        id: 'vidente_lysandra',
+        titulo: 'Vidente de Lysandra',
+        descripcion: 'Derrota a Lysandra 3 veces',
+        icono: '🔮',
+        condicion: (stats) => (stats.bestiasMatadas['lysandra'] || 0) >= 3
+    },
+    {
+        id: 'juez_aurelian',
+        titulo: 'Juez de Aurelian',
+        descripcion: 'Derrota a Aurelian 3 veces',
+        icono: '⚖️',
+        condicion: (stats) => (stats.bestiasMatadas['aurelian'] || 0) >= 3
+    },
+    {
+        id: 'bufon_maro',
+        titulo: 'Bufón de Maro',
+        descripcion: 'Derrota a Maro 3 veces',
+        icono: '🎭',
+        condicion: (stats) => (stats.bestiasMatadas['maro'] || 0) >= 3
+    },
+
+    // === RANGOS ===
+    {
+        id: 'rango_iniciado',
+        titulo: 'Iniciado Confirmado',
+        descripcion: 'Alcanza el rango de Iniciado',
+        icono: '🕯️',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Iniciado"
+    },
+    {
+        id: 'rango_erudito',
+        titulo: 'Erudito',
+        descripcion: 'Alcanza el rango de Erudito', 
+        icono: '📖',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Erudito"
+    },
+    {
+        id: 'rango_guardian',
+        titulo: 'Guardián',
+        descripcion: 'Alcanza el rango de Guardián del Conocimiento',
+        icono: '🛡️',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Guardián del Conocimiento"
+    },
+    {
+        id: 'rango_maestro',
+        titulo: 'Maestro del Ritual',
+        descripcion: 'Alcanza el rango de Maestro del Ritual',
+        icono: '👑',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Maestro del Ritual"
+    },
+
+    // === MATERIAS/DOMINIOS ===
+    {
+        id: 'primer_dominio',
+        titulo: 'Primer Dominio',
+        descripcion: 'Crea tu primera materia',
+        icono: '📝',
+        condicion: (stats) => stats.clases.length >= 1
+    },
+    {
+        id: 'estudiante_multiple',
+        titulo: 'Estudiante Múltiple',
+        descripcion: 'Crea 5 materias diferentes',
+        icono: '📚',
+        condicion: (stats) => stats.clases.length >= 5
+    },
+    {
+        id: 'maestro_dominios',
+        titulo: 'Maestro de Dominios',
+        descripcion: 'Crea 12 materias diferentes',
+        icono: '🎓',
+        condicion: (stats) => stats.clases.length >= 12
+    },
+    {
+        id: 'especialista',
+        titulo: 'Especialista',
+        descripcion: 'Completa 5 horas en una sola materia',
+        icono: '⭐',
+        condicion: (stats) => stats.clases.some(c => c.minutos >= 300)
+    },
+    {
+        id: 'polymath',
+        titulo: 'Polímatha',
+        descripcion: 'Completa 5 horas en 3 materias diferentes',
+        icono: '🌈',
+        condicion: (stats) => {
+            const materiasCon5Horas = stats.clases.filter(c => c.minutos >= 300).length;
+            return materiasCon5Horas >= 3;
+        }
+    },
+
+    // === LOGROS ESPECIALES ===
+    {
+        id: 'coleccionista',
+        titulo: 'Coleccionista de Bestias',
+        descripcion: 'Derrota al menos una vez a cada bestia',
+        icono: '🎯',
+        condicion: (stats) => {
+            const bestiasUnicas = Object.keys(stats.bestiasMatadas).length;
+            return bestiasUnicas >= 6; // Total de jefes
+        }
+    },
+    {
+        id: 'sin_miedo',
+        titulo: 'Sin Miedo al Éxito',
+        descripcion: 'Completa un pacto de 4 horas o más',
+        icono: '💪',
+        condicion: (stats) => stats.pactoMaximo >= 240
+    },
+    {
+        id: 'consistencia',
+        titulo: 'Estudiante Consistente',
+        descripcion: 'Completa 7 días diferentes de estudio',
+        icono: '📅',
+        condicion: (stats) => stats.diasEstudiados >= 7
+    },
+    {
+        id: 'leyenda_viva',
+        titulo: 'Leyenda Viva',
+        descripcion: 'Alcanza el rango máximo (Entidad Cósmica)',
+        icono: '✨',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Entidad Cósmica"
+    },
+    {
+        id: 'perfeccionista',
+        titulo: 'Perfeccionista',
+        descripcion: 'Desbloquea todos los logros',
+        icono: '🏆',
+        condicion: (stats) => stats.logrosDesbloqueados && stats.logrosDesbloqueados.length >= LOGROS.length - 1
+    }
+];
 
 const healthLowPulseCSS = `
 @keyframes healthLowPulse {
@@ -154,26 +399,42 @@ document.addEventListener('DOMContentLoaded', () => {
     function getStats() {
         const statsString = localStorage.getItem('focusSoulStats');
         let parsedStats;
-
+    
         try {
             parsedStats = statsString ? JSON.parse(statsString) : {};
         } catch (e) {
             console.error("Error al parsear focusSoulStats del localStorage:", e);
-            parsedStats = {}; // Si hay error, inicializa vacío
+            parsedStats = {};
         }
-
-        // Garantiza que totalMinutos siempre es un número, por defecto 0
+    
+        // Propiedades existentes
         parsedStats.totalMinutos = typeof parsedStats.totalMinutos === 'number' ? parsedStats.totalMinutos : 0;
-        
-        // Garantiza que bestiasMatadas siempre es un objeto
         parsedStats.bestiasMatadas = typeof parsedStats.bestiasMatadas === 'object' && parsedStats.bestiasMatadas !== null ? parsedStats.bestiasMatadas : {};
-
         parsedStats.clases = Array.isArray(parsedStats.clases) ? parsedStats.clases : [];
+        
+        // ✅ NUEVAS PROPIEDADES PARA LOGROS AVANZADOS
+        parsedStats.logrosDesbloqueados = Array.isArray(parsedStats.logrosDesbloqueados) ? parsedStats.logrosDesbloqueados : [];
+        parsedStats.pactoMaximo = typeof parsedStats.pactoMaximo === 'number' ? parsedStats.pactoMaximo : 0;
+        parsedStats.diasEstudiados = typeof parsedStats.diasEstudiados === 'number' ? parsedStats.diasEstudiados : 0;
+        parsedStats.ultimoDia = parsedStats.ultimoDia || null;
+        
         return parsedStats;
     }
 
     function saveStats(stats) {
+        // ✅ ACTUALIZAR DATOS PARA LOGROS ANTES DE GUARDAR
+        const hoy = new Date().toDateString();
+        
+        // Trackear días estudiados
+        if (stats.ultimoDia !== hoy) {
+            stats.diasEstudiados = (stats.diasEstudiados || 0) + 1;
+            stats.ultimoDia = hoy;
+        }
+        
         localStorage.setItem('focusSoulStats', JSON.stringify(stats));
+        
+        // ✅ Verificar logros después de cada guardado
+        setTimeout(() => verificarLogros(stats), 100);
     }
 
     function getRank(totalMinutos) {
@@ -421,9 +682,101 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 console.log("🏠 Volviendo al menú - Materia actual reseteada");
             }, 400);
+            // ✅ NUEVO: Mostrar notificaciones pendientes al volver al menú
+    setTimeout(() => {
+        if (window.pendingNotifications && window.pendingNotifications.length > 0) {
+            window.pendingNotifications.forEach(notif => {
+                showToast(notif.titulo, notif.mensaje, { 
+                    type: 'gold', 
+                    duration: 5000,
+                    showProgress: true 
+                });
+            });
+            window.pendingNotifications = [];
+        }
+    }, 1000);
         };
+         // ✅ NUEVO: Manejar el botón de logros
+    document.addEventListener('click', function(e) {
+        if (e.target.dataset.action === 'logros') {
+            showLogros();
+        }
+    });
+    
+    // ✅ NUEVO: Botón de cerrar logros
+    document.getElementById('close-logros-btn').addEventListener('click', function() {
+        document.getElementById('logros-modal').classList.add('hidden');
+    });
+}
+
+// ✅ NUEVO: Función para mostrar logros
+function showLogros() {
+    const stats = getStats();
+    const logrosList = document.getElementById('logros-list');
+    
+    let html = '';
+    LOGROS.forEach(logro => {
+        const estaDesbloqueado = stats.logrosDesbloqueados.includes(logro.id);
+        
+        html += `
+            <div class="logro-item ${estaDesbloqueado ? 'desbloqueado' : 'bloqueado'}">
+                <div class="logro-icon">${estaDesbloqueado ? logro.icono : '<img src="img/candado1.png" alt="Logro bloqueado" class="locked-icon">'}</div>
+                <div class="logro-info">
+                    <h4>${estaDesbloqueado ? logro.titulo : '???'}</h4>
+                    <p>${estaDesbloqueado ? logro.descripcion : 'Logro bloqueado'}</p>
+                </div>
+
+            </div>
+        `;
+    });
+    
+    logrosList.innerHTML = html;
+    document.getElementById('logros-modal').classList.remove('hidden');
     }
 
+    //Logros
+    function verificarLogros(stats) {
+        const nuevosLogros = [];
+        
+        LOGROS.forEach(logro => {
+            // Si ya estaba desbloqueado, skip
+            if (stats.logrosDesbloqueados && stats.logrosDesbloqueados.includes(logro.id)) return;
+            
+            // Verificar condición
+            if (logro.condicion(stats)) {
+                nuevosLogros.push(logro.id);
+                
+                // Añadir a notificaciones pendientes
+                if (!window.pendingNotifications) window.pendingNotifications = [];
+                window.pendingNotifications.push({
+                    tipo: 'logro',
+                    titulo: `🎉 ${logro.titulo}`,
+                    mensaje: logro.descripcion,
+                    icono: logro.icono
+                });
+                
+                console.log(`🏆 Logro desbloqueado: ${logro.titulo}`);
+            }
+        });
+        
+        // Actualizar stats solo si hay nuevos logros
+        if (nuevosLogros.length > 0) {
+            stats.logrosDesbloqueados = [...(stats.logrosDesbloqueados || []), ...nuevosLogros];
+            saveStats(stats);
+            
+            // Mostrar toast inmediato del primer logro
+            const primerLogro = LOGROS.find(l => l.id === nuevosLogros[0]);
+            if (primerLogro) {
+                showToast(`🏆 ${primerLogro.titulo}`, primerLogro.descripcion, { 
+                    type: 'gold', 
+                    duration: 6000,
+                    showProgress: true 
+                });
+            }
+        }
+        
+        return nuevosLogros.length > 0;
+    }
 
     // Cargar materias en el select del pacto
     function loadClassSelect() {
@@ -481,7 +834,7 @@ function loadClassList() {
     const classListElement = document.getElementById('class-list');
     
     if (stats.clases.length === 0) {
-        classListElement.innerHTML = '<p style="text-align: center; color: var(--color-parchment);">Aún no has creado ninguna materia.</p>';
+        classListElement.innerHTML = '<p style="text-align: center; font-size: 1.1rem ;color: var(--color-parchment);">Aún no has creado ninguna materia.</p>';
         return;
     }
 
@@ -491,8 +844,8 @@ function loadClassList() {
         html += `
             <div class="class-item">
                 <div>
-                    <strong>${clase.nombre}</strong><br>
-                    <small>${clase.minutos} minutos (${horas} horas)</small>
+                    <strong class="class-title">${clase.nombre}</strong><br>
+                    <small class="class-subtitle">${clase.minutos} minutos (${horas} horas)</small>
                 </div>
                 <button class="delete-class-btn" data-id="${clase.id}">Eliminar</button>
             </div>
@@ -870,6 +1223,14 @@ function showVictoryScreen() {
         const stats = getStats();
         stats.bestiasMatadas[currentBossId] = (stats.bestiasMatadas[currentBossId] || 0) + 1;
         stats.totalMinutos = (stats.totalMinutos || 0) + Math.floor(dealtSeconds / 60);
+        
+        // ✅ NUEVO: ACTUALIZAR PACTO MÁXIMO
+        const duracionPacto = Math.floor(pactInitialSeconds / 60); // Convertir a minutos
+        if (duracionPacto > (stats.pactoMaximo || 0)) {
+            stats.pactoMaximo = duracionPacto;
+            console.log(`📈 Nuevo pacto máximo: ${duracionPacto} minutos`);
+        }
+        
         saveStats(stats);
     }
     
@@ -914,10 +1275,13 @@ function handleVictoryInput(e) {
         e.stopPropagation();
     }
     
-    hideVictoryScreen();
+    hideVictoryScreen(currentBoss ? currentBoss.id : "");
 }
+function capitalizarPrimeraLetra(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
-function hideVictoryScreen() {
+function hideVictoryScreen(bossName) {
     const victoryScreen = document.getElementById('victory-screen');
     
     // Remover eventos primero
@@ -933,40 +1297,149 @@ function hideVictoryScreen() {
     
     // Volver al menú
     returnToMenu();
+    // Toast con pausa automática (comportamiento por defecto)
+showToast('BESTIARIO ACTUALIZADO', `Has dominado a ${capitalizarPrimeraLetra(bossName)}`, { 
+    type: 'gold',
+    duration: 5000,
+    showProgress: true 
+});
 }
-    // --- FUNCIÓN PARA MOSTRAR NOTIFICACIONES TIPO TOASTIFY ---
+
+
 /**
- * Muestra una notificación temporal tipo "toast" en la esquina superior derecha.
- * @param {string} title El título o tipo de notificación (ej. "LOGRO DESBLOQUEADO", "NUEVO OBJETO").
- * @param {string} message El mensaje principal de la notificación (ej. "Bestia añadida al Bestiario").
- * @param {string} type El tipo de toast ('gold' por defecto, 'error', 'info', etc.).
- * @param {number} duration Duración en milisegundos que el toast es visible (por defecto 5000ms).
+ * Muestra una notificación toast personalizada
+ * @param {string} title - Título de la notificación
+ * @param {string} message - Mensaje de la notificación
+ * @param {Object} options - Opciones personalizadas
+ * @param {string} options.type - Tipo predefinido ('gold', 'error', 'success', 'info', 'warning')
+ * @param {string} options.backgroundColor - Color de fondo personalizado
+ * @param {string} options.textColor - Color del texto personalizado
+ * @param {string} options.borderColor - Color del borde personalizado
+ * @param {string} options.titleColor - Color del título personalizado
+ * @param {number} options.duration - Duración en milisegundos (por defecto 5000ms)
+ * @param {boolean} options.showProgress - Mostrar barra de progreso (true por defecto)
  */
-function showToastify(title, message, type = 'gold', duration = 5000) {
+function showToast(title, message, options = {}) {
     const toastContainer = document.getElementById('toast-container');
     if (!toastContainer) {
-        console.error("Toast container with ID 'toast-container' not found. Please add <div id='toast-container'></div> to your HTML.");
+        console.error("Toast container no encontrado");
         return;
     }
 
     const toast = document.createElement('div');
-    toast.classList.add('toast', type); // Añade la clase 'toast' y el tipo (ej. 'gold')
+    toast.className = 'toast';
     
-    // Contenido del toast
+    // Aplicar tipo predefinido si se especifica
+    if (options.type) {
+        toast.classList.add(options.type);
+    }
+    
+    // Aplicar estilos personalizados si se proporcionan
+    const style = [];
+    if (options.backgroundColor) style.push(`--toast-bg: ${options.backgroundColor}`);
+    if (options.textColor) style.push(`--toast-text: ${options.textColor}`);
+    if (options.borderColor) style.push(`--toast-border: ${options.borderColor}`);
+    if (options.titleColor) style.push(`--toast-title: ${options.titleColor}`);
+    
+    if (style.length > 0) {
+        toast.style = style.join('; ');
+    }
+    
+    const duration = options.duration || 5000;
+    const showProgress = options.showProgress !== false; // true por defecto
+    
     toast.innerHTML = `
-        <strong style="display: block; margin-bottom: 5px;">${title.toUpperCase()}</strong>
-        <span>${message}</span>
+        <div class="toast-header">
+            <strong class="toast-title">${title}</strong>
+            <button class="toast-close" onclick="this.parentElement.parentElement.remove()">×</button>
+        </div>
+        <div class="toast-message">${message}</div>
+        ${showProgress ? '<div class="toast-progress"></div>' : ''}
     `;
+    
+    // Variables para controlar el tiempo
+    let remainingTime = duration;
+    let startTime = Date.now();
+    let timeoutId;
+    let isPaused = false;
+    
+    const progressBar = toast.querySelector('.toast-progress');
+    
+    // Función para iniciar el temporizador de eliminación
+    const startRemoveTimer = () => {
+        timeoutId = setTimeout(() => {
+            if (toast.parentNode && !isPaused) {
+                removeToast();
+            }
+        }, remainingTime);
+    };
+    
+    // Función para eliminar el toast con animación
+    const removeToast = () => {
+        toast.style.animation = `toastFadeOut 0.5s forwards ease-in`;
+        setTimeout(() => {
+            if (toast.parentNode) {
+                toast.remove();
+            }
+        }, 500);
+    };
+    
+    // Configurar eventos de pausa/reanudación
+    toast.addEventListener('mouseenter', () => {
+        isPaused = true;
+        clearTimeout(timeoutId);
+        
+        // Calcular tiempo restante
+        const elapsed = Date.now() - startTime;
+        remainingTime -= elapsed;
+        
+        // Pausar animación de la barra de progreso
+        if (progressBar) {
+            progressBar.style.animationPlayState = 'paused';
+        }
+    });
+    
+    toast.addEventListener('mouseleave', () => {
+        if (isPaused) {
+            isPaused = false;
+            startTime = Date.now();
+            
+            // Reanudar animación de la barra de progreso
+            if (progressBar) {
+                progressBar.style.animationPlayState = 'running';
+            }
+            
+            // Reiniciar temporizador de eliminación
+            startRemoveTimer();
+        }
+    });
+    
+    // Configurar la barra de progreso si existe
+    if (progressBar) {
+        progressBar.style.animationDuration = `${duration}ms`;
+    }
+    
+    // Iniciar animación de entrada
+    toast.style.animation = `toastSlideIn 0.5s forwards ease-out`;
+    
+    // Agregar al contenedor
+    toastContainer.appendChild(toast);
+    
+    // Iniciar temporizador de eliminación
+    startRemoveTimer();
+    
+    // Función para eliminar manualmente el toast
+    toast.removeToast = () => {
+        clearTimeout(timeoutId);
+        removeToast();
+    };
+    
+    return toast;
+}
 
-    toastContainer.prepend(toast); // Añade el nuevo toast al principio para que los nuevos salgan arriba
-
-    // Ajustar la animación de salida para que se dispare después de la duración
-    toast.style.animation = `slideInRight 0.5s forwards ease-out, fadeOut 0.5s forwards ease-in ${duration / 1000 - 0.5}s`;
-
-    // Eliminar el toast del DOM después de que termine la animación de salida
-    setTimeout(() => {
-        toast.remove();
-    }, duration + 500); // Duración + tiempo de animación de salida
+// Función de alias para mantener compatibilidad
+function showToastify(title, message, type = 'gold', duration = 5000) {
+    return showToast(title, message, { type, duration });
 }
 
 // --- EJEMPLOS DE CÓMO LLAMARÍAS ESTA FUNCIÓN ---
@@ -1572,4 +2045,6 @@ initialize();
 initializeDebugPanel();
 
 });
+
+
 

@@ -29,35 +29,38 @@
         <button class="menu-option" data-action="start">COMENZAR RITUAL</button>
         <button class="menu-option" data-action="instructions">TOMO DE INICIACIÓN</button>
         <button class="menu-option" data-action="bestiary">BESTIARIO</button>
+        <button class="menu-option" data-action="logros">SALA DE TROFEOS</button>
+
     </div>
 
     <!-- MODAL PARA SELECCIONAR HORAS (OCULTO INICIALMENTE) -->
     <div id="pact-modal" class="screen hidden message-screen">
         <div class="modal-content">
-            <h2>SELLA TU PACTO</h2>
+            <h2 style="margin-bottom: 0;">SELLA TU PACTO</h2>
+            <hr class="bestiary-divider">
             <label for="hours-offering">¿CUÁL ES TU OFRENDA?</label>
             
-            <div class="select-wrapper">
+            <div  class="select-wrapper">
                 <select id="hours-offering">
-                    <option value="" disabled selected>SELECCIONA TU OFRENDA</option>
+                    <option value="" disabled selected>ELIGE TU OFRENDA</option>
                     <!-- Las horas se cargan automáticamente por JavaScript -->
                 </select>
             </div>
             <!-- EN EL MODAL DEL PACTO (después del select de horas) -->
-            <label for="class-offering">¿PARA QUÉ MATERIA LUCHAS?</label>
+            <label style="margin-top: 3rem;" for="class-offering">¿QUÉ DOMINIO DESEAS CONQUISTAR?</label>
             <div class="select-wrapper">
                 <select id="class-offering">
-                    <option value="" disabled selected>SELECCIONA TU MATERIA</option>
+                    <option value="" disabled selected>ELIGE UN CAMPO DE SABER</option>
                     <!-- Las materias se cargan desde localStorage -->
                 </select>
             </div>
-            <button id="manage-classes-btn" class="ghost-button" style="margin-top: 1rem; padding: 0.5rem 2rem !important;">
-                GESTIONAR MATERIAS
+            <button id="manage-classes-btn" class="ghost-button">
+                GESTIONAR DOMINIOS
             </button>
             <hr class="bestiary-divider">
             <div class="modal-actions">
                 <button id="confirm-pact-btn" class="gold-button">INICIAR RITUAL</button>
-                <button id="cancel-pact-btn" class="ghost-button">REPLEGARSE </button>
+                <button id="cancel-pact-btn" class="ghost-button">DESISTIR </button>
             </div>
         </div>
     </div>
@@ -207,33 +210,47 @@
     </div>
     <div id="class-modal" class="screen hidden message-screen">
         <div class="modal-content instructions-modal-content">
-            <h2 class="modal-title">GESTIÓN DE MATERIAS</h2>
+            <h2 class="modal-title" style="margin-bottom: 0;">CÓDICE DE DOMINIOS</h2> 
             
-            <div class="instructions-content">
-                <!-- Lista de materias -->
-                <div id="class-list" style="text-align: left; margin-bottom: 2rem;">
-                    <!-- Se llena dinámicamente -->
+            <div class="instructions-content" style="padding: 0;">
+                <hr class="bestiary-divider">
+                <div id="class-list" style="text-align: left;">
+                    <p><i>Aquí se listarán tus Dominios conquistados.</i></p> 
                 </div>
                 
                 <hr class="bestiary-divider">
                 
-                <!-- Formulario nueva materia -->
                 <div class="add-class-form" style="margin-top: 1.5rem;">
-                    <h3 style="color: var(--color-gold); margin-bottom: 1rem;">Nueva Materia</h3>
-                    <input type="text" id="new-class-name" placeholder="Ej: Análisis Matemático" 
-                           style="background: rgba(255,255,255,0.1); border: 1px solid var(--color-gold); 
-                                  color: white; padding: 0.8rem; width: 100%; margin-bottom: 1rem;
-                                  font-family: var(--font-body);">
-                    <button id="add-class-btn" class="gold-button" style="padding: 0.8rem 2rem !important;">
-                        CREAR MATERIA
+                    <h3 style="color: var(--color-gold); margin-bottom: 1rem; font-weight: 700; font-family: var(--font-body);">NUEVO CAMPO DE SABER</h3> 
+                    <input maxlength="32" type="text" id="new-class-name" placeholder="Ej: Las Runas de Álgebra Antigua" > 
+                    <button id="add-class-btn" class="gold-button">
+                        AÑADIR AL CÓDICE
                     </button>
-                </div>
+                    <button id="close-class-modal-btn" class="modal-close-btn">
+                        RETORNAR AL JURAMENTO
+                    </button>                </div>
             </div>
     
-            <button id="close-class-modal-btn" class="modal-close-btn">VOLVER AL PACTO</button>
+
         </div>
     </div>
     <div id="toast-container"></div>
+    <!-- MODAL DE LOGROS -->
+<div id="logros-modal" class="screen hidden message-screen">
+    <div class="modal-content instructions-modal-content">
+        <h2 class="modal-title" style="margin-bottom: 0;">SALA DE TROFEOS</h2>
+        
+        <div id="trofeos-container" class="instructions-content" >
+            <hr class="bestiary-divider">
+            <div id="logros-list" class="logros-list">
+                <!-- Los logros se cargan aquí dinámicamente -->
+            </div>
+            <hr class="bestiary-divider">
+        </div>
+
+        <button id="close-logros-btn" class="modal-close-btn">VOLVER AL SANTUARIO</button>
+    </div>
+</div>
     <script src="script.js"></script>
 
 
@@ -290,10 +307,10 @@
 </div>
 
 <!-- Botón flotante para abrir el panel de debug -->
-<!-- <button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
+<button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
     🐛
-</button> -->
-<button id="debug-toggle" title="Abrir panel de debug">
-    
 </button>
+<!-- <button id="debug-toggle" title="Abrir panel de debug">
+    
+</button> -->
 </html>
