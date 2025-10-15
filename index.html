@@ -134,7 +134,7 @@
         <!-- CONTENEDOR DE FOGATA Y TIMER -->
         <div id="bonfire-container" class="bonfire-container hidden">
             <div class="bonfire-content">
-                <img src="img/dark-souls-bonfire.gif" alt="Fogata" class="bonfire-gif">
+                <img src="img/bonefire.gif" alt="Fogata" class="bonfire-gif">
                 <div class="break-timer-wrapper">
                     <div class="break-timer-display">
                         <span id="break-timer">05:00</span>
@@ -205,41 +205,63 @@
     <audio id="break-sound" preload="auto">
         <source src="sounds/break.mp3" type="audio/mpeg">
     </audio>
-    <div id="bestiary-modal" class="screen hidden message-screen">
-        <div class="modal-content instructions-modal-content"> <h2 id="bestiary-title" class="modal-title">Bestiario del Pacto</h2>
-
-
-            <div id="bestiary-stats">
-                
-                </div>
+    <div id="bestiary-modal" class="screen hidden">
+        <div class="modal-content" style="width: 95vw; height: 95vh; max-width: 1400px; max-height: 900px;">
+            <h2 class="modal-title" style="margin-bottom: 2rem;">BESTIARIO DEL PACTO</h2>
             
-            <button id="close-bestiary-btn" class="modal-close-btn">Cerrar Bestiario</button>
+            <div id="bestiary-stats" style="height: 100%; overflow: hidden;">
+                <!-- El contenido se genera dinámicamente -->
+            </div>
+            
+            <button id="close-bestiary-btn" class="modal-close-btn">CERRAR BESTIARIO</button>
         </div>
     </div>
-    <div id="class-modal" class="screen hidden message-screen">
-        <div class="modal-content instructions-modal-content">
-            <h2 class="modal-title" style="margin-bottom: 0;">CÓDICE DE DOMINIOS</h2> 
-            
-            <div class="instructions-content" style="padding: 0;">
-                <hr class="bestiary-divider">
-                <div id="class-list" style="text-align: left;">
-                    <p><i>Aquí se listarán tus Dominios conquistados.</i></p> 
+    <div id="class-modal" class="screen hidden">
+        <div class="modal-content class-dashboard" style="width: 60%; height: 95vh; max-width: 1800px; max-height: 900px; display: flex; flex-direction: column; padding: 1.5rem;">
+            <!-- HEADER COMPACTO -->
+            <div style="display: flex; flex-direction: column;justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h2 class="modal-title" style="margin: 0;">CÓDICE DE DOMINIOS</h2>
+                <div style="display: flex; gap: 2rem; align-items: center;">
+                    <span style="color: var(--color-gold); font-family: var(--font-body);">
+                        <span id="class-count">0</span>/50 <strong style="font-weight: 100; color: #F5E6CA;">DOMINIOS</strong>
+                    </span>
+                    <span style="color: var(--color-parchment);">
+                        TIEMPO TOTAL: <span id="total-class-time" style="color: var(--color-gold); font-family: var(--font-body);">0h 0m</span>
+                    </span>
                 </div>
-                
-                <hr class="bestiary-divider">
-                
-                <div class="add-class-form" style="margin-top: 1.5rem;">
-                    <h3 style="color: var(--color-gold); margin-bottom: 1rem; font-weight: 700; font-family: var(--font-body);">NUEVO CAMPO DE SABER</h3> 
-                    <input maxlength="32" type="text" id="new-class-name" placeholder="Ej: Las Runas de Álgebra Antigua" > 
-                    <button id="add-class-btn" class="gold-button">
-                        AÑADIR AL CÓDICE
-                    </button>
-                    <button id="close-class-modal-btn" class="modal-close-btn">
-                        RETORNAR AL JURAMENTO
-                    </button>                </div>
             </div>
     
-
+            <hr class="bestiary-divider">
+    
+            <!-- FORMULARIO COMPACTO EN LÍNEA -->
+            <div style="display: flex; flex-direction: column;gap: 1rem; align-items: center; padding: 0 0.5rem;">
+                <h4 style="color: var(--color-gold); margin: 0; white-space: nowrap; font-size: 1.5rem;">FORJAR NUEVO DOMINIO:</h4>
+                <input maxlength="26" type="text" id="new-class-name" placeholder="Ej: Las Runas de Álgebra Antigua" 
+                       style="flex: 1; border:none; border-bottom: 1px solid var(--color-gold); ;font-size:1.1rem; padding: 0.3rem;  width: 100%; background: none;">
+                <button id="add-class-btn" class="gold-button" style="white-space: nowrap; padding-block: 0.3rem; width: 100%; font-size: 1.1rem;">
+                    FORJAR
+                </button>
+            </div>
+    
+            <hr class="bestiary-divider">
+    
+            <!-- DASHBOARD PRINCIPAL - GRID HORIZONTAL -->
+            <div class="dashboard-grid" style="width: 95%;padding-inline: 4rem;flex: 1; overflow-x: hidden; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); grid-auto-rows: 120px; gap: 1rem;">
+                <!-- Las tarjetas se cargarán aquí dinámicamente -->
+            </div>
+    
+            <!-- ESTADO VACÍO CENTRADO -->
+            <div id="no-classes-message" class="no-classes-message" style="display: none; text-align: center; padding: 2rem; color: var(--color-parchment); flex: 1; display: flex; align-items: center; justify-content: center;">
+                <div class="empty-state">
+                    <span style="font-size: 2.5rem; display: block; margin-bottom: 0.5rem; opacity: 0.5;">📚</span>
+                    <h3 style="color: var(--color-gold); font-family: var(--font-title); margin: 0 0 0.3rem 0; font-size: 1.2rem;">EL CÓDICE ESTÁ VACÍO</h3>
+                    <p style="margin: 0; font-size: 0.9rem;">Forja tu primer dominio para comenzar tu legado</p>
+                </div>
+            </div>
+    
+            <button id="close-class-modal-btn" class="modal-close-btn" style="margin-top: 1rem; align-self: center; width: 40%;">
+                RETORNAR AL JURAMENTO
+            </button>
         </div>
     </div>
     <div id="toast-container"></div>
