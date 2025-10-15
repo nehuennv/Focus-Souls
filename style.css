@@ -451,6 +451,7 @@ label {
     
     /* ANIMACIÓN DE RESPIRACIÓN SUTIL */
     animation: backgroundBreath 12s ease-in-out infinite;
+    filter: blur(1px) brightness(0.95) ;
 }
 
 @keyframes backgroundBreath {
