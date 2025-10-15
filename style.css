@@ -451,7 +451,7 @@ label {
     
     /* ANIMACIÓN DE RESPIRACIÓN SUTIL */
     animation: backgroundBreath 12s ease-in-out infinite;
-    filter: blur(1px) brightness(0.95) ;
+    /* filter: blur(1px) brightness(0.95) ; */
 }
 
 @keyframes backgroundBreath {
@@ -716,18 +716,21 @@ label {
 
 /* Imagen del jefe */
 #boss-image {
-    max-height: 50vh;  
-    opacity: 1; 
-    transition: all 0.3s ease;
-    filter: drop-shadow(0 0 100px rgba(0, 0, 0, 0.3));
-    transform: none; /* Aseguramos que no herede transform del contenedor */
+    max-height: 50vh;
+    opacity: 1;
+    transition: all 0.5s ease;
+    filter: 
+        drop-shadow(0 0 5px rgba(0, 0, 0, 0.5))
+        drop-shadow(0 0 20px var(--boss-aura-color, rgba(212, 175, 55, 0.5)));
+    transform: none;
     cursor: pointer;
 }
 
-/* Hover de la imagen del jefe */
 #boss-image:hover {
-    transform: scale(1.05); /* Solo escala la imagen, no afecta el centrado */
-    filter: drop-shadow(0 0 30px rgba(212, 175, 55, 0.5)) brightness(1.1);
+    transform: scale(1.05);
+    filter: 
+        /* drop-shadow(0 0 5px rgba(0, 0, 0, 0.5)) */
+        drop-shadow(0 0 25px var(--boss-aura-color, rgba(212, 175, 55, 0.5))) !important;
 }
 
 /* Signos de interrogación en el hover */
@@ -934,7 +937,6 @@ label {
 .message-screen h2 { 
     font-size: clamp(2rem, 8vw, 4rem); 
     text-align: center; 
-    margin-bottom: 2rem;
     text-shadow: 0 0 20px var(--color-gold);
     color: var(--color-gold);
 }
@@ -1208,9 +1210,9 @@ label {
 
 /* MODAL DE LORE */
 .lore-content {
-    width: 60%;
+    width: 55%;
     text-align: center;
-    margin: 2rem 0;
+    /* margin: 2rem 0; */
 }
 
 .lore-image {
@@ -1238,12 +1240,23 @@ label {
     text-shadow: 0 0 15px rgba(212, 175, 55, 0.7);
 }
 #lore-text {
-    color: var(--color-parchment);
+    color: #F5F5F5;
+
     font-size: 1.2rem;
     line-height: 1.7;
     font-family: var(--font-body);
     text-align: center;
     padding: 0 1rem;
+}
+#lore-text strong {
+    font-family: var(--font-body) !important;
+    color: #F5F5F5;
+    font-weight: 700;
+
+
+}
+#lore-text br {
+    /* background-color: #0066CC; */
 }
 /* CONTENEDOR DE PARTÍCULAS DEL TIMER */
 .timer-particles-container {
@@ -2260,29 +2273,10 @@ html, body, * {
 
 /* --- CURSO INTERACTIVO: CÍRCULO DORADO RELLENO --- */
 button, select, a, [data-action], .menu-option, 
-input, textarea, .gold-button, .ghost-button {
+input, textarea, .gold-button, .ghost-button , #boss-image{
     cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iI0Q0QUYzNyIvPgo8L3N2Zz4=') 16 16, pointer !important;
 }
 
-/* --- CURSO PELIGROSO: CÍRCULO ROJO --- */
-.danger-element, .critical-action, .red-button {
-    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iI0I4MDAwMCIvPgo8L3N2Zz4=') 16 16, not-allowed !important;
-}
-
-/* --- CURSO MÁGICO: CÍRCULO PÚRPURA --- */
-.magic-item, .spell-button, .rune-element {
-    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iIzhiMDBmZiIvPgo8L3N2Zz4=') 16 16, pointer !important;
-}
-
-/* --- CURSO INFORMACIÓN: CÍRCULO AZUL --- */
-.info-element, .lore-item {
-    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8Y2lyY2xlIGN4PSIxNiIgY3k9IjE2IiByPSI4IiBmaWxsPSIjMDA3N2ZmIi8+Cjwvc3ZnPg==') 16 16, help !important;
-}
-
-/* --- CURSO ESPERA: CÍRCULO GRIS --- */
-.wait-element, .loading-item {
-    cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iOCIgZmlsbD0iIzY2NjY2NiIvPgo8L3N2Zz4=') 16 16, wait !important;
-}
 
 
 /* ====================================================== */
