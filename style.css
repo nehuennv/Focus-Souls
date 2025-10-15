@@ -545,7 +545,7 @@ label {
     /* mix-blend-mode: difference; */
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    border-right: 2px solid rgba(255, 255, 255, 0.3);
+    /* border-right: 2px solid rgba(255, 255, 255, 0.3); */
 
 }   
 /* #back-to-menu-btn::after {
@@ -1465,6 +1465,12 @@ label {
     border-top: 1px solid rgba(212, 175, 55, 0.3);
     margin: 2rem 0;
     width: 100%;
+}
+.bestiary-divider2{
+border-right: 1px solid rgba(255, 255, 255);
+    opacity: 0.1;
+    height: 80%;   
+    margin: 0 1rem;
 }
 
 /* ============================================= */

@@ -940,15 +940,15 @@ document.addEventListener('keydown', (e) => {
         if (state === 'break') {
             const mins = Math.floor(seconds / 60);
             const secs = seconds % 60;
-            document.title = `🔄 ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} DESCANSO - Focus Soul`;
+            document.title = `🔄 ${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} DESCANSO - Focus Souls`;
         } else if (state === 'victory') {
         document.title = "PACTO CUMPLIDO - Focus Soul";
     } else if (state === 'lobby') {
-        document.title = "FOCUS SOUL";
+        document.title = "FOCUS SOULS";
     } else {
         const mins = Math.floor(seconds / 60);
         const secs = seconds % 60;
-        document.title = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} - Focus Soul`;
+        document.title = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')} - Focus Souls`;
     }
 }
 

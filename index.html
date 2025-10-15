@@ -27,9 +27,11 @@
     <!-- NUEVO MENÚ MINIMALISTA -->
     <div class="lobby-menu">
         <button class="menu-option" data-action="start">COMENZAR RITUAL</button>
-        <button class="menu-option" data-action="instructions">TOMO DE INICIACIÓN</button>
         <button class="menu-option" data-action="bestiary">BESTIARIO</button>
         <button class="menu-option" data-action="logros">SALA DE TROFEOS</button>
+        <button class="menu-option" data-action="instructions">TOMO DE INICIACIÓN</button>
+
+
 
     </div>
 
@@ -81,12 +83,15 @@
         <div class="battle-container">
             <nav id="action-navbar" class="action-navbar">
                 <button id="back-to-menu-btn">Romper Pacto</button>
+                <hr class="bestiary-divider2">
                 <div class="load-time-controls">
                     <button class="load-time-btn" data-time="10">+10 MIN</button>
                     <button class="load-time-btn" data-time="30">+30 MIN</button>
                     <button class="load-time-btn" data-time="60">+60 MIN</button>
                     <button id="launch-attack-btn" disabled>LANZAR ATAQUE</button>
                 </div>
+                <hr class="bestiary-divider2">
+
                 <button id="pause-btn" class="load-time-btn">❚❚</button>
 
             </nav>
@@ -307,10 +312,10 @@
 </div>
 
 <!-- Botón flotante para abrir el panel de debug -->
-<button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
+<!-- <button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
     🐛
-</button>
-<!-- <button id="debug-toggle" title="Abrir panel de debug">
-    
 </button> -->
+<button id="debug-toggle" title="Abrir panel de debug">
+    
+</button>
 </html>
