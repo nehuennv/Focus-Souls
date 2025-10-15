@@ -856,12 +856,35 @@ label {
     padding: 0.3rem 1.5rem;
     
 }
+/* Asegurar que el modal de gestión de materias tenga mayor z-index */
+#class-modal {
+    z-index: 101 !important; /* Mayor que el modal del pacto (100) */
+}
+
+/* Asegurar que el modal del pacto se oculte cuando se abre gestión */
+#class-modal:not(.hidden) ~ #pact-modal,
+#class-modal:not(.hidden) + #pact-modal {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+/* Opcional: mejorar la transición del modal de materias */
+#class-modal .modal-content {
+    animation: modalAppear 0.6s ease-out !important;
+}
+#confirm-no-btn{
+    border: 1px solid var(--color-gold) ;
+}
+#confirm-no-btn:hover{
+    filter: drop-shadow(0 0 10px var(--color-gold));
+}
 #confirm-yes-btn { 
-    border-color: var(--color-health-red); 
+    border:1px solid var(--color-health-red) ; 
     color: var(--color-health-red); 
 }
 #confirm-yes-btn:hover {
-    /* box-shadow: 0 0 15px var(--color-health-red); */
+    filter: drop-shadow(0 0 10px var(--color-health-red));
 }
 
 /* MODAL DE INSTRUCCIONES MEJORADO */
@@ -2105,4 +2128,61 @@ input, textarea, .gold-button, .ghost-button {
 .toast.error {
     background: linear-gradient(to right, #B80000, #800000);
     color: white;
+}
+
+/* ============================================= */
+/* ESTILOS PARA EL SISTEMA DE MATERIAS */
+/* ============================================= */
+
+/* Input de nueva materia */
+#new-class-name {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid var(--color-gold);
+    color: white;
+    padding: 0.8rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    font-family: var(--font-body);
+    border-radius: 3px;
+}
+
+#new-class-name::placeholder {
+    color: rgba(255,255,255,0.5);
+}
+
+/* Items de materia en la lista */
+.class-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(212,175,55,0.3);
+}
+
+.class-item:last-child {
+    border-bottom: none;
+}
+
+/* Botón eliminar materia */
+.delete-class-btn {
+    background: rgba(184,0,0,0.2);
+    border: 1px solid var(--color-health-red);
+    color: var(--color-health-red);
+    padding: 0.3rem 0.8rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.delete-class-btn:hover {
+    background: rgba(184,0,0,0.3);
+    transform: scale(1.05);
+}
+
+/* Botón gestionar materias en el modal del pacto */
+#manage-classes-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 2rem !important;
+    font-size: 0.9rem;
 }

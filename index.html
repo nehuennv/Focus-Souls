@@ -43,6 +43,17 @@
                     <!-- Las horas se cargan automáticamente por JavaScript -->
                 </select>
             </div>
+            <!-- EN EL MODAL DEL PACTO (después del select de horas) -->
+            <label for="class-offering">¿PARA QUÉ MATERIA LUCHAS?</label>
+            <div class="select-wrapper">
+                <select id="class-offering">
+                    <option value="" disabled selected>SELECCIONA TU MATERIA</option>
+                    <!-- Las materias se cargan desde localStorage -->
+                </select>
+            </div>
+            <button id="manage-classes-btn" class="ghost-button" style="margin-top: 1rem; padding: 0.5rem 2rem !important;">
+                GESTIONAR MATERIAS
+            </button>
             <hr class="bestiary-divider">
             <div class="modal-actions">
                 <button id="confirm-pact-btn" class="gold-button">INICIAR RITUAL</button>
@@ -194,12 +205,41 @@
             <button id="close-bestiary-btn" class="modal-close-btn">Cerrar Bestiario</button>
         </div>
     </div>
-    <script src="script.js"></script>
+    <div id="class-modal" class="screen hidden message-screen">
+        <div class="modal-content instructions-modal-content">
+            <h2 class="modal-title">GESTIÓN DE MATERIAS</h2>
+            
+            <div class="instructions-content">
+                <!-- Lista de materias -->
+                <div id="class-list" style="text-align: left; margin-bottom: 2rem;">
+                    <!-- Se llena dinámicamente -->
+                </div>
+                
+                <hr class="bestiary-divider">
+                
+                <!-- Formulario nueva materia -->
+                <div class="add-class-form" style="margin-top: 1.5rem;">
+                    <h3 style="color: var(--color-gold); margin-bottom: 1rem;">Nueva Materia</h3>
+                    <input type="text" id="new-class-name" placeholder="Ej: Análisis Matemático" 
+                           style="background: rgba(255,255,255,0.1); border: 1px solid var(--color-gold); 
+                                  color: white; padding: 0.8rem; width: 100%; margin-bottom: 1rem;
+                                  font-family: var(--font-body);">
+                    <button id="add-class-btn" class="gold-button" style="padding: 0.8rem 2rem !important;">
+                        CREAR MATERIA
+                    </button>
+                </div>
+            </div>
+    
+            <button id="close-class-modal-btn" class="modal-close-btn">VOLVER AL PACTO</button>
+        </div>
+    </div>
     <div id="toast-container"></div>
+    <script src="script.js"></script>
+
 
 </body>
 <!-- PANEL DE DEBUG - TESTER HELPER -->
-<!-- <div id="debug-panel" class="debug-panel hidden">
+<div id="debug-panel" class="debug-panel hidden">
     <div class="debug-header">
         <h3>🧪 MODO TESTER</h3>
         <button id="debug-close" class="debug-close">×</button>
@@ -247,10 +287,10 @@
             <button class="debug-btn" data-action="show-stats">📊 Ver Stats</button>
         </div>
     </div>
-</div> -->
+</div>
 
 <!-- Botón flotante para abrir el panel de debug -->
-<!-- <button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
+<button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
     🐛
-</button> -->
+</button>
 </html>

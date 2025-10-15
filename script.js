@@ -102,9 +102,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const bestiaryModal = document.getElementById('bestiary-modal');
     const closeBestiaryBtn = document.getElementById('close-bestiary-btn');
     const bestiaryStats = document.getElementById('bestiary-stats');
-    // --- NUEVAS VARIABLES PARA PARTÍCULAS DEL TIMER ---
     const timerParticlesContainer = document.getElementById('timer-particles-container');
     let timerParticlesInterval = null;
+    const classModal = document.getElementById('class-modal');
+    const manageClassesBtn = document.getElementById('manage-classes-btn');
+    const closeClassModalBtn = document.getElementById('close-class-modal-btn');
+    const classSelect = document.getElementById('class-offering');
+    const classList = document.getElementById('class-list');
+    const newClassNameInput = document.getElementById('new-class-name');
+    const addClassBtn = document.getElementById('add-class-btn');
+
 
     // --- NUEVOS ELEMENTOS PARA LORE ---
     const bossInfoBtn = document.getElementById('boss-info-btn');
@@ -140,6 +147,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let minuteSaveCounter = 0;
     let currentBossId = null; // Guardará el ID del jefe actual
     let breakRemaining = 0;
+    let currentClassId = null; // Materia seleccionada para el pacto actual
+
 
     // --- LOCAL STORAGE FUNCTIONS ---
     function getStats() {
@@ -159,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Garantiza que bestiasMatadas siempre es un objeto
         parsedStats.bestiasMatadas = typeof parsedStats.bestiasMatadas === 'object' && parsedStats.bestiasMatadas !== null ? parsedStats.bestiasMatadas : {};
 
+        parsedStats.clases = Array.isArray(parsedStats.clases) ? parsedStats.clases : [];
         return parsedStats;
     }
 
@@ -304,6 +314,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 5. Función modificada para empezar batalla desde el modal
         function startBattleFromModal(selectedHours) {
+            // NUEVO: Validar materia seleccionada
+            const selectedClassId = parseInt(classSelect.value);
+            if (isNaN(selectedClassId)) {
+                alert('Por favor, selecciona una materia para tu pacto.');
+                return;
+            }
+            
+            playSound(clickSound);
+            
+            // Guardar materia seleccionada para esta sesión
+            currentClassId = selectedClassId;
+            
             pactInitialSeconds = selectedHours * 3600;
             unallocatedSeconds = pactInitialSeconds;
             loadedSeconds = 0;
@@ -325,6 +347,8 @@ document.addEventListener('DOMContentLoaded', () => {
             
             startTimerParticles();
             resetForNextRound();
+            
+            console.log(`🎓 Pacto iniciado para materia ID: ${currentClassId}`);
         }
         
 
@@ -382,20 +406,133 @@ document.addEventListener('DOMContentLoaded', () => {
                 lobbyScreen.style.transition = 'opacity 0.8s ease-in-out';
                 lobbyScreen.classList.remove('hidden');
                 
-                // RESETEAR ESTADOS
+                // RESETEAR ESTADOS (incluyendo materia actual)
                 isTimerRunning = false;
                 isPaused = false;
                 loadedSeconds = 0;
                 unallocatedSeconds = 0;
                 dealtSeconds = 0;
                 pactInitialSeconds = 0;
+                currentClassId = null; // ← NUEVO: Resetear materia actual
                 
                 updateTimerDisplay(0);
                 updateTabTitle(0, 'lobby');
                 updateFavicon('lobby');
+                
+                console.log("🏠 Volviendo al menú - Materia actual reseteada");
             }, 400);
         };
     }
+
+
+    // Cargar materias en el select del pacto
+    function loadClassSelect() {
+        const stats = getStats();
+        classSelect.innerHTML = '<option value="" disabled selected>SELECCIONA TU MATERIA</option>';
+        
+        stats.clases.forEach(clase => {
+            const option = document.createElement('option');
+            option.value = clase.id;
+            option.textContent = clase.nombre;
+            classSelect.appendChild(option);
+        });
+}
+function addClass() {
+    const className = newClassNameInput.value.trim();
+    if (!className) return;
+    
+    const stats = getStats();
+    
+    // Límite de 12 materias
+    if (stats.clases.length >= 12) {
+        alert('Máximo 12 materias permitidas');
+        return;
+    }
+    
+    const newId = stats.clases.length > 0 ? Math.max(...stats.clases.map(c => c.id)) + 1 : 1;
+    
+    stats.clases.push({
+        id: newId,
+        nombre: className,
+        minutos: 0,
+        createdAt: new Date().toISOString()
+    });
+    
+    saveStats(stats);
+    newClassNameInput.value = '';
+    loadClassSelect();
+    loadClassList(); // ← Agregar esta línea
+}
+
+// Eliminar materia
+function deleteClass(id) {
+    if (!confirm('¿Estás seguro de eliminar esta materia? Se perderán sus estadísticas.')) return;
+    
+    const stats = getStats();
+    stats.clases = stats.clases.filter(c => c.id !== id);
+    saveStats(stats);
+    loadClassSelect();
+    loadClassList(); // ← Agregar esta línea
+}
+
+// Cargar lista de materias en el modal de gestión
+function loadClassList() {
+    const stats = getStats();
+    const classListElement = document.getElementById('class-list');
+    
+    if (stats.clases.length === 0) {
+        classListElement.innerHTML = '<p style="text-align: center; color: var(--color-parchment);">Aún no has creado ninguna materia.</p>';
+        return;
+    }
+
+    let html = '';
+    stats.clases.forEach(clase => {
+        const horas = (clase.minutos / 60).toFixed(1);
+        html += `
+            <div class="class-item">
+                <div>
+                    <strong>${clase.nombre}</strong><br>
+                    <small>${clase.minutos} minutos (${horas} horas)</small>
+                </div>
+                <button class="delete-class-btn" data-id="${clase.id}">Eliminar</button>
+            </div>
+        `;
+    });
+
+    classListElement.innerHTML = html;
+
+    // Añadir event listeners a los botones de eliminar
+    document.querySelectorAll('.delete-class-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const id = parseInt(e.target.dataset.id);
+            deleteClass(id);
+        });
+    });
+}
+// Event Listeners
+manageClassesBtn.addEventListener('click', () => {
+    playSound(clickSound);
+    loadClassList();
+    classModal.classList.remove('hidden');
+});
+
+closeClassModalBtn.addEventListener('click', () => {
+    playSound(clickSound);
+    classModal.classList.add('hidden');
+});
+
+addClassBtn.addEventListener('click', () => {
+    playSound(clickSound);
+    addClass();
+});
+
+// Permitir crear con Enter
+newClassNameInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') addClass();
+});
+
+// Cargar materias al inicializar
+loadClassSelect();
     // --- LOCAL STORAGE & BESTIARY FUNCTIONS ---
 
 
@@ -882,6 +1019,16 @@ function showToastify(title, message, type = 'gold', duration = 5000) {
             if (minuteSaveCounter >= 60) {
                 const stats = getStats();
                 stats.totalMinutos = (stats.totalMinutos || 0) + 1;
+
+            // NUEVO: Guardar en materia actual también
+            if (currentClassId) {
+                const currentClass = stats.clases.find(c => c.id === currentClassId);
+                if (currentClass) {
+                    currentClass.minutos = (currentClass.minutos || 0) + 1;
+                    console.log(`📚 +1 minuto para: ${currentClass.nombre} (Total: ${currentClass.minutos}min)`);
+                }
+            }
+
                 saveStats(stats);
                 minuteSaveCounter = 0;
             }
@@ -1081,9 +1228,9 @@ function showToastify(title, message, type = 'gold', duration = 5000) {
         const favorite = findFavoriteVictim(stats.bestiasMatadas);
         const rank = getRank(stats.totalMinutos);
         const totalHours = (stats.totalMinutos / 60).toFixed(1);
-
+    
         let content = `
-                    <hr class="bestiary-divider">
+            <hr class="bestiary-divider">
             <div class="bestiary-header">
                 <span class="rank-icon">${rank.icon}</span>
                 <div class="rank-info">
@@ -1102,20 +1249,39 @@ function showToastify(title, message, type = 'gold', duration = 5000) {
                     <p>${Object.values(stats.bestiasMatadas).reduce((sum, current) => sum + current, 0)}</p>
                 </div>
             </div>
-            <hr class="bestiary-divider">
         `;
         
         if (favorite && favorite.kills > 0) {
             content += `
+                <hr class="bestiary-divider">
                 <div class="favorite-victim">
                     <h4>Tu Víctima Favorita:</h4>
                     <p>${favorite.nombre} (${favorite.kills} ${favorite.kills > 1 ? 'veces' : 'vez'})</p>
-                    </div>
-                <hr class="bestiary-divider">
+                </div>
             `;
         }
-
+    
+        // NUEVO: Sección de tiempo por materia
         content += `
+            <hr class="bestiary-divider">
+            <h4 id="class-stats-title">Tiempo por Materia:</h4>
+            <ul class="boss-kill-list">
+        `;
+        
+        if (stats.clases.length === 0) {
+            content += "<li>Aún no has estudiado ninguna materia</li>";
+        } else {
+            // Ordenar materias por tiempo (mayor a menor)
+            const sortedClasses = [...stats.clases].sort((a, b) => b.minutos - a.minutos);
+            
+            sortedClasses.forEach(clase => {
+                const horas = (clase.minutos / 60).toFixed(1);
+                content += `<li>${clase.nombre}: ${clase.minutos} minutos (${horas} horas)</li>`;
+            });
+        }
+        
+        content += `</ul>
+            <hr class="bestiary-divider">
             <h4 id="boss-kill-title">Conteo de Caza Detallado:</h4>
             <ul class="boss-kill-list">
         `;
@@ -1123,7 +1289,6 @@ function showToastify(title, message, type = 'gold', duration = 5000) {
         if (Object.keys(stats.bestiasMatadas).length === 0) {
             content += "<li>Aún no has cazado ninguna bestia.</li>";
         } else {
-            // Aseguramos que se muestren todos los jefes, incluso si tienen 0 kills
             JEFES.forEach(jefe => {
                 const count = stats.bestiasMatadas[jefe.id] || 0;
                 if (count > 0) {
@@ -1133,8 +1298,9 @@ function showToastify(title, message, type = 'gold', duration = 5000) {
                 }
             });
         }
+        
         content += `</ul>
-        <hr class="bestiary-divider">
+            <hr class="bestiary-divider">
         `;
         
         bestiaryStats.innerHTML = content;
@@ -1213,8 +1379,6 @@ function showToastify(title, message, type = 'gold', duration = 5000) {
         }
     }
 
-    initialize();
-
     // ===================================================================================
 // SISTEMA DE DEBUG - TESTER HELPER
 // ===================================================================================
@@ -1245,6 +1409,7 @@ function initializeDebugPanel() {
     // Actualizar estado cada segundo
     setInterval(updateDebugStatus, 1000);
 }
+
 
 function handleDebugAction(action) {
     switch(action) {
@@ -1403,7 +1568,8 @@ function updateDebugStatus() {
     statusElement.innerHTML = status;
 }
 
-// Inicializar el panel de debug (agregar esta línea al final del DOMContentLoaded)
+initialize();
 initializeDebugPanel();
+
 });
 
