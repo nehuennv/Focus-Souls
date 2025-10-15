@@ -420,7 +420,31 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-
+    // ===================================================================================
+// LISTENER PARA BARRA ESPACIADORA - PAUSA/PLAY
+// ===================================================================================
+document.addEventListener('keydown', (e) => {
+    // Solo responder a barra espaciadora (código 32)
+    if (e.code === 'Space') {
+        // Prevenir comportamiento por defecto (scroll)
+        e.preventDefault();
+        
+        // Verificar condiciones para pausar/reanudar:
+        // 1. Debe estar en pantalla de batalla
+        // 2. El timer debe estar corriendo O pausado
+        // 3. NO debe estar en descanso
+        // 4. NO debe estar en pantalla de victoria/lore/instrucciones
+        if (!battleScreen.classList.contains('hidden') && 
+            isTimerRunning && 
+            !battleScreen.classList.contains('break-active') &&
+            loreScreen.classList.contains('hidden') &&
+            instructionsScreen.classList.contains('hidden') &&
+            messageScreen.classList.contains('hidden')) {
+            
+            togglePause();
+        }
+    }
+});
     // Función para actualizar el título de la pestaña
     function updateTabTitle(seconds, state = 'battle') {
         if (state === 'break') {
@@ -449,10 +473,12 @@ function togglePause() {
         pauseBtn.textContent = "▶";
         pauseBtn.classList.add('paused');
         pauseBtn.title = "Reanudar ritual";
+        console.log("⏸️ Timer pausado");
     } else {
         pauseBtn.textContent = "❚❚";
         pauseBtn.classList.remove('paused');
         pauseBtn.title = "Pausar ritual";
+        console.log("▶ Timer reanudado");
     }
 }
 
@@ -717,8 +743,7 @@ function showVictoryScreen() {
     victoryScreen.innerHTML = `
         <div class="victory-content">
             <div class="victory-boss-name">${currentBoss ? currentBoss.nombre : ""}</div>
-                <h2 class="victory-title">BESTIA CAZADA</h2>
-
+            <h2 class="victory-title">BESTIA CAZADA</h2>
             <div class="victory-subtitle">PULSA CUALQUIER TECLA PARA CONTINUAR</div>
         </div>
     `;
@@ -739,12 +764,81 @@ function showVictoryScreen() {
     updateTabTitle(0, 'victory');
     updateFavicon('victory');
     
-    // Después de 3 segundos, volver al menú automáticamente
-    // setTimeout(() => {
-    //     victoryScreen.remove();
-    //     returnToMenu();
-    // }, 3000);
+    // Usar setTimeout para asegurar que los eventos se adjuntan después del render
+    setTimeout(() => {
+        document.addEventListener('keydown', handleVictoryInput);
+        victoryScreen.addEventListener('click', handleVictoryInput);
+    }, 100);
 }
+
+function handleVictoryInput(e) {
+    // Prevenir múltiples ejecuciones
+    if (e.type === 'click') {
+        e.stopPropagation();
+    }
+    
+    hideVictoryScreen();
+}
+
+function hideVictoryScreen() {
+    const victoryScreen = document.getElementById('victory-screen');
+    
+    // Remover eventos primero
+    document.removeEventListener('keydown', handleVictoryInput);
+    if (victoryScreen) {
+        victoryScreen.removeEventListener('click', handleVictoryInput);
+    }
+    
+    // Remover pantalla
+    if (victoryScreen) {
+        victoryScreen.remove();
+    }
+    
+    // Volver al menú
+    returnToMenu();
+}
+    // --- FUNCIÓN PARA MOSTRAR NOTIFICACIONES TIPO TOASTIFY ---
+/**
+ * Muestra una notificación temporal tipo "toast" en la esquina superior derecha.
+ * @param {string} title El título o tipo de notificación (ej. "LOGRO DESBLOQUEADO", "NUEVO OBJETO").
+ * @param {string} message El mensaje principal de la notificación (ej. "Bestia añadida al Bestiario").
+ * @param {string} type El tipo de toast ('gold' por defecto, 'error', 'info', etc.).
+ * @param {number} duration Duración en milisegundos que el toast es visible (por defecto 5000ms).
+ */
+function showToastify(title, message, type = 'gold', duration = 5000) {
+    const toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        console.error("Toast container with ID 'toast-container' not found. Please add <div id='toast-container'></div> to your HTML.");
+        return;
+    }
+
+    const toast = document.createElement('div');
+    toast.classList.add('toast', type); // Añade la clase 'toast' y el tipo (ej. 'gold')
+    
+    // Contenido del toast
+    toast.innerHTML = `
+        <strong style="display: block; margin-bottom: 5px;">${title.toUpperCase()}</strong>
+        <span>${message}</span>
+    `;
+
+    toastContainer.prepend(toast); // Añade el nuevo toast al principio para que los nuevos salgan arriba
+
+    // Ajustar la animación de salida para que se dispare después de la duración
+    toast.style.animation = `slideInRight 0.5s forwards ease-out, fadeOut 0.5s forwards ease-in ${duration / 1000 - 0.5}s`;
+
+    // Eliminar el toast del DOM después de que termine la animación de salida
+    setTimeout(() => {
+        toast.remove();
+    }, duration + 500); // Duración + tiempo de animación de salida
+}
+
+// --- EJEMPLOS DE CÓMO LLAMARÍAS ESTA FUNCIÓN ---
+
+// Cuando la pantalla de victoria se desvanece y regresas al menú:
+// showToastify('¡NUEVO DOMINIO AÑADIDO!', 'Bestia "El Archivista" registrada en el Bestiario.', 'gold');
+
+// Otro ejemplo, quizás para un error:
+// showToastify('ERROR DEL SISTEMA', 'No se pudo guardar la partida automáticamente.', 'error');
 
     function launchAttack() {
         playSound(clickSound);
