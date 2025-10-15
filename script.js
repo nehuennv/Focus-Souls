@@ -1,28 +1,28 @@
 const JEFES = [
-    // {   
-    //     id: 'horrax',
-    //     nombre: "Horrax, el Vástago de la Escoria",
-    //     imagenUrl: 'img/horrax.png',
-    //     fondoUrl: 'img/horraxBg.png',
-    //     lore: `Horrax no fue derrotado por un enemigo, sino por su propio martillo. En su obsesión por la rutina inquebrantable, trató su espíritu como hierro y su voluntad como fuego, golpeándose a sí mismo hasta quebrarse.
-    //     <br>
-    //     Representa el burnout y la disciplina tóxica, el recordatorio de que la verdadera fuerza no reside en la resistencia infinita, sino en el equilibrio entre el esfuerzo y el descanso.
-    //     <br>
-    //     Se dice que fue el herrero que forjó las primeras cadenas de <strong>Nyr</strong>, sin saber que forjaba su propia prisión.`,
-    //     color: '#432716'
-    // },
-    // {
-    //     id: 'alberic',
-    //     nombre: "Alberic, el Escriba sin Rostro", 
-    //     imagenUrl: 'img/alberic.png',        
-    //     fondoUrl: 'img/albericBg.png',
-    //     lore: `Alberic fue un erudito que buscó el conocimiento absoluto, pero en su afán olvidó que el saber no es un tesoro para ser acumulado, sino una herramienta para ser usada.
-    //     <br>
-    //     Ahora es una prisión de su propia biblioteca, un eco de la procrastinación que nace de la sobrecarga de información. Cada golpe contra él es un acto de decisión, una página leída en lugar de apilada, una idea ejecutada en lugar de solo pensada.
-    //     <br>
-    //     Entre sus pergaminos yacen los diseños incompletos de las máscaras que <strong>Theron</strong> tanto anhela, y los registros de cada visión que <strong>Lysandra</strong> no pudo evitar ver.`,
-    //     color: '#432716'
-    // },
+    {   
+        id: 'horrax',
+        nombre: "Horrax, el Vástago de la Escoria",
+        imagenUrl: 'img/horrax.png',
+        fondoUrl: 'img/horraxBg.png',
+        lore: `Horrax no fue derrotado por un enemigo, sino por su propio martillo. En su obsesión por la rutina inquebrantable, trató su espíritu como hierro y su voluntad como fuego, golpeándose a sí mismo hasta quebrarse.
+        <br>
+        Representa el burnout y la disciplina tóxica, el recordatorio de que la verdadera fuerza no reside en la resistencia infinita, sino en el equilibrio entre el esfuerzo y el descanso.
+        <br>
+        Se dice que fue el herrero que forjó las primeras cadenas de <strong>Nyr</strong>, sin saber que forjaba su propia prisión.`,
+        color: '#432716'
+    },
+    {
+        id: 'alberic',
+        nombre: "Alberic, el Escriba sin Rostro", 
+        imagenUrl: 'img/alberic.png',        
+        fondoUrl: 'img/albericBg.png',
+        lore: `Alberic fue un erudito que buscó el conocimiento absoluto, pero en su afán olvidó que el saber no es un tesoro para ser acumulado, sino una herramienta para ser usada.
+        <br>
+        Ahora es una prisión de su propia biblioteca, un eco de la procrastinación que nace de la sobrecarga de información. Cada golpe contra él es un acto de decisión, una página leída en lugar de apilada, una idea ejecutada en lugar de solo pensada.
+        <br>
+        Entre sus pergaminos yacen los diseños incompletos de las máscaras que <strong>Theron</strong> tanto anhela, y los registros de cada visión que <strong>Lysandra</strong> no pudo evitar ver.`,
+        color: '#432716'
+    },
     {
         id: 'morwenna',
         nombre: "Morwenna, Madre de los Brotes Marchitos",
@@ -35,98 +35,98 @@ const JEFES = [
         Ahora es un monumento al potencial perdido y a la apatía que crece sobre los jardines descuidados del alma. Derrotarla es un acto de reencuentro: regar las semillas de la vieja inspiración o arrancar las malas hierbas del arrepentimiento para plantar algo nuevo.`,
         color: '#C5A230'
     },
-    // {
-    //     id: 'lysandra',
-    //     nombre: "Lysandra, la Vidente Estancada",
-    //     imagenUrl: 'img/lysandra.png',        
-    //     fondoUrl: 'img/lysandraBg.png',
-    //     lore: `Condenada a ver todos los hilos del tiempo, Lysandra se ahogó en ellos.
-    //     <br>
-    //     En sus visiones contempló el ascenso y caída de <strong>Horrax</strong>, presenció cada indecisión de <strong>Kaelen</strong> como un universo paralelo, y vio cómo las cadenas de <strong>Nyr</strong> se tejían hilo a hilo.
-    //     <br>
-    //     Obsesionada con los errores del pasado y aterrorizada por las infinitas posibilidades del futuro, perdió la capacidad de existir en el único momento que importa: el ahora. Luchar contra ella es un ejercicio de presencia, un juramento para anclar la mente en el presente y actuar, sin el peso de lo que fue ni la ansiedad de lo que será.`,
-    //     color: '#9A7B15'
-    // },
-    // {
-    //     id: 'aurelian',
-    //     nombre: "Aurelian, El Juez Saliente",
-    //     imagenUrl: 'img/aurelian.png',        
-    //     fondoUrl: 'img/aurelianBg.png',
-    //     lore: `Aurelian es la manifestación del Síndrome del Impostor y el miedo paralizante al juicio ajeno.
-    //     <br>
-    //     Su espejo refleja no solo tus inseguridades, sino también los ecos de <strong>Theron</strong> buscando perfección y los fantasmas de las elecciones que <strong>Kaelen</strong> nunca hizo.
-    //     <br>
-    //     No te ataca directamente, sino que te aplasta con el peso de tu propia autocrítica. Es el miedo a no ser suficiente, a ser "descubierto" como un fraude. Se sienta en silencio, observando, y su arma principal es un gran espejo que no refleja tu imagen, sino una versión grotesca y fallida de tus mayores inseguridades.`,
-    //     color: '#1D2522'
-    // },
-    // {
-    //     id: 'maro',
-    //     nombre: "Maro, el Bufón Dorado",
-    //     imagenUrl: 'img/maro.png',        
-    //     fondoUrl: 'img/maroBg.png',
-    //     lore: `Maro es la encarnación de la distracción y la gratificación instantánea.
-    //     <br>
-    //     Sus baratijas doradas son primas lejanas de la copa vacía de <strong>Vesper</strong>, y su reino de distracciones florece en el mismo suelo donde los brotes de <strong>Morwenna</strong> se marchitan.
-    //     <br>
-    //     No es un monstruo de fuerza bruta, sino un ladrón sutil que roba tu recurso más preciado: el tiempo y el foco. Se presenta como una figura juguetona y brillante, ofreciendo baratijas luminosas que son placenteras en el momento pero te dejan vacío y con el día perdido.`,
-    //     color: '#362C0C'
-    // },
-    // {
-    //     id: 'vesper',
-    //     nombre: "Vesper, el Festín Vacío", 
-    //     imagenUrl: 'img/vesper.png',        
-    //     fondoUrl: 'img/vesperBg.png',
-    //     lore: `Vesper fue antaño el alma de la fiesta, el regente de la noche que buscaba su verdad en el brillo de los focos y la aprobación de las miradas vacías.
-    //     <br>
-    //     En sus mejores noches, competía con <strong>Maro</strong> por la atención de las almas, sin saber que ambos conducían al mismo vacío.
-    //     <br>
-    //     Creó un reino de placer efémero donde las máscaras se usaban para esconder el dolor y cada risa resonaba con un eco hueco. Pero la noche eterna lo consumió; cada brindis se convirtió en un sorbo de veneno, cada danza un paso hacia el agotamiento.
-    //     <br>
-    //     Ahora flota, un rey desposeído de su propia voluntad, atrapado entre los fragmentos de un espejo roto y los jirones de una fiesta sin fin.`,
-    //     color: '#283F52'
-    // },
-    // {
-    //     id: 'kaelen',
-    //     nombre: "Kaelen, el Indeciso", 
-    //     imagenUrl: 'img/kaelen.png',        
-    //     fondoUrl: 'img/kaelenBg.png',
-    //     lore: `Dicen que Kaelen pudo ser el más grande de todos los eruditos, guerreros o videntes.
-    //     <br>
-    //     En otra vida, podría haber sido el aprendiz que <strong>Alberic</strong> tanto buscó, o el guerrero que <strong>Horrax</strong> intentó forjar.
-    //     <br>
-    //     Pero ante la infinidad de sendas, su voluntad se fracturó. Ahora es un espectro humanoide, una figura trágica y delgada que flota sin rumbo.
-    //     <br>
-    //     De su espalda brotan incontables brazos fantasmales, cada uno aferrando el pálido eco de una vocación abandonada: una espada a medio forjar, un pergamino roto, una brújula giratoria, una llave sin cerradura, un mapa rasgado.`,
-    //     color: '#f3f3f3'
-    // },
-    // {
-    //     id: 'nyr',
-    //     nombre: "Nyr, el Santo Encadenado",
-    //     imagenUrl: `img/nyr.png`,        
-    //     fondoUrl: `img/nyrBg.png`,
-    //     lore: `Nyr personifica la nobleza del servicio corrompida por la ausencia de fronteras.
-    //     <br>
-    //     Las cadenas que lo atan fueron forjadas con el mismo hierro que quebró a <strong>Horrax</strong>, y cada eslabón representa una promesa que <strong>Lysandra</strong> vio incumplirse.
-    //     <br>
-    //     Es una imponente figura de mármol pálido, un santo anclado en el aire no por su poder, sino por las miles de finas cadenas doradas que perforan su ser, cada una un juramento a una causa ajena.
-    //     <br>
-    //     No lucha, solo soporta el tirón infinito de las expectativas. De sus ojos, perpetuamente cerrados, brotan lágrimas de oro líquido, el llanto silencioso de una voluntad entregada a los demás hasta que la propia se desvaneció por completo.`,
-    //     color: '#362C0C'
-    // },
-    // {
-    //     id: 'theron',
-    //     nombre: "Theron, el Eco de la Perfección",
-    //     imagenUrl: `img/thereon.png`,        
-    //     fondoUrl: `img/thereonBg.png`,
-    //     lore: `Theron nació del murmullo de la comparación, del veneno de "no ser suficiente".
-    //     <br>
-    //     Sus máscaras perfectas son la respuesta grotesca al espejo de <strong>Aurelian</strong>, y su búsqueda de la excelencia absoluta es el extremo opuesto de la indecisión de <strong>Kaelen</strong>.
-    //     <br>
-    //     Es un eco, una figura humanoide sin rostro propio que habita un panteón de glorias ajenas. Flota erráticamente, intentando imitar la grandeza de las estatuas que lo rodean, pero su cuerpo quebrado siempre le traiciona.
-    //     <br>
-    //     En sus múltiples y temblorosas manos, sostiene una colección de máscaras de porcelana exquisitamente elaboradas, cada una representando una perfección inalcanzable. Su tragedia reside en su mirada: los ojos de las máscaras perfectas que sostiene son cuencas vacías que reflejan la nada que siente por dentro.`,
-    //     color: '#475C55'
-    // }
+    {
+        id: 'lysandra',
+        nombre: "Lysandra, la Vidente Estancada",
+        imagenUrl: 'img/lysandra.png',        
+        fondoUrl: 'img/lysandraBg.png',
+        lore: `Condenada a ver todos los hilos del tiempo, Lysandra se ahogó en ellos.
+        <br>
+        En sus visiones contempló el ascenso y caída de <strong>Horrax</strong>, presenció cada indecisión de <strong>Kaelen</strong> como un universo paralelo, y vio cómo las cadenas de <strong>Nyr</strong> se tejían hilo a hilo.
+        <br>
+        Obsesionada con los errores del pasado y aterrorizada por las infinitas posibilidades del futuro, perdió la capacidad de existir en el único momento que importa: el ahora. Luchar contra ella es un ejercicio de presencia, un juramento para anclar la mente en el presente y actuar, sin el peso de lo que fue ni la ansiedad de lo que será.`,
+        color: '#9A7B15'
+    },
+    {
+        id: 'aurelian',
+        nombre: "Aurelian, El Juez Saliente",
+        imagenUrl: 'img/aurelian.png',        
+        fondoUrl: 'img/aurelianBg.png',
+        lore: `Aurelian es la manifestación del Síndrome del Impostor y el miedo paralizante al juicio ajeno.
+        <br>
+        Su espejo refleja no solo tus inseguridades, sino también los ecos de <strong>Theron</strong> buscando perfección y los fantasmas de las elecciones que <strong>Kaelen</strong> nunca hizo.
+        <br>
+        No te ataca directamente, sino que te aplasta con el peso de tu propia autocrítica. Es el miedo a no ser suficiente, a ser "descubierto" como un fraude. Se sienta en silencio, observando, y su arma principal es un gran espejo que no refleja tu imagen, sino una versión grotesca y fallida de tus mayores inseguridades.`,
+        color: '#1D2522'
+    },
+    {
+        id: 'maro',
+        nombre: "Maro, el Bufón Dorado",
+        imagenUrl: 'img/maro.png',        
+        fondoUrl: 'img/maroBg.png',
+        lore: `Maro es la encarnación de la distracción y la gratificación instantánea.
+        <br>
+        Sus baratijas doradas son primas lejanas de la copa vacía de <strong>Vesper</strong>, y su reino de distracciones florece en el mismo suelo donde los brotes de <strong>Morwenna</strong> se marchitan.
+        <br>
+        No es un monstruo de fuerza bruta, sino un ladrón sutil que roba tu recurso más preciado: el tiempo y el foco. Se presenta como una figura juguetona y brillante, ofreciendo baratijas luminosas que son placenteras en el momento pero te dejan vacío y con el día perdido.`,
+        color: '#362C0C'
+    },
+    {
+        id: 'vesper',
+        nombre: "Vesper, el Festín Vacío", 
+        imagenUrl: 'img/vesper.png',        
+        fondoUrl: 'img/vesperBg.png',
+        lore: `Vesper fue antaño el alma de la fiesta, el regente de la noche que buscaba su verdad en el brillo de los focos y la aprobación de las miradas vacías.
+        <br>
+        En sus mejores noches, competía con <strong>Maro</strong> por la atención de las almas, sin saber que ambos conducían al mismo vacío.
+        <br>
+        Creó un reino de placer efémero donde las máscaras se usaban para esconder el dolor y cada risa resonaba con un eco hueco. Pero la noche eterna lo consumió; cada brindis se convirtió en un sorbo de veneno, cada danza un paso hacia el agotamiento.
+        <br>
+        Ahora flota, un rey desposeído de su propia voluntad, atrapado entre los fragmentos de un espejo roto y los jirones de una fiesta sin fin.`,
+        color: '#283F52'
+    },
+    {
+        id: 'kaelen',
+        nombre: "Kaelen, el Indeciso", 
+        imagenUrl: 'img/kaelen.png',        
+        fondoUrl: 'img/kaelenBg.png',
+        lore: `Dicen que Kaelen pudo ser el más grande de todos los eruditos, guerreros o videntes.
+        <br>
+        En otra vida, podría haber sido el aprendiz que <strong>Alberic</strong> tanto buscó, o el guerrero que <strong>Horrax</strong> intentó forjar.
+        <br>
+        Pero ante la infinidad de sendas, su voluntad se fracturó. Ahora es un espectro humanoide, una figura trágica y delgada que flota sin rumbo.
+        <br>
+        De su espalda brotan incontables brazos fantasmales, cada uno aferrando el pálido eco de una vocación abandonada: una espada a medio forjar, un pergamino roto, una brújula giratoria, una llave sin cerradura, un mapa rasgado.`,
+        color: '#f3f3f3'
+    },
+    {
+        id: 'nyr',
+        nombre: "Nyr, el Santo Encadenado",
+        imagenUrl: `img/nyr.png`,        
+        fondoUrl: `img/nyrBg.png`,
+        lore: `Nyr personifica la nobleza del servicio corrompida por la ausencia de fronteras.
+        <br>
+        Las cadenas que lo atan fueron forjadas con el mismo hierro que quebró a <strong>Horrax</strong>, y cada eslabón representa una promesa que <strong>Lysandra</strong> vio incumplirse.
+        <br>
+        Es una imponente figura de mármol pálido, un santo anclado en el aire no por su poder, sino por las miles de finas cadenas doradas que perforan su ser, cada una un juramento a una causa ajena.
+        <br>
+        No lucha, solo soporta el tirón infinito de las expectativas. De sus ojos, perpetuamente cerrados, brotan lágrimas de oro líquido, el llanto silencioso de una voluntad entregada a los demás hasta que la propia se desvaneció por completo.`,
+        color: '#362C0C'
+    },
+    {
+        id: 'theron',
+        nombre: "Theron, el Eco de la Perfección",
+        imagenUrl: `img/thereon.png`,        
+        fondoUrl: `img/thereonBg.png`,
+        lore: `Theron nació del murmullo de la comparación, del veneno de "no ser suficiente".
+        <br>
+        Sus máscaras perfectas son la respuesta grotesca al espejo de <strong>Aurelian</strong>, y su búsqueda de la excelencia absoluta es el extremo opuesto de la indecisión de <strong>Kaelen</strong>.
+        <br>
+        Es un eco, una figura humanoide sin rostro propio que habita un panteón de glorias ajenas. Flota erráticamente, intentando imitar la grandeza de las estatuas que lo rodean, pero su cuerpo quebrado siempre le traiciona.
+        <br>
+        En sus múltiples y temblorosas manos, sostiene una colección de máscaras de porcelana exquisitamente elaboradas, cada una representando una perfección inalcanzable. Su tragedia reside en su mirada: los ojos de las máscaras perfectas que sostiene son cuencas vacías que reflejan la nada que siente por dentro.`,
+        color: '#475C55'
+    }
 ];
 
 // Configuración de sonidos (agregá tus archivos en la carpeta sounds/)
