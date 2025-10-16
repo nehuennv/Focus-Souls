@@ -4,11 +4,11 @@ const JEFES = [
         nombre: "Horrax, el Vástago de la Escoria",
         imagenUrl: 'img/horrax.png',
         fondoUrl: 'img/horraxBg.png',
-        lore: `Horrax no fue derrotado por un enemigo, sino por su propio martillo. En su obsesión por la rutina inquebrantable, trató su espíritu como hierro y su voluntad como fuego, golpeándose a sí mismo hasta quebrarse.
+        lore: `Horrax no fue derrotado por un enemigo, sino por el yunque de su propia obsesión. Forjó su voluntad en una disciplina de hierro, martillando sin pausa hasta que solo quedó la escoria de lo que pudo ser un hombre.
         <br>
-        Representa el burnout y la disciplina tóxica, el recordatorio de que la verdadera fuerza no reside en la resistencia infinita, sino en el equilibrio entre el esfuerzo y el descanso.
+        Es la encarnación de la autoexplotación, la crítica feroz a una cultura que venera el esfuerzo infinito hasta consumir el alma. Su martillo no forja, solo pulveriza. Su yunque no templa, solo aplasta.
         <br>
-        Se dice que fue el herrero que forjó las primeras cadenas de <strong>Nyr</strong>, sin saber que forjaba su propia prisión.`,
+        Las primeras cadenas de <strong>Nyr</strong> salieron de su fragua, un acto de ceguera donde creó las prisiones que luego lo estrangularían a él.`,
         color: '#432716'
     },
     {
@@ -16,11 +16,11 @@ const JEFES = [
         nombre: "Alberic, el Escriba sin Rostro", 
         imagenUrl: 'img/alberic.png',        
         fondoUrl: 'img/albericBg.png',
-        lore: `Alberic fue un erudito que buscó el conocimiento absoluto, pero en su afán olvidó que el saber no es un tesoro para ser acumulado, sino una herramienta para ser usada.
+        lore: `Alberic creyó que el conocimiento era un fin en sí mismo. Devoró bibliotecas enteras, acumulando sabiduría como un avaro acumula oro, hasta que el peso de lo inútil le arrancó el rostro y la identidad.
         <br>
-        Ahora es una prisión de su propia biblioteca, un eco de la procrastinación que nace de la sobrecarga de información. Cada golpe contra él es un acto de decisión, una página leída en lugar de apilada, una idea ejecutada en lugar de solo pensada.
+        Es el monumento a la procrastinación intelectual, al que prefiere el mapa antes que el territorio. Su castillo de pergaminos es una tumba con vista al cielo del saber que nunca usó.
         <br>
-        Entre sus pergaminos yacen los diseños incompletos de las máscaras que <strong>Theron</strong> tanto anhela, y los registros de cada visión que <strong>Lysandra</strong> no pudo evitar ver.`,
+        Sus textos contienen las máscaras que <strong>Theron</strong> ansía y los futuros que <strong>Lysandra</strong> no pudo evitar; ecos de un saber que nunca trascendió el papel.`,
         color: '#432716'
     },
     {
@@ -28,11 +28,11 @@ const JEFES = [
         nombre: "Morwenna, Madre de los Brotes Marchitos",
         imagenUrl: 'img/morwenna.png',        
         fondoUrl: 'img/morwennaBg.png',
-        lore: `Morwenna fue una vez la guardiana de las pasiones y los sueños incipientes. Pero por cada talento no cultivado, por cada idea abandonada, una de sus flores se marchitó.
+        lore: `Morwenna es el jardín de los comienzos abortados. Cada sueño postergado, cada talento abandonado por miedo o pereza, hizo que una de sus flores se pudriera en el tallo.
         <br>
-        Cada camino que <strong>Kaelen</strong> no tomó hizo caer un pétalo de su jardín, y cada distracción de <strong>Maro</strong> alejó a otra semilla de su potencial.
+        No es la muerte, es algo peor: la lenta necrosis del potencial. Su agonía es un recordatorio de que la peor prisión es la de lo que pudo ser y nunca fue.
         <br>
-        Ahora es un monumento al potencial perdido y a la apatía que crece sobre los jardines descuidados del alma. Derrotarla es un acto de reencuentro: regar las semillas de la vieja inspiración o arrancar las malas hierbas del arrepentimiento para plantar algo nuevo.`,
+        El jardín que <strong>Kaelen</strong> no regó y las semillas que <strong>Maro</strong> pisoteó en su baile, son los hijos que ella llora.`,
         color: '#C5A230'
     },
     {
@@ -40,11 +40,11 @@ const JEFES = [
         nombre: "Lysandra, la Vidente Estancada",
         imagenUrl: 'img/lysandra.png',        
         fondoUrl: 'img/lysandraBg.png',
-        lore: `Condenada a ver todos los hilos del tiempo, Lysandra se ahogó en ellos.
+        lore: `Lysandra no vive en el tiempo, es el tiempo quien vive en ella. Un río de ayeres y mañanas que la ahoga, impidiéndole habitar el único instante que es real: el ahora.
         <br>
-        En sus visiones contempló el ascenso y caída de <strong>Horrax</strong>, presenció cada indecisión de <strong>Kaelen</strong> como un universo paralelo, y vio cómo las cadenas de <strong>Nyr</strong> se tejían hilo a hilo.
+        Es la parálisis de la hiperconsciencia, la maldición de ver demasiados caminos y no poder pisar ninguno. Su lucha no es contra un enemigo, sino contra la tiranía de la propia mente atrapada en el eterno tráfico del tiempo.
         <br>
-        Obsesionada con los errores del pasado y aterrorizada por las infinitas posibilidades del futuro, perdió la capacidad de existir en el único momento que importa: el ahora. Luchar contra ella es un ejercicio de presencia, un juramento para anclar la mente en el presente y actuar, sin el peso de lo que fue ni la ansiedad de lo que será.`,
+        En su calvario, atestiguó la forja de <strong>Horrax</strong> y el encadenamiento de <strong>Nyr</strong>, visiones que la clavaron en una cruz de pasado y futuro.`,
         color: '#9A7B15'
     },
     {
@@ -52,11 +52,11 @@ const JEFES = [
         nombre: "Aurelian, El Juez Saliente",
         imagenUrl: 'img/aurelian.png',        
         fondoUrl: 'img/aurelianBg.png',
-        lore: `Aurelian es la manifestación del Síndrome del Impostor y el miedo paralizante al juicio ajeno.
+        lore: `Aurelian es el eco internalizado de cada "no eres suficiente". No juzga con una espada, sino con el silencio ensordecedor de la autocrítica convertida en verdugo.
         <br>
-        Su espejo refleja no solo tus inseguridades, sino también los ecos de <strong>Theron</strong> buscando perfección y los fantasmas de las elecciones que <strong>Kaelen</strong> nunca hizo.
+        Su espejo no miente, pero solo muestra la herida, nunca la cura. Es el miedo a ser descubierto como un fraude, hecho carne y sentado en un trono de dudas propias.
         <br>
-        No te ataca directamente, sino que te aplasta con el peso de tu propia autocrítica. Es el miedo a no ser suficiente, a ser "descubierto" como un fraude. Se sienta en silencio, observando, y su arma principal es un gran espejo que no refleja tu imagen, sino una versión grotesca y fallida de tus mayores inseguridades.`,
+        En su reflejo distorsionado, <strong>Theron</strong> busca una máscara y <strong>Kaelen</strong> ve los caminos que no tomó; todos son acusados por el mismo tribunal interior.`,
         color: '#1D2522'
     },
     {
@@ -64,11 +64,11 @@ const JEFES = [
         nombre: "Maro, el Bufón Dorado",
         imagenUrl: 'img/maro.png',        
         fondoUrl: 'img/maroBg.png',
-        lore: `Maro es la encarnación de la distracción y la gratificación instantánea.
+        lore: `Maro es el susurro seductor de la distracción. No roba la vida con un cuchillo, sino con una promesa vacía de diversión eterna. Su oro es falso, su risa un cascabel que anestesia el alma.
         <br>
-        Sus baratijas doradas son primas lejanas de la copa vacía de <strong>Vesper</strong>, y su reino de distracciones florece en el mismo suelo donde los brotes de <strong>Morwenna</strong> se marchitan.
+        Es la crítica a la gratificación instantánea, al desplazamiento infinito que nos aleja de nuestro propósito. Su reino es un carnaval de nada, donde se intercambia el foco por fuegos artificiales para la mente.
         <br>
-        No es un monstruo de fuerza bruta, sino un ladrón sutil que roba tu recurso más preciado: el tiempo y el foco. Se presenta como una figura juguetona y brillante, ofreciendo baratijas luminosas que son placenteras en el momento pero te dejan vacío y con el día perdido.`,
+        Es la pesadilla dorada en la que <strong>Vesper</strong> quiere creer, y la niebla que asfixia el jardín de <strong>Morwenna</strong>.`,
         color: '#362C0C'
     },
     {
@@ -76,13 +76,11 @@ const JEFES = [
         nombre: "Vesper, el Festín Vacío", 
         imagenUrl: 'img/vesper.png',        
         fondoUrl: 'img/vesperBg.png',
-        lore: `Vesper fue antaño el alma de la fiesta, el regente de la noche que buscaba su verdad en el brillo de los focos y la aprobación de las miradas vacías.
+        lore: `Vesper es el hambre que persiste después del banquete. Gobernó la noche, creyendo que la validación externa podría llenar el vacío interno. Cada brindis fue un clavo en su ataúd de ébano, cada elogio, un sorbo de hiel.
         <br>
-        En sus mejores noches, competía con <strong>Maro</strong> por la atención de las almas, sin saber que ambos conducían al mismo vacío.
+        Es el cadáver de la fiesta, el espectro del "qué dirán" que sacrifica la autenticidad en el altar de la aprobación. Su trono es una copa vacía, su cetro, un suspiro.
         <br>
-        Creó un reino de placer efémero donde las máscaras se usaban para esconder el dolor y cada risa resonaba con un eco hueco. Pero la noche eterna lo consumió; cada brindis se convirtió en un sorbo de veneno, cada danza un paso hacia el agotamiento.
-        <br>
-        Ahora flota, un rey desposeído de su propia voluntad, atrapado entre los fragmentos de un espejo roto y los jirones de una fiesta sin fin.`,
+        En su espiral, compitió con <strong>Maro</strong> por las migajas de atención, sin ver que ambos servían al mismo dios de la nada.`,
         color: '#283F52'
     },
     {
@@ -90,13 +88,11 @@ const JEFES = [
         nombre: "Kaelen, el Indeciso", 
         imagenUrl: 'img/kaelen.png',        
         fondoUrl: 'img/kaelenBg.png',
-        lore: `Dicen que Kaelen pudo ser el más grande de todos los eruditos, guerreros o videntes.
+        lore: `Kaelen es el cementerio de las posibilidades. Su tragedia no es la falta de potencial, sino la maldición de verlo todo y atreverse con nada. Cada camino no tomado le creció un brazo fantasma, un miembro inútil de un cuerpo paralizado.
         <br>
-        En otra vida, podría haber sido el aprendiz que <strong>Alberic</strong> tanto buscó, o el guerrero que <strong>Horrax</strong> intentó forjar.
+        Es la parálisis por análisis, el miedo a elegir y equivocarse, hecho un hombre-spectro. Sus incontables brazos no son un símbolo de poder, sino de un peso insoportable.
         <br>
-        Pero ante la infinidad de sendas, su voluntad se fracturó. Ahora es un espectro humanoide, una figura trágica y delgada que flota sin rumbo.
-        <br>
-        De su espalda brotan incontables brazos fantasmales, cada uno aferrando el pálido eco de una vocación abandonada: una espada a medio forjar, un pergamino roto, una brújula giratoria, una llave sin cerradura, un mapa rasgado.`,
+        Podría haber sido el discípulo de <strong>Alberic</strong> o el heredero de <strong>Horrax</strong>, pero en su hesitación, solo logró ser el epítome de la potencialidad desperdiciada.`,
         color: '#f3f3f3'
     },
     {
@@ -104,13 +100,11 @@ const JEFES = [
         nombre: "Nyr, el Santo Encadenado",
         imagenUrl: `img/nyr.png`,        
         fondoUrl: `img/nyrBg.png`,
-        lore: `Nyr personifica la nobleza del servicio corrompida por la ausencia de fronteras.
+        lore: `Nyr es la bondad convertida en patología. Se entregó tanto a las causas ajenas que olvidó cómo tener una propia. Sus cadenas no son de metal, son de expectativas y deudas emocionales, cada una un hilo de oro que le roba un pedazo de voluntad.
         <br>
-        Las cadenas que lo atan fueron forjadas con el mismo hierro que quebró a <strong>Horrax</strong>, y cada eslabón representa una promesa que <strong>Lysandra</strong> vio incumplirse.
+        Es la crítica a la abnegación sin límites, al santo que salva a todos menos a sí mismo. Su martirio no es sagrado, es un recordatorio mudo de que el servicio debe nacer de la plenitud, no del vacío.
         <br>
-        Es una imponente figura de mármol pálido, un santo anclado en el aire no por su poder, sino por las miles de finas cadenas doradas que perforan su ser, cada una un juramento a una causa ajena.
-        <br>
-        No lucha, solo soporta el tirón infinito de las expectativas. De sus ojos, perpetuamente cerrados, brotan lágrimas de oro líquido, el llanto silencioso de una voluntad entregada a los demás hasta que la propia se desvaneció por completo.`,
+        Las cadenas que <strong>Horrax</strong> forjó con ciega disciplina, son el mismo dogma que <strong>Lysandra</strong> previó; él es el mártir final de una cadena de errores nobles.`,
         color: '#362C0C'
     },
     {
@@ -118,25 +112,29 @@ const JEFES = [
         nombre: "Theron, el Eco de la Perfección",
         imagenUrl: `img/thereon.png`,        
         fondoUrl: `img/thereonBg.png`,
-        lore: `Theron nació del murmullo de la comparación, del veneno de "no ser suficiente".
+        lore: `Theron es el vacío que queda tras perseguir un espejismo. Nació de la comparación y se alimenta de la insatisfacción. Sus máscaras no son para esconderse, son desesperados intentos de encontrar un rostro que no le pertenece.
         <br>
-        Sus máscaras perfectas son la respuesta grotesca al espejo de <strong>Aurelian</strong>, y su búsqueda de la excelencia absoluta es el extremo opuesto de la indecisión de <strong>Kaelen</strong>.
+        Es la personificación del "síndrome del impostor", la criatura que el mercado de las ideales inalcanzables crea y luego desecha. Su baile grotesco es el de quien busca en el exterior la validación que solo puede nacer dentro.
         <br>
-        Es un eco, una figura humanoide sin rostro propio que habita un panteón de glorias ajenas. Flota erráticamente, intentando imitar la grandeza de las estatuas que lo rodean, pero su cuerpo quebrado siempre le traiciona.
-        <br>
-        En sus múltiples y temblorosas manos, sostiene una colección de máscaras de porcelana exquisitamente elaboradas, cada una representando una perfección inalcanzable. Su tragedia reside en su mirada: los ojos de las máscaras perfectas que sostiene son cuencas vacías que reflejan la nada que siente por dentro.`,
+        Las máscaras que sostiene son la respuesta enferma al espejo de <strong>Aurelian</strong> y la antítesis de la parálisis de <strong>Kaelen</strong>: un activismo frenético hacia la nada.`,
         color: '#475C55'
+    },
+    {
+        id: 'albedo',
+        nombre: "Albedo, la Musa Fragmentada",
+        imagenUrl: 'img/albedo.png',
+        fondoUrl: 'img/albedoBg.png',
+        lore: `Albedo es el naufragio de la identidad. Fue el espejo donde otros se vieron reflejados, hasta que se pulverizó bajo el peso de las expectativas ajenas. No tiene forma porque se la dieron toda, y en el proceso, no le dejaron nada.
+        <br>
+        Es la crítica final a la externalización del yo. Su silueta es un torbellino de rostros prestados, un coro de voces que ahogan la propia. Luchar contra ella es buscar la autenticidad en un mundo de ruido.
+        <br>
+        En su fragmentación, absorbió el ansia de máscaras de <strong>Theron</strong>, la acumulación de datos de <strong>Alberic</strong> y la indecisión de <strong>Kaelen</strong>. Es el collage definitivo de un alma despedazada por el mundo.`,
+        color: '#362C0C'
     }
 ];
 
 // Configuración de sonidos (agregá tus archivos en la carpeta sounds/)
-const SOUNDS = {
-    hover: 'sounds/hover.mp3',
-    click: 'sounds/click.mp3', 
-    impact: 'sounds/impact.mp3',
-    break: 'sounds/break.mp3',
-    victory: 'sounds/victory.mp3'
-};
+
 // ===================================================================================
 // FUNCIÓN GETRANK - MOVER AL INICIO (ANTES DE LOGROS)
 // ===================================================================================
@@ -591,6 +589,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const classList = document.getElementById('class-list');
     const newClassNameInput = document.getElementById('new-class-name');
     const addClassBtn = document.getElementById('add-class-btn');
+    const MAX_HISTORY = 6; 
+
 
 
     // --- NUEVOS ELEMENTOS PARA LORE ---
@@ -601,16 +601,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const loreText = document.getElementById('lore-text');
     const closeLoreBtn = document.getElementById('close-lore-btn');
 
-    let currentBoss = null; // Para guardar el jefe actual
-    
-    
-    // Elementos de audio
-    const hoverSound = document.getElementById('hover-sound');
-    const clickSound = document.getElementById('click-sound');
-    const impactSound = document.getElementById('impact-sound');
-    const breakSound = document.getElementById('break-sound');
 
+    //SONIDOS
+    const bellSound = document.getElementById('bell-sound');
+    const bonfireSound = document.getElementById('bonfire-sound');
+    const clickSound = document.getElementById('click-sound');
+    const toastSound = document.getElementById('toast-sound');
+    const hoverSound = document.getElementById('hover-sound');
+    const startGameSound = document.getElementById('start-game-sound');
+    const startBattleSound = document.getElementById('start-battle-sound');
+    const goToMenu = document.getElementById('go-to-menu-sound');
+
+    
+    
     // --- GAME STATE ---
+    let jefeHistory = [];
     let pactInitialSeconds = 0;
     let unallocatedSeconds = 0;
     let loadedSeconds = 0;
@@ -628,7 +633,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentBossId = null; // Guardará el ID del jefe actual
     let breakRemaining = 0;
     let currentClassId = null; // Materia seleccionada para el pacto actual
+    let currentBoss = null; // Para guardar el jefe actual
 
+
+    // HOVER PARA TODOS LOS BOTONES Y SELECTS
+    document.addEventListener('mouseover', function(e) {
+        if (e.target.matches('button, select, .menu-option, .gold-button, .ghost-button, .load-time-btn')) {
+            playSound(hoverSound);
+        }
+    });
 
     // --- LOCAL STORAGE FUNCTIONS ---
     function getStats() {
@@ -708,6 +721,7 @@ document.addEventListener('DOMContentLoaded', () => {
             splashScreen.classList.remove('hidden');
             
             const hideSplash = () => {
+                playSound(startBattleSound);
                 playSound(clickSound);
                 
                 // Animación de salida del splash
@@ -793,62 +807,68 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 4. Configurar botones del modal de pacto
         confirmPactBtn.addEventListener('click', () => {
-            const selectedValue = parseInt(hoursSelect.value);
-            if (isNaN(selectedValue) || selectedValue === 0) {
-                alert('Por favor, selecciona una duración para tu pacto.');
-                return;
-            }
-            playSound(clickSound);
-            hidePactModal();
-            startBattleFromModal(selectedValue);
-        });
-        
-        cancelPactBtn.addEventListener('click', () => {
-            playSound(clickSound);
-            hidePactModal();
-        });
-        
-        // 5. Función modificada para empezar batalla desde el modal
-        function startBattleFromModal(selectedHours) {
-            // NUEVO: Validar materia seleccionada
+            const selectedHours = parseInt(hoursSelect.value);
             const selectedClassId = parseInt(classSelect.value);
-            if (isNaN(selectedClassId)) {
-                alert('Por favor, selecciona una materia para tu pacto.');
+            
+            // Validación completa
+            let errorMessage = "";
+            if (isNaN(selectedHours) || selectedHours === 0) {
+                errorMessage = "Selecciona una duración para tu pacto";
+            } else if (isNaN(selectedClassId)) {
+                errorMessage = "Selecciona un dominio del conocimiento";
+            }
+            
+            if (errorMessage) {
+                showToast("PACTO INCOMPLETO", errorMessage, { 
+                    type: 'error', 
+                    duration: 4000
+                });
                 return;
             }
             
+            // ✅ TODO VÁLIDO - Iniciar batalla directamente
             playSound(clickSound);
+            playSound(startGameSound);
+            hidePactModal();
             
-            // Guardar materia seleccionada para esta sesión
+            // Inicializar batalla
             currentClassId = selectedClassId;
-            
             pactInitialSeconds = selectedHours * 3600;
             unallocatedSeconds = pactInitialSeconds;
             loadedSeconds = 0;
             dealtSeconds = 0;
             
-            // Elegir un jefe aleatorio
-            currentBoss = JEFES[Math.floor(Math.random() * JEFES.length)];
+            // Elegir jefe aleatorio
+            currentBoss = getRandomBoss();
             currentBossId = currentBoss.id; 
             backgroundContainer.style.backgroundImage = `url('${currentBoss.fondoUrl}')`;
             bossImage.src = currentBoss.imagenUrl;
             bossName.textContent = currentBoss.nombre;
-
             applyBossAura(currentBoss.color);
-
         
-            // Transición suave al cambiar de pantalla
+            // Transición a batalla
             lobbyScreen.style.transition = 'opacity 0.8s ease-in-out';
             battleScreen.style.transition = 'opacity 0.8s ease-in-out';
-            
             lobbyScreen.classList.add('hidden');
             battleScreen.classList.remove('hidden');
             
             startTimerParticles();
             resetForNextRound();
             
+            // Toast de confirmación
+            showToast("PACTO SELLADO", `Has jurado ${selectedHours} hora${selectedHours > 1 ? 's' : ''} de concentración`, { 
+                type: 'gold',
+                duration: 3000
+            });
+            
             console.log(`🎓 Pacto iniciado para materia ID: ${currentClassId}`);
-        }
+        });
+
+        cancelPactBtn.addEventListener('click', () => {
+            playSound(clickSound);
+            hidePactModal();
+        });
+        
         
 
         loadTimeBtns.forEach(btn => {
@@ -1059,6 +1079,7 @@ function addClass() {
         type: 'gold', 
         duration: 3000 
     });
+    playSound(toastSound);
 }
 // Eliminar materia
 function deleteClass(id) {
@@ -1109,34 +1130,36 @@ function loadClassList() {
             const classCard = document.createElement('div');
             classCard.className = `class-card ${esMaestria ? 'mastered' : ''}`;
             
-            classCard.innerHTML = `
-                <div class="class-card-header">
-                    <h4 class="class-card-title" title="${clase.nombre}">${clase.nombre}</h4>
-                    <button class="class-card-delete" data-id="${clase.id}" title="Eliminar dominio">
-                        ✕
-                    </button>
-                </div>
-                
-                <div class="class-card-stats">
-                    <div class="class-stat">
-                        <span class="class-stat-value">${clase.minutos}</span>
-                        <span class="class-stat-label">Minutos</span>
-                    </div>
-                    <div class="class-stat">
-                        <span class="class-stat-value">${horas}h ${minutos}m</span>
-                        <span class="class-stat-label">Total</span>
-                    </div>
-                </div>
-                
-                <div class="class-card-progress">
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${Math.min((clase.minutos / 1500) * 100, 100)}%"></div>
-                    </div>
-                    <small style="color: var(--color-parchment); opacity: 0.7; font-size: .7rem; display: block; margin-top: 0.2rem; font-family:var(--font-title)">
-                        ${esMaestria ? '⭐ Maestría' : 'Progreso'}
-                    </small>
-                </div>
-            `;
+// En lugar del código actual de classCard.innerHTML, usá esto:
+classCard.innerHTML = `
+    <div class="class-card-header">
+        <h4 class="class-card-title" title="${clase.nombre}">${clase.nombre}</h4>
+        <div class="class-card-actions">
+            <button class="class-card-edit" data-id="${clase.id}" title="Editar dominio"><img src="img/pencilIcon.png" alt="Editar dominio"></button>
+            <button class="class-card-delete" data-id="${clase.id}" title="Eliminar dominio">✕</button>
+        </div>
+    </div>
+    
+    <div class="class-card-stats">
+        <div class="class-stat">
+            <span class="class-stat-value">${clase.minutos}</span>
+            <span class="class-stat-label">Minutos</span>
+        </div>
+        <div class="class-stat">
+            <span class="class-stat-value">${horas}h ${minutos}m</span>
+            <span class="class-stat-label">Total</span>
+        </div>
+    </div>
+    
+    <div class="class-card-progress">
+        <div class="progress-bar">
+            <div class="progress-fill" style="width: ${Math.min((clase.minutos / 1500) * 100, 100)}%"></div>
+        </div>
+        <small style="color: var(--color-parchment); opacity: 0.7; font-size: .7rem; display: block; margin-top: 0.2rem; font-family:var(--font-title)">
+            ${esMaestria ? '⭐ Maestría' : 'Progreso'}
+        </small>
+    </div>
+`;
 
             dashboardGrid.appendChild(classCard);
         });
@@ -1148,8 +1171,68 @@ function loadClassList() {
                 deleteClass(id);
             });
         });
+        document.querySelectorAll('.class-card-edit').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const id = parseInt(e.target.dataset.id);
+                editClass(id);
+            });
+        });
     }
 }
+function editClass(id) {
+    const stats = getStats();
+    const clase = stats.clases.find(c => c.id === id);
+    
+    if (!clase) return;
+    
+    const nuevoNombre = prompt('Nuevo nombre del dominio:', clase.nombre);
+    
+    if (nuevoNombre && nuevoNombre.trim() !== '' && nuevoNombre !== clase.nombre) {
+        clase.nombre = nuevoNombre.trim();
+        saveStats(stats);
+        loadClassSelect();
+        loadClassList();
+        
+        showToast('DOMINIO ACTUALIZADO', `"${clase.nombre}" ha sido modificado`, { 
+            type: 'gold', 
+            duration: 3000 
+        });
+    }
+}
+//Algoritmo Nuevo Jefe
+function getRandomBoss() {
+    // Si no hay historial, elegir completamente aleatorio
+    if (jefeHistory.length === 0) {
+        const randomBoss = JEFES[Math.floor(Math.random() * JEFES.length)];
+        jefeHistory.push(randomBoss.id);
+        return randomBoss;
+    }
+
+    // Filtrar jefes que NO estén en el historial reciente
+    const availableJefes = JEFES.filter(jefe => !jefeHistory.includes(jefe.id));
+    
+    // Si hay jefes disponibles que no se usaron recientemente
+    if (availableJefes.length > 0) {
+        const randomBoss = availableJefes[Math.floor(Math.random() * availableJefes.length)];
+        
+        // Actualizar historial
+        jefeHistory.push(randomBoss.id);
+        if (jefeHistory.length > MAX_HISTORY) {
+            jefeHistory.shift(); // Remover el más antiguo
+        }
+        
+        return randomBoss;
+    } 
+    // Si todos los jefes ya fueron usados recientemente, reiniciar historial
+    else {
+        jefeHistory = [];
+        const randomBoss = JEFES[Math.floor(Math.random() * JEFES.length)];
+        jefeHistory.push(randomBoss.id);
+        return randomBoss;
+    }
+}
+
+
 // Event Listeners
 manageClassesBtn.addEventListener('click', () => {
     playSound(clickSound);
@@ -1204,14 +1287,11 @@ loadClassSelect();
 document.addEventListener('keydown', (e) => {
     // Solo responder a barra espaciadora (código 32)
     if (e.code === 'Space') {
-        // Prevenir comportamiento por defecto (scroll)
+        if (e.target.matches('input, textarea, [contenteditable="true"]')) {
+            return; 
+        }
         e.preventDefault();
         
-        // Verificar condiciones para pausar/reanudar:
-        // 1. Debe estar en pantalla de batalla
-        // 2. El timer debe estar corriendo O pausado
-        // 3. NO debe estar en descanso
-        // 4. NO debe estar en pantalla de victoria/lore/instrucciones
         if (!battleScreen.classList.contains('hidden') && 
             isTimerRunning && 
             !battleScreen.classList.contains('break-active') &&
@@ -1443,7 +1523,7 @@ function createTimerSpark() {
         dealtSeconds = 0;
         
         // Elegir un jefe aleatorio y guardarlo
-        currentBoss = JEFES[Math.floor(Math.random() * JEFES.length)];
+        currentBoss = getRandomBoss();
         currentBossId = currentBoss.id; 
         backgroundContainer.style.backgroundImage = `url('${currentBoss.fondoUrl}')`;
         bossImage.src = currentBoss.imagenUrl;
@@ -1457,6 +1537,58 @@ function createTimerSpark() {
         
         resetForNextRound();
     }
+//TOOLTIP VIDA RESTANTE
+// Función para formatear el tiempo restante
+function formatTimeRemaining(seconds) {
+    if (seconds >= 3600) {
+        // Más de 1 hora: mostrar en horas y minutos
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        return `${hours}h ${minutes}m`;
+    } else {
+        // Menos de 1 hora: mostrar solo minutos
+        const minutes = Math.ceil(seconds / 60);
+        return `${minutes} min`;
+    }
+}
+
+// Función para actualizar el tooltip
+function updateHealthBarTooltip() {
+    const tooltip = document.getElementById('health-time-remaining');
+    if (!tooltip) return;
+    
+    const timeText = formatTimeRemaining(unallocatedSeconds);
+    tooltip.textContent = timeText;
+}
+
+// Función para mostrar/ocultar el tooltip con efectos
+function initializeHealthBarTooltip() {
+    const healthBarContainer = document.getElementById('health-bar-container');
+    const tooltip = document.getElementById('health-bar-tooltip');
+    
+    if (!healthBarContainer || !tooltip) return;
+    
+    let hideTimeout;
+    
+    healthBarContainer.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimeout);
+        updateHealthBarTooltip();
+        tooltip.classList.add('visible');
+    });
+    
+    healthBarContainer.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('visible');
+        hideTimeout = setTimeout(() => {
+            // Pequeño delay para suavizar la transición
+        }, 300);
+    });
+    
+    // Actualizar también al mover el mouse dentro del contenedor
+    healthBarContainer.addEventListener('mousemove', () => {
+        updateHealthBarTooltip();
+    });
+}
+
 
         // --- FUNCIONES PARA EL SISTEMA DE LORE ---
 // En la función showLore(), cambia esto:
@@ -1500,6 +1632,9 @@ function showLore() {
             }
         }
     }
+
+
+
 //fondo url
 function applyBossAura(color) {
     if (!color) return;
@@ -1534,6 +1669,7 @@ function restoreBossAppearance() {
 // NUEVA FUNCIÓN: MOSTRAR VICTORIA ESTILO DARK SOULS
 // ===================================================================================
 function showVictoryScreen() {
+    playSound(bellSound)
     // Detener todo
     stopTimerParticles();
     clearInterval(timerInterval);
@@ -1570,10 +1706,6 @@ function showVictoryScreen() {
     document.body.appendChild(victoryScreen);
     
     // Efectos de sonido
-    if (SOUNDS.victory) {
-        const victorySound = new Audio(SOUNDS.victory);
-        victorySound.play().catch(e => console.log("Sonido de victoria no pudo reproducirse:", e));
-    }
     
     // Ocultar otras pantallas
     battleScreen.classList.add('hidden');
@@ -1591,6 +1723,7 @@ function showVictoryScreen() {
 }
 
 function handleVictoryInput(e) {
+    playSound(goToMenu)
     // Prevenir múltiples ejecuciones
     if (e.type === 'click') {
         e.stopPropagation();
@@ -1884,6 +2017,7 @@ function restoreHealthBarAppearance() {
     healthBarInner.style.borderRadius = '2px 0px 0px 2px';
 }
 function showBreakScreen() {
+    playSound(bellSound);
     updateTabTitle(0, 'break');
     updateFavicon('break');
     
@@ -1937,6 +2071,8 @@ function showBreakScreen() {
 
     function extendBreak() {
         playSound(clickSound);
+        playSound(bonfireSound); 
+
         if (!breakExtended) {
             breakExtended = true;
             // Extender el descanso sumando 300 segundos (5 minutos)
@@ -2062,11 +2198,13 @@ function showBreakScreen() {
             <div class="bestiary-layout">
                 <!-- ENCABEZADO MEJORADO -->
                 <div class="bestiary-header-section">
-                    <div class="bestiary-rank-icon">${rank.icon}</div>
-                    <div class="bestiary-rank-info">
-                        <h2>${rank.rango}</h2>
-                        <p>${rank.lore}</p>
-                    </div>
+                                <div class="bestiary-rank-desc">
+                <div class="bestiary-rank-icon">${rank.icon}</div>
+                <div class="bestiary-rank-info">
+                    <h2>${rank.rango}</h2>
+                    <p>${rank.lore}</p>
+                </div>
+            </div>
                     <div class="bestiary-main-stats">
                         <div class="stat-item">
                             <h4>Tiempo Total</h4>
@@ -2085,26 +2223,32 @@ function showBreakScreen() {
                     <div class="classes-grid">
         `;
         
-        if (stats.clases.length === 0) {
-            content += `
-                <div class="class-grid-item" style="grid-column: 1 / -1; text-align: center;">
-                    <span class="class-grid-title">Aún no has conquistado dominios</span>
-                    <span class="class-grid-subtitle">Crea materias para comenzar</span>
-                </div>
-            `;
-        } else {
-            const sortedClasses = [...stats.clases].sort((a, b) => b.minutos - a.minutos);
+// En la sección de materias, cambiar a:
+if (stats.clases.length === 0) {
+    content += `
+        <div class="class-grid-item" style="grid-column: 1 / -1; max-width: 280px; margin: 0 auto;">
+            <span class="class-grid-title">Aún no has conquistado dominios</span>
+            <span class="class-grid-subtitle">Crea materias para comenzar</span>
+        </div>
+    `;
+} else {
+    const sortedClasses = [...stats.clases].sort((a, b) => b.minutos - a.minutos);
+    
+    sortedClasses.forEach(clase => {
+        const horas = (clase.minutos / 60).toFixed(1);
+        // Acortar nombres muy largos
+        const nombreDisplay = clase.nombre.length > 25 
+            ? clase.nombre.substring(0, 22) + '...' 
+            : clase.nombre;
             
-            sortedClasses.forEach(clase => {
-                const horas = (clase.minutos / 60).toFixed(1);
-                content += `
-                    <div class="class-grid-item">
-                        <span class="class-grid-title">${clase.nombre}</span>
-                        <span class="class-grid-subtitle">${clase.minutos} min (${horas}h)</span>
-                    </div>
-                `;
-            });
-        }
+        content += `
+            <div class="class-grid-item">
+                <span class="class-grid-title" title="${clase.nombre}">${nombreDisplay}</span>
+                <span class="class-grid-subtitle">${clase.minutos} min (${horas}h)</span>
+            </div>
+        `;
+    });
+}
         
         content += `
                     </div>
@@ -2174,6 +2318,7 @@ function showBreakScreen() {
         } else {
             healthBarInner.style.animation = 'none';
         }
+        updateHealthBarTooltip();
     }
 
     function updateHealthBarImpact() {
@@ -2224,13 +2369,41 @@ function showBreakScreen() {
         }
     }
 
-    function playSound(audioElement) {
-        // Solo reproducir si el usuario ya ha interactuado con la página
-        if (document.querySelector('button:focus')) {
-            audioElement.currentTime = 0;
-            audioElement.play().catch(e => console.log("Audio no pudo reproducirse:", e));
-        }
+// Reemplazar completamente la función playSound por esta versión:
+function playSound(audioElement) {
+    if (!audioElement) {
+        console.log('❌ Elemento de audio no encontrado');
+        return;
     }
+    
+    try {
+        // Intentar reproducir directamente
+        audioElement.currentTime = 0;
+        const playPromise = audioElement.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+                // Si falla, mostrar mensaje útil
+                console.log('🔇 Audio bloqueado, esperando interacción:', error);
+                
+                // Agregar evento para reintentar después de interacción
+                const retryPlay = () => {
+                    audioElement.play().catch(e => {});
+                    document.removeEventListener('click', retryPlay);
+                };
+                document.addEventListener('click', retryPlay, { once: true });
+            });
+        }
+    } catch (error) {
+        console.log('❌ Error con audio:', error);
+    }
+}
+    // Agregar este event listener para marcar la primera interacción:
+    document.addEventListener('click', () => {
+        if (!document.querySelector('body').classList.contains('user-interacted')) {
+            document.querySelector('body').classList.add('user-interacted');
+        }
+    }, { once: true });
 
     // ===================================================================================
 // SISTEMA DE DEBUG - TESTER HELPER
@@ -2422,6 +2595,7 @@ function updateDebugStatus() {
 }
 
 initialize();
+initializeHealthBarTooltip();
 initializeDebugPanel();
 
 });
