@@ -445,7 +445,7 @@ label {
     background-position: center bottom;
     opacity: 1; 
     z-index: -1; 
-    transition: background-image 1s ease-in-out;
+    /* transition: background-image 0s ease-in-out; */
     
     /* ANIMACIÓN DE RESPIRACIÓN SUTIL */
     animation: backgroundBreath 12s ease-in-out infinite;

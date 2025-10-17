@@ -132,6 +132,26 @@ const JEFES = [
         color: '#362C0C'
     },
 ];
+function precargarTodasLasImagenes() {
+    console.log('🔄 Precargando todas las imágenes...');
+    
+    JEFES.forEach(jefe => {
+        // Precargar imagen del jefe
+        const imgJefe = new Image();
+        imgJefe.src = jefe.imagenUrl;
+        
+        // Precargar fondo del jefe  
+        const imgFondo = new Image();
+        imgFondo.src = jefe.fondoUrl;
+        
+        console.log(`✅ Precargado: ${jefe.nombre}`);
+    });
+    
+    console.log('🎯 TODAS las imágenes precargadas en caché');
+}
+
+// Ejecutar la precarga INMEDIATAMENTE
+precargarTodasLasImagenes();
 
 // Configuración de sonidos (agregá tus archivos en la carpeta sounds/)
 
