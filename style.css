@@ -340,12 +340,17 @@ h1, h2 {
 /* ====================================================== */
 /* PANTALLA SPLASH INMERSIVA */
 #splash-screen {
+
     background: radial-gradient(circle at center, #000000 0%, #130c01 100%);
     z-index: 1000;
     cursor: pointer;
 }
 
 .splash-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     position: relative;
     z-index: 1001;
@@ -355,7 +360,7 @@ h1, h2 {
     font-size: clamp(3rem, 10vw, 6rem);
     color: var(--color-gold);
     text-shadow: 0 0 30px var(--color-gold);
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
     animation: titleEntrance 1.5s ease-out !important;
 }
 
@@ -369,8 +374,10 @@ h1, h2 {
     color: var(--color-parchment);
     font-family: var(--font-body);
     font-size: 1.5rem;
-    animation: titleEntrance 1.2s ease-out !important;
-    opacity: 0.8;
+    animation: subtitleEntrance 1.2s ease-out !important;
+    /* text-shadow: 0 0 20px var(--color-gold); */
+    position: relative; top: 2rem;
+    opacity: 0.3;
 }
 
 .splash-aura {
@@ -2023,6 +2030,16 @@ h1, h2 {
         text-shadow: 0 0 20px var(--color-gold);
     }
 }
+@keyframes subtitleEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.8);
+    }
+    100% {
+        opacity: 0.3;
+        transform: translateY(0) scale(1);
+    }
+}
 
 @keyframes titleGlow {
     0% { text-shadow: 0 0 20px var(--color-gold); }
@@ -2700,4 +2717,182 @@ h1, h2 {
 
 .modal-content::-webkit-scrollbar-thumb:hover {
     background: #b8941f;
+}
+
+/* ====================================================== */
+/* --- RESPONSIVE MOBILE/TABLET --- */
+/* ====================================================== */
+
+/* Clases para mostrar/ocultar elementos según el dispositivo */
+.desktop-only {
+    display: block;
+}
+.mobile-only {
+    display: none;
+}
+
+/* Botón móvil de lanzar ataque */
+.launch-attack-mobile {
+
+    border-radius: 0px 0px 4px 4px;
+    padding: .7rem 2rem;
+    background: rgba(100, 78, 5, 0.309);
+    backdrop-filter: blur(5px);
+    border: 1px solid var(--color-gold);
+    border-top: none;
+    color: var(--color-gold);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    /* z-index: 100; */
+    transition: all 0.3s ease;
+    /* opacity: 1 !important; */
+}
+
+.launch-attack-mobile:hover:not(:disabled) {
+    background: rgba(130, 100, 0, 0.373) ;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+}
+
+
+.launch-attack-mobile:disabled {
+    opacity: 0.4;
+    color: #ffffff;
+    cursor: not-allowed;
+}
+
+/* Tablets pequeñas y móviles */
+@media (max-width: 1024px) {
+    .action-navbar {
+        
+        gap: 0.5rem;
+        padding: 0.8rem;
+    }
+    
+    .load-time-controls {
+        /* order: 3; */
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .bestiary-divider2 {
+        /* display: none; */
+    }
+    
+    /* #pause-btn {
+        margin-left: auto;
+    } */
+}
+#back-to-menu-btn-mobile{
+    color: var(--color-text);
+    padding: 0rem 0.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-image: url(img/backMobile.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center; */
+}
+#back-to-menu-btn-mobile img{
+    margin-top: 4px;
+
+    width: 60%;
+}
+
+/* Móviles */
+@media (max-width: 768px) {
+    .bestiary-divider2{
+        margin-inline: 0;
+    }
+
+    .desktop-only {
+        display: none !important;
+    }
+    
+    .mobile-only {
+        display: block !important;
+    }
+    
+    .action-navbar {
+        gap: 0;
+        padding: 0.5rem;
+        width: 80%;
+    }
+    
+    .load-time-controls {
+        gap: 0.5rem;
+    }
+    
+    .load-time-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 1rem;
+    }
+    
+    .timer-minutes, .timer-seconds {
+        font-size: 25vh;
+    }
+    
+    .timer-colon {
+        font-size: 20vh;
+    }
+    
+    #boss-image {
+        max-height: 40vh;
+    }
+    
+    .battle-footer {
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    /* Ajustar el modal de clases para móviles */
+    #class-modal .modal-content {
+        width: 95vw;
+        height: 90vh;
+        
+    }
+    .class-dashboard {
+        padding: 0 !important;
+        margin-inline: 0;
+        width: 80% !important;
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 100px;
+        gap: 0.8rem;
+        padding-inline: 0rem !important;
+    }
+    .dashboard-grid::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 480px) {
+    .load-time-controls {
+        flex-wrap: wrap;
+    }
+    
+    .load-time-btn {
+        flex: 1;
+        min-width: calc(33% - 0.5rem);
+        text-align: center;
+    }
+    
+    .timer-minutes, .timer-seconds {
+        font-size: 20vh;
+    }
+    
+    .timer-colon {
+        font-size: 15vh;
+    }
+    
+    .launch-attack-mobile {
+        /* bottom: 1rem;
+        width: 95%; */
+        font-size: 1.1rem;
+        /* padding: 0.8rem 1.5rem; */
+    }
 }

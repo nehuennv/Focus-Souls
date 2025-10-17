@@ -709,6 +709,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const healthBarInner = document.getElementById('health-bar-inner');
     const bossName = document.getElementById('boss-name');
     const launchAttackBtn = document.getElementById('launch-attack-btn');
+    const launchAttackBtnMobile = document.getElementById('launch-attack-btn-mobile');
+    const backToMenuBtnMobile = document.getElementById('back-to-menu-btn-mobile');
     const loadTimeBtns = document.querySelectorAll('.load-time-btn');
     const backToMenuBtn = document.getElementById('back-to-menu-btn');
     const backgroundContainer = document.getElementById('background-container');
@@ -1394,6 +1396,20 @@ function getRandomBoss() {
 
 
 // Event Listeners
+// Agrega event listeners para los nuevos botones móviles:
+if (launchAttackBtnMobile) {
+    launchAttackBtnMobile.addEventListener('click', launchAttack);
+    launchAttackBtnMobile.addEventListener('mouseenter', () => playSound(hoverSound));
+}
+
+if (backToMenuBtnMobile) {
+    backToMenuBtnMobile.addEventListener('click', confirmAbandon);
+    backToMenuBtnMobile.addEventListener('mouseenter', () => playSound(hoverSound));
+}
+
+// Agrega un event listener para redimensionamiento:
+window.addEventListener('resize', updateUI);
+
 manageClassesBtn.addEventListener('click', () => {
     playSound(clickSound);
     loadClassList();
@@ -2090,6 +2106,9 @@ function startTimer(duration) {
     updateFavicon('battle');
     
     launchAttackBtn.disabled = true;
+    if (launchAttackBtnMobile) {
+        launchAttackBtnMobile.disabled = true;
+    }
     
     targetTime = Date.now() + duration * 1000;
     minuteSaveCounter = 0;
@@ -2274,14 +2293,16 @@ function showBreakScreen() {
         pauseBtn.classList.add('hidden');
         battleScreen.classList.remove('timer-running');
         
-        // ✅ HABILITAR TODOS LOS BOTONES después del ataque
         document.querySelectorAll('.action-navbar button').forEach(b => {
             b.classList.remove('hidden');
             b.disabled = false;
         });
         
-        // Solo el botón de lanzar ataque debe empezar deshabilitado
+        // Deshabilitar ambos botones de ataque
         launchAttackBtn.disabled = true;
+        if (launchAttackBtnMobile) {
+            launchAttackBtnMobile.disabled = true;
+        }
         
         restoreHealthBarAppearance();
         restoreBossAppearance();
@@ -2459,11 +2480,12 @@ if (stats.clases.length === 0) {
     }
 
     function updateUI() {
-        // ✅ SOLO habilitar "LANZAR ATAQUE" cuando NO hay timer corriendo Y hay tiempo cargado
-        launchAttackBtn.disabled = isTimerRunning || loadedSeconds === 0;
+        const isMobile = window.innerWidth <= 768;
+        const attackBtn = isMobile ? launchAttackBtnMobile : launchAttackBtn;
+        
+        attackBtn.disabled = isTimerRunning || loadedSeconds === 0;
         updateHealthBarPreview();
         
-        // Solo actualizar el timer display si no está corriendo
         if (!isTimerRunning) {
             updateTimerDisplay(loadedSeconds);
         }
