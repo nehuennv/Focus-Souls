@@ -2385,7 +2385,7 @@ function showBreakScreen() {
                 
                 <!-- SECCIÓN MATERIAS -->
                 <div class="bestiary-classes-section">
-                    <h3>DOMINIOS CONQUISTADOS</h3>
+                    <h3>DOMINIOS</h3>
                     <div class="classes-grid">
         `;
         

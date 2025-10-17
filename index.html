@@ -28,10 +28,10 @@
     
     <!-- NUEVO MENÚ MINIMALISTA -->
     <div class="lobby-menu">
-        <button class="menu-option" data-action="start">COMENZAR RITUAL</button>
-        <button class="menu-option" data-action="bestiary">BESTIARIO</button>
-        <button class="menu-option" data-action="logros">SALA DE TROFEOS</button>
-        <button class="menu-option" data-action="instructions">TOMO DE INICIACIÓN</button>
+        <button class="menu-option" data-action="start">Comenzar ritual</button>
+        <button class="menu-option" data-action="bestiary">Bestiario</button>
+        <button class="menu-option" data-action="logros">Sala de trofeos</button>
+        <button class="menu-option" data-action="instructions">Tomo de iniciación</button>
 
 
 
@@ -51,7 +51,7 @@
                 </select>
             </div>
             <!-- EN EL MODAL DEL PACTO (después del select de horas) -->
-            <label style="margin-top: 3rem;" for="class-offering">¿QUÉ DOMINIO DESEAS CONQUISTAR?</label>
+            <label style="margin-top: 2rem;" for="class-offering">¿QUÉ DOMINIO DESEAS CONQUISTAR?</label>
             <div class="select-wrapper">
                 <select id="class-offering">
                     <option value="" disabled selected>ELIGE UN CAMPO DE SABER</option>
@@ -179,7 +179,7 @@
                 <hr class="bestiary-divider">
             </div>
 
-            <button id="close-instructions-btn" class="modal-close-btn">INICIAR VIAJE            </button>
+            <button id="close-instructions-btn" class="modal-close-btn">VOLVER            </button>
         </div>
     </div>
     <div id="lore-screen" class="screen hidden instructions-modal">
@@ -197,20 +197,20 @@
 
     
     <div id="bestiary-modal" class="screen hidden">
-        <div class="modal-content" style="width: 95vw; height: 95vh; max-width: 1400px; max-height: 900px;">
+        <div class="modal-content" style="width: 95vw; height: 95vh; max-width: 1400px; ">
             <h2 class="modal-title" style="margin-bottom: 2rem;">BESTIARIO DEL PACTO</h2>
             
             <div id="bestiary-stats" style="height: 100%; overflow: hidden;">
                 <!-- El contenido se genera dinámicamente -->
             </div>
             
-            <button id="close-bestiary-btn" class="modal-close-btn">CERRAR BESTIARIO</button>
+            <button id="close-bestiary-btn" class="modal-close-btn">VOLVER</button>
         </div>
     </div>
     <div id="class-modal" class="screen hidden">
-        <div class="modal-content class-dashboard" style="width: 60%; height: 95vh; max-width: 1800px; max-height: 900px; display: flex; flex-direction: column; padding: 1.5rem;">
+        <div class="modal-content class-dashboard" style="width: 60%; height: 95vh; max-width: 1800px; display: flex; flex-direction: column; padding: 1.5rem;">
             <!-- HEADER COMPACTO -->
-            <div style="display: flex; flex-direction: column;justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <div style="display: flex; flex-direction: column;justify-content: space-between; align-items: center;">
                 <h2 class="modal-title" style="margin: 0;">CÓDICE DE DOMINIOS</h2>
                 <div style="display: flex; gap: 2rem; align-items: center;">
                     <span style="color: var(--color-gold); font-family: var(--font-body);">
@@ -263,16 +263,15 @@
 <div id="logros-modal" class="screen hidden message-screen">
     <div class="modal-content instructions-modal-content">
         <h2 class="modal-title" style="margin-bottom: 0;">SALA DE TROFEOS</h2>
+        <hr class="bestiary-divider" style="margin-bottom:1px; width: 80%;">
         
         <div id="trofeos-container" class="instructions-content" >
-            <hr class="bestiary-divider">
             <div id="logros-list" class="logros-list">
                 <!-- Los logros se cargan aquí dinámicamente -->
             </div>
-            <hr class="bestiary-divider">
         </div>
-
-        <button id="close-logros-btn" class="modal-close-btn">VOLVER AL SANTUARIO</button>
+        <hr class="bestiary-divider" style="margin-top: 1px; width: 80%;">
+        <button id="close-logros-btn" class="modal-close-btn">VOLVER</button>
     </div>
 </div>
 
@@ -357,9 +356,9 @@
 </div>
 
 <!-- Botón flotante para abrir el panel de debug -->
-<!-- <button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
+<button id="debug-toggle" class="debug-toggle" title="Abrir panel de debug">
     🐛
-</button> -->
+</button>
 <button id="debug-toggle" title="Abrir panel de debug">
     
 </button>
