@@ -302,7 +302,6 @@ const LOGROS = [
         condicion: (stats) => Object.values(stats.bestiasMatadas).reduce((a, b) => a + b, 0) >= 2500
     },
 
-    // === BESTIAS ESPECÍFICAS (12) ===
     {
         id: 'domador_horrax',
         titulo: 'Domador de Horrax',
@@ -328,7 +327,7 @@ const LOGROS = [
         id: 'vidente_lysandra',
         titulo: 'Vidente de Lysandra',
         descripcion: 'Derrota a Lysandra 3 veces',
-        icono: '🔮',
+        icono: '🔮', // O un reloj de arena ⏳ o un ojo 👁️ para el tiempo
         condicion: (stats) => (stats.bestiasMatadas['lysandra'] || 0) >= 3
     },
     {
@@ -345,6 +344,42 @@ const LOGROS = [
         icono: '🎭',
         condicion: (stats) => (stats.bestiasMatadas['maro'] || 0) >= 3
     },
+    {
+        id: 'anfitrion_vesper',
+        titulo: 'Anfitrión de Vesper',
+        descripcion: 'Derrota a Vesper 3 veces',
+        icono: '🥂', // Copa de vino
+        condicion: (stats) => (stats.bestiasMatadas['vesper'] || 0) >= 3
+    },
+    {
+        id: 'explorador_kaelen',
+        titulo: 'Explorador de Kaelen',
+        descripcion: 'Derrota a Kaelen 3 veces',
+        icono: '🧭', // Brújula para la indecisión/caminos
+        condicion: (stats) => (stats.bestiasMatadas['kaelen'] || 0) >= 3
+    },
+    {
+        id: 'devoto_nyr',
+        titulo: 'Devoto de Nyr',
+        descripcion: 'Derrota a Nyr 3 veces',
+        icono: '🔗', // Cadena para las ataduras
+        condicion: (stats) => (stats.bestiasMatadas['nyr'] || 0) >= 3
+    },
+    {
+        id: 'perfeccionista_theron',
+        titulo: 'Perfeccionista de Theron',
+        descripcion: 'Derrota a Theron 3 veces',
+        icono: '🎭', // Máscara (como Maro, pero su lore es diferente) o un trofeo 🏆
+        condicion: (stats) => (stats.bestiasMatadas['theron'] || 0) >= 3
+    },
+    {
+        id: 'reflejo_albedo',
+        titulo: 'Reflejo de Albedo',
+        descripcion: 'Derrota a Albedo 3 veces',
+        icono: '🌀', // Remolino/espiral para fragmentación/confusión de identidad
+        condicion: (stats) => (stats.bestiasMatadas['albedo'] || 0) >= 3
+    },
+
     // Versiones épicas (10 derrotas cada uno)
     {
         id: 'rey_horrax',
@@ -371,7 +406,7 @@ const LOGROS = [
         id: 'oraculo_lysandra',
         titulo: 'Oráculo de Lysandra',
         descripcion: 'Derrota a Lysandra 10 veces',
-        icono: '🔭',
+        icono: '🔭', // Telescopio para la visión de tiempo
         condicion: (stats) => (stats.bestiasMatadas['lysandra'] || 0) >= 10
     },
     {
@@ -388,63 +423,147 @@ const LOGROS = [
         icono: '🎪',
         condicion: (stats) => (stats.bestiasMatadas['maro'] || 0) >= 10
     },
+    {
+        id: 'maestro_vesper',
+        titulo: 'Maestro de Vesper',
+        descripcion: 'Derrota a Vesper 10 veces',
+        icono: '🌌', // Noche estrellada/vacío cósmico
+        condicion: (stats) => (stats.bestiasMatadas['vesper'] || 0) >= 10
+    },
+    {
+        id: 'guia_kaelen',
+        titulo: 'Guía de Kaelen',
+        descripcion: 'Derrota a Kaelen 10 veces',
+        icono: '🗺️', // Mapa/camino
+        condicion: (stats) => (stats.bestiasMatadas['kaelen'] || 0) >= 10
+    },
+    {
+        id: 'redentor_nyr',
+        titulo: 'Redentor de Nyr',
+        descripcion: 'Derrota a Nyr 10 veces',
+        icono: '🕊️', // Paloma/Liberación para las cadenas rotas
+        condicion: (stats) => (stats.bestiasMatadas['nyr'] || 0) >= 10
+    },
+    {
+        id: 'arquitecto_theron',
+        titulo: 'Arquitecto de Theron',
+        descripcion: 'Derrota a Theron 10 veces',
+        icono: '🗿', // Estatua/Perfección alcanzada
+        condicion: (stats) => (stats.bestiasMatadas['theron'] || 0) >= 10
+    },
+    {
+        id: 'espejo_albedo',
+        titulo: 'Espejo de Albedo',
+        descripcion: 'Derrota a Albedo 10 veces',
+        icono: '✨', // Brillo/espejo/identidad clara
+        condicion: (stats) => (stats.bestiasMatadas['albedo'] || 0) >= 10
+    },
 
-    // === RANGOS (8) ===
+    // === RANGOS (15) ===
+    {
+        id: 'rango_neofito',
+        titulo: 'Neófito',
+        descripcion: 'Comienza tu camino en la senda del foco',
+        icono: '🌑',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Neófito"
+    },
     {
         id: 'rango_iniciado',
-        titulo: 'Iniciado Confirmado',
-        descripcion: 'Alcanza el rango de Iniciado',
+        titulo: 'Iniciado',
+        descripcion: 'Has sellado tu primer pacto de concentración',
         icono: '🕯️',
         condicion: (stats) => getRank(stats.totalMinutos).rango === "Iniciado"
     },
     {
+        id: 'rango_acolito', 
+        titulo: 'Acólito',
+        descripcion: 'Los primeros ritos han sido aprendidos',
+        icono: '📜',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Acólito"
+    },
+    {
         id: 'rango_erudito',
         titulo: 'Erudito',
-        descripcion: 'Alcanza el rango de Erudito', 
+        descripcion: 'Has comenzado a desentrañar los misterios del saber',
         icono: '📖',
         condicion: (stats) => getRank(stats.totalMinutos).rango === "Erudito"
     },
     {
         id: 'rango_guardian',
-        titulo: 'Guardián',
-        descripcion: 'Alcanza el rango de Guardián del Conocimiento',
+        titulo: 'Guardián del Conocimiento',
+        descripcion: 'Proteges las verdades con tu atención inquebrantable',
         icono: '🛡️',
         condicion: (stats) => getRank(stats.totalMinutos).rango === "Guardián del Conocimiento"
     },
     {
         id: 'rango_veterano',
         titulo: 'Veterano de la Forja',
-        descripcion: 'Alcanza el rango de Veterano de la Forja',
-        icono: '⚒️',
+        descripcion: 'Has resistido innumerables batallas en la forja',
+        icono: '🔥',
         condicion: (stats) => getRank(stats.totalMinutos).rango === "Veterano de la Forja"
     },
     {
         id: 'rango_cazador',
         titulo: 'Cazador de Ecos',
-        descripcion: 'Alcanza el rango de Cazador de Ecos',
-        icono: '🎯',
+        descripcion: 'Dominas el arte de rastrear distracciones',
+        icono: '🗡️',
         condicion: (stats) => getRank(stats.totalMinutos).rango === "Cazador de Ecos"
     },
     {
         id: 'rango_maestro',
-        titulo: 'Maestro del Ritual',
-        descripcion: 'Alcanza el rango de Maestro del Ritual',
-        icono: '👑',
+        titulo: 'Maestro del Ritual', 
+        descripcion: 'Tu disciplina es un arma legendaria',
+        icono: '⚖️',
         condicion: (stats) => getRank(stats.totalMinutos).rango === "Maestro del Ritual"
+    },
+    {
+        id: 'rango_señor',
+        titulo: 'Señor del Pacto',
+        descripcion: 'Los rituales del foco son tu dominio absoluto',
+        icono: '👑',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Señor del Pacto"
     },
     {
         id: 'rango_arconte',
         titulo: 'Arconte del Silencio',
-        descripcion: 'Alcanza el rango de Arconte del Silencio',
+        descripcion: 'Gobiernas los dominios de la calma absoluta',
         icono: '🦉',
         condicion: (stats) => getRank(stats.totalMinutos).rango === "Arconte del Silencio"
     },
     {
         id: 'rango_iluminado',
         titulo: 'Iluminado',
-        descripcion: 'Alcanza el rango de Iluminado',
-        icono: '💡',
+        descripcion: 'Has encontrado la claridad perfecta',
+        icono: '💡', 
         condicion: (stats) => getRank(stats.totalMinutos).rango === "Iluminado"
+    },
+    {
+        id: 'rango_alma',
+        titulo: 'Alma Trascendida',
+        descripcion: 'Tu espíritu se ha elevado más allá de lo mundano',
+        icono: '🌀',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Alma Trascendida"
+    },
+    {
+        id: 'rango_heraldo',
+        titulo: 'Heraldo del Abismo',
+        descripcion: 'Has dominado los vacíos de la distracción',
+        icono: '🌌',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Heraldo del Abismo"
+    },
+    {
+        id: 'rango_mente',
+        titulo: 'Mente Ancestral', 
+        descripcion: 'Tu voluntad es tan antigua como el primer pensamiento',
+        icono: '🧠',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Mente Ancestral"
+    },
+    {
+        id: 'rango_entidad',
+        titulo: 'Entidad Cósmica',
+        descripcion: 'Has trascendido las barreras del tiempo y la mente',
+        icono: '✨',
+        condicion: (stats) => getRank(stats.totalMinutos).rango === "Entidad Cósmica"
     },
 
     // === MATERIAS/DOMINIOS (8) ===
@@ -690,16 +809,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function saveStats(stats) {
+        // Guardar el rango anterior ANTES de actualizar
+        const rangoAnterior = getRank(stats.totalMinutos).rango;
+        
         // ✅ ACTUALIZAR DATOS PARA LOGROS ANTES DE GUARDAR
         const hoy = new Date().toDateString();
         
-        // Trackear días estudiados
         if (stats.ultimoDia !== hoy) {
             stats.diasEstudiados = (stats.diasEstudiados || 0) + 1;
             stats.ultimoDia = hoy;
         }
         
         localStorage.setItem('focusSoulStats', JSON.stringify(stats));
+        
+        // ✅ VERIFICAR SI SUBIÓ DE RANGO
+        const nuevoRango = getRank(stats.totalMinutos).rango;
+        
+        if (rangoAnterior !== nuevoRango) {
+            // ¡SUBISTE DE RANGO! - Mostrar toast especial
+            setTimeout(() => {
+                const rankInfo = getRank(stats.totalMinutos);
+                showToast(`🎉 ${rankInfo.rango}`, `Has alcanzado el rango ${rankInfo.rango}`, { 
+                    type: 'gold',
+                    duration: 5000,
+                    showProgress: true 
+                });
+            }, 1000);
+        }
         
         // ✅ Verificar logros después de cada guardado
         setTimeout(() => verificarLogros(stats), 100);
@@ -863,6 +999,10 @@ document.addEventListener('DOMContentLoaded', () => {
             currentBossId = currentBoss.id; 
             backgroundContainer.style.backgroundImage = `url('${currentBoss.fondoUrl}')`;
             bossImage.src = currentBoss.imagenUrl;
+            bossImage.classList.remove('boss-appear');
+            setTimeout(() => {
+                bossImage.classList.add('boss-appear');
+            }, 10);
             bossName.textContent = currentBoss.nombre;
             applyBossAura(currentBoss.color);
         
