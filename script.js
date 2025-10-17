@@ -45,7 +45,7 @@ const JEFES = [
         Es la parálisis de la hiperconsciencia, la maldición de ver demasiados caminos y no poder pisar ninguno. Su lucha no es contra un enemigo, sino contra la tiranía de la propia mente atrapada en el eterno tráfico del tiempo.
         <br>
         En su calvario, atestiguó la forja de <strong>Horrax</strong> y el encadenamiento de <strong>Nyr</strong>, visiones que la clavaron en una cruz de pasado y futuro.`,
-        color: '#9A7B15'
+        color: '#337B96'
     },
     {
         id: 'aurelian',
@@ -90,7 +90,7 @@ const JEFES = [
         fondoUrl: 'img/kaelenBg.png',
         lore: `Kaelen es el cementerio de las posibilidades. Su tragedia no es la falta de potencial, sino la maldición de verlo todo y atreverse con nada. Cada camino no tomado le creció un brazo fantasma, un miembro inútil de un cuerpo paralizado.
         <br>
-        Es la parálisis por análisis, el miedo a elegir y equivocarse, hecho un hombre-spectro. Sus incontables brazos no son un símbolo de poder, sino de un peso insoportable.
+        Es la parálisis por análisis, el miedo a elegir y equivocarse, hecho un hombre-spectro. Sus incontables brazos no son un símbolo de poder, sino de un peso insoportable. Se dice que sus brazos son un eco de los incontables "yo" que nunca pudo ser, reflejados y fragmentados en la forma de <strong>Albedo</strong>.
         <br>
         Podría haber sido el discípulo de <strong>Alberic</strong> o el heredero de <strong>Horrax</strong>, pero en su hesitación, solo logró ser el epítome de la potencialidad desperdiciada.`,
         color: '#f3f3f3'
@@ -126,11 +126,11 @@ const JEFES = [
         fondoUrl: 'img/albedoBg.png',
         lore: `Albedo es el naufragio de la identidad. Fue el espejo donde otros se vieron reflejados, hasta que se pulverizó bajo el peso de las expectativas ajenas. No tiene forma porque se la dieron toda, y en el proceso, no le dejaron nada.
         <br>
-        Es la crítica final a la externalización del yo. Su silueta es un torbellino de rostros prestados, un coro de voces que ahogan la propia. Luchar contra ella es buscar la autenticidad en un mundo de ruido.
+        Su silueta es un torbellino de rostros prestados, un coro de voces que ahogan la propia. Luchar contra ella es buscar la autenticidad en un mundo de ruido.
         <br>
-        En su fragmentación, absorbió el ansia de máscaras de <strong>Theron</strong>, la acumulación de datos de <strong>Alberic</strong> y la indecisión de <strong>Kaelen</strong>. Es el collage definitivo de un alma despedazada por el mundo.`,
+        En su fragmentación, absorbió el ansia de máscaras de <strong>Theron</strong>, la acumulación de datos de <strong>Alberic</strong> y la indecisión de <strong>Kaelen</strong>. Es el collage definitivo de un alma despedazada por el mundo. Se dice que sus múltiples semblantes son un reflejo grotesco de los incontables "yo" que <strong>Kaelen</strong> jamás pudo elegir, un espejo distorsionado de cada vocación que él abandonó antes de ser asumida.`,
         color: '#362C0C'
-    }
+    },
 ];
 
 // Configuración de sonidos (agregá tus archivos en la carpeta sounds/)
@@ -1613,11 +1613,6 @@ function showLore() {
     function modifyLoadedTime(seconds, buttonElement = null) {
         playSound(clickSound);
         
-        // ⚠️ AGREGAR VERIFICACIÓN PARA EVITAR DUPLICACIÓN CUANDO EL TIMER ESTÁ CORRIENDO
-        if (isTimerRunning && seconds !== 600) { // 600 segundos = 10 minutos
-            return; // Solo permitir +10min cuando el timer está corriendo
-        }
-        
         if (unallocatedSeconds >= seconds) {
             unallocatedSeconds -= seconds;
             loadedSeconds += seconds;
@@ -1639,28 +1634,38 @@ function showLore() {
 function applyBossAura(color) {
     if (!color) return;
     
-    // Aplicar el color como drop-shadow y glow
+    // Crear el filtro con el color específico del boss
     const newFilter = `
         drop-shadow(0 0 5px rgba(0, 0, 0, 0.5))
         drop-shadow(0 0 20px ${color}66)
+        drop-shadow(0 0 30px ${color}44)
     `;
-    bossImage.style.filter = newFilter;
     
-    // Guardar el filtro como data attribute para restaurarlo después
+    // Aplicar el filtro y guardarlo
+    bossImage.style.filter = newFilter;
     bossImage.dataset.originalFilter = newFilter;
+    bossImage.dataset.bossColor = color; // Guardar el color también
+    
+    console.log(`🎨 Aplicando aura para ${currentBoss.nombre}: ${color}`);
 }
 
 function resetBossAura() {
-    const defaultFilter = 'drop-shadow(0 0 5px rgba(0, 0, 0, 0.5))';
-    bossImage.style.filter = defaultFilter;
-    bossImage.dataset.originalFilter = defaultFilter;
+    // Si hay un boss activo con color, aplicar su aura
+    if (currentBoss && currentBoss.color) {
+        applyBossAura(currentBoss.color);
+    } else {
+        // Si no, usar el filtro por defecto
+        const defaultFilter = 'drop-shadow(0 0 5px rgba(0, 0, 0, 0.5))';
+        bossImage.style.filter = defaultFilter;
+        bossImage.dataset.originalFilter = defaultFilter;
+    }
 }
 function restoreBossAppearance() {
     const originalFilter = bossImage.dataset.originalFilter;
     if (originalFilter) {
         bossImage.style.filter = originalFilter;
+        console.log(`🔄 Restaurando filtro original: ${originalFilter}`);
     } else {
-        // Si no hay filtro guardado, aplicar el por defecto
         resetBossAura();
     }
 }
@@ -1924,10 +1929,7 @@ function startTimer(duration) {
     updateTabTitle(duration, 'battle');
     updateFavicon('battle');
     
-    // Deshabilitar botones excepto +10min
-    document.querySelectorAll('.load-time-controls button, #launch-attack-btn').forEach(b => b.disabled = true);
-    const add10MinBtn = document.querySelector('.load-time-btn[data-time="10"]');
-    if (add10MinBtn) add10MinBtn.disabled = false;
+    launchAttackBtn.disabled = true;
     
     targetTime = Date.now() + duration * 1000;
     minuteSaveCounter = 0;
@@ -2111,10 +2113,14 @@ function showBreakScreen() {
         isTimerRunning = false;
         pauseBtn.classList.add('hidden');
         battleScreen.classList.remove('timer-running');
+        
+        // ✅ HABILITAR TODOS LOS BOTONES después del ataque
         document.querySelectorAll('.action-navbar button').forEach(b => {
             b.classList.remove('hidden');
             b.disabled = false;
         });
+        
+        // Solo el botón de lanzar ataque debe empezar deshabilitado
         launchAttackBtn.disabled = true;
         
         restoreHealthBarAppearance();
@@ -2293,7 +2299,8 @@ if (stats.clases.length === 0) {
     }
 
     function updateUI() {
-        launchAttackBtn.disabled = loadedSeconds === 0;
+        // ✅ SOLO habilitar "LANZAR ATAQUE" cuando NO hay timer corriendo Y hay tiempo cargado
+        launchAttackBtn.disabled = isTimerRunning || loadedSeconds === 0;
         updateHealthBarPreview();
         
         // Solo actualizar el timer display si no está corriendo

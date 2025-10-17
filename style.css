@@ -601,6 +601,11 @@ label {
     width: 80%;
     flex-direction: column; 
 }
+.battle-footer:hover .health-tooltip {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    top: -30px;
+}
 #class-offering{
     font-size: 1rem;
     background: rgba(0, 0, 0, 0.0); 
@@ -979,11 +984,7 @@ label {
     }
 } */
 
-#health-bar-container:hover .health-tooltip {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-    top: -30px;
-}
+
 
 /* Efecto de respiración para el tooltip cuando está visible */
 /* .health-tooltip.visible {
