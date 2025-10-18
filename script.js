@@ -2154,7 +2154,6 @@ function startTimer(duration) {
 function handleImpact() {
     isTimerRunning = false;
     pauseBtn.classList.add('hidden');
-    playSound(impactSound);
     battleScreen.classList.remove('timer-running');
 
     // Sumar los segundos cargados a los segundos infligidos
@@ -2202,7 +2201,6 @@ function showBreakScreen() {
     updateTabTitle(0, 'break');
     updateFavicon('break');
     
-    playSound(breakSound);
     breakRemaining = BREAK_DURATION;
     breakExtended = false;
     

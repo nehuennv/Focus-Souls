@@ -211,6 +211,9 @@ button:disabled:hover {
     justify-content: center;
     gap: .5rem;
     width: 80%;
+    opacity: 1 !important;
+    transition: all .5s ease;
+    pointer-events: all !important;
     flex-wrap: wrap;
 }
 #confirm-abandon-btn{
@@ -2725,10 +2728,10 @@ h1, h2 {
 
 /* Clases para mostrar/ocultar elementos según el dispositivo */
 .desktop-only {
-    display: block;
+    display: block !important;
 }
 .mobile-only {
-    display: none;
+    display: none !important;
 }
 
 /* Botón móvil de lanzar ataque */
