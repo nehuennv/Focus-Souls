@@ -4,6 +4,7 @@ const JEFES = [
         nombre: "Horrax, el Vástago de la Escoria",
         imagenUrl: 'img/horrax.png',
         fondoUrl: 'img/horraxBg.png',
+        imagenSelect: 'img/horraxSl.webp',
         lore: `Horrax no fue derrotado por un enemigo, sino por el yunque de su propia obsesión. Forjó su voluntad en una disciplina de hierro, martillando sin pausa hasta que solo quedó la escoria de lo que pudo ser un hombre.
         <br>
         Es la encarnación de la autoexplotación, la crítica feroz a una cultura que venera el esfuerzo infinito hasta consumir el alma. Su martillo no forja, solo pulveriza. Su yunque no templa, solo aplasta.
@@ -16,6 +17,7 @@ const JEFES = [
         nombre: "Alberic, el Escriba sin Rostro", 
         imagenUrl: 'img/alberic.png',        
         fondoUrl: 'img/albericBg.png',
+        imagenSelect: 'img/albericSl.webp',  
         lore: `Alberic creyó que el conocimiento era un fin en sí mismo. Devoró bibliotecas enteras, acumulando sabiduría como un avaro acumula oro, hasta que el peso de lo inútil le arrancó el rostro y la identidad.
         <br>
         Es el monumento a la procrastinación intelectual, al que prefiere el mapa antes que el territorio. Su castillo de pergaminos es una tumba con vista al cielo del saber que nunca usó.
@@ -28,6 +30,7 @@ const JEFES = [
         nombre: "Morwenna, Madre de los Brotes Marchitos",
         imagenUrl: 'img/morwenna.png',        
         fondoUrl: 'img/morwennaBg.png',
+        imagenSelect: 'img/morwennaSl.webp',        
         lore: `Morwenna es el jardín de los comienzos abortados. Cada sueño postergado, cada talento abandonado por miedo o pereza, hizo que una de sus flores se pudriera en el tallo.
         <br>
         No es la muerte, es algo peor: la lenta necrosis del potencial. Su agonía es un recordatorio de que la peor prisión es la de lo que pudo ser y nunca fue.
@@ -40,6 +43,7 @@ const JEFES = [
         nombre: "Lysandra, la Vidente Estancada",
         imagenUrl: 'img/lysandra.png',        
         fondoUrl: 'img/lysandraBg.png',
+        imagenSelect: 'img/lysandraSl.webp',        
         lore: `Lysandra no vive en el tiempo, es el tiempo quien vive en ella. Un río de ayeres y mañanas que la ahoga, impidiéndole habitar el único instante que es real: el ahora.
         <br>
         Es la parálisis de la hiperconsciencia, la maldición de ver demasiados caminos y no poder pisar ninguno. Su lucha no es contra un enemigo, sino contra la tiranía de la propia mente atrapada en el eterno tráfico del tiempo.
@@ -52,6 +56,7 @@ const JEFES = [
         nombre: "Aurelian, El Juez Saliente",
         imagenUrl: 'img/aurelian.png',        
         fondoUrl: 'img/aurelianBg.png',
+        imagenSelect: 'img/aurelianSl.webp',        
         lore: `Aurelian es el eco internalizado de cada "no eres suficiente". No juzga con una espada, sino con el silencio ensordecedor de la autocrítica convertida en verdugo.
         <br>
         Su espejo no miente, pero solo muestra la herida, nunca la cura. Es el miedo a ser descubierto como un fraude, hecho carne y sentado en un trono de dudas propias.
@@ -64,6 +69,7 @@ const JEFES = [
         nombre: "Maro, el Bufón Dorado",
         imagenUrl: 'img/maro.png',        
         fondoUrl: 'img/maroBg.png',
+        imagenSelect: 'img/maroSl.webp',        
         lore: `Maro es el susurro seductor de la distracción. No roba la vida con un cuchillo, sino con una promesa vacía de diversión eterna. Su oro es falso, su risa un cascabel que anestesia el alma.
         <br>
         Es la crítica a la gratificación instantánea, al desplazamiento infinito que nos aleja de nuestro propósito. Su reino es un carnaval de nada, donde se intercambia el foco por fuegos artificiales para la mente.
@@ -76,6 +82,7 @@ const JEFES = [
         nombre: "Vesper, el Festín Vacío", 
         imagenUrl: 'img/vesper.png',        
         fondoUrl: 'img/vesperBg.png',
+        imagenSelect: 'img/vesperSl.webp', 
         lore: `Vesper es el hambre que persiste después del banquete. Gobernó la noche, creyendo que la validación externa podría llenar el vacío interno. Cada brindis fue un clavo en su ataúd de ébano, cada elogio, un sorbo de hiel.
         <br>
         Es el cadáver de la fiesta, el espectro del "qué dirán" que sacrifica la autenticidad en el altar de la aprobación. Su trono es una copa vacía, su cetro, un suspiro.
@@ -88,6 +95,7 @@ const JEFES = [
         nombre: "Kaelen, el Indeciso", 
         imagenUrl: 'img/kaelen.png',        
         fondoUrl: 'img/kaelenBg.png',
+        imagenSelect: 'img/kaelenSl.webp', 
         lore: `Kaelen es el cementerio de las posibilidades. Su tragedia no es la falta de potencial, sino la maldición de verlo todo y atreverse con nada. Cada camino no tomado le creció un brazo fantasma, un miembro inútil de un cuerpo paralizado.
         <br>
         Es la parálisis por análisis, el miedo a elegir y equivocarse, hecho un hombre-spectro. Sus incontables brazos no son un símbolo de poder, sino de un peso insoportable. Se dice que sus brazos son un eco de los incontables "yo" que nunca pudo ser, reflejados y fragmentados en la forma de <strong>Albedo</strong>.
@@ -100,6 +108,7 @@ const JEFES = [
         nombre: "Nyr, el Santo Encadenado",
         imagenUrl: `img/nyr.png`,        
         fondoUrl: `img/nyrBg.png`,
+        imagenSelect: 'img/nyrSl.webp', 
         lore: `Nyr es la bondad convertida en patología. Se entregó tanto a las causas ajenas que olvidó cómo tener una propia. Sus cadenas no son de metal, son de expectativas y deudas emocionales, cada una un hilo de oro que le roba un pedazo de voluntad.
         <br>
         Es la crítica a la abnegación sin límites, al santo que salva a todos menos a sí mismo. Su martirio no es sagrado, es un recordatorio mudo de que el servicio debe nacer de la plenitud, no del vacío.
@@ -112,6 +121,7 @@ const JEFES = [
         nombre: "Theron, el Eco de la Perfección",
         imagenUrl: `img/thereon.png`,        
         fondoUrl: `img/thereonBg.png`,
+        imagenSelect: 'img/theronSl.webp', 
         lore: `Theron es el vacío que queda tras perseguir un espejismo. Nació de la comparación y se alimenta de la insatisfacción. Sus máscaras no son para esconderse, son desesperados intentos de encontrar un rostro que no le pertenece.
         <br>
         Es la personificación del "síndrome del impostor", la criatura que el mercado de las ideales inalcanzables crea y luego desecha. Su baile grotesco es el de quien busca en el exterior la validación que solo puede nacer dentro.
@@ -124,6 +134,7 @@ const JEFES = [
         nombre: "Albedo, la Musa Fragmentada",
         imagenUrl: 'img/albedo.png',
         fondoUrl: 'img/albedoBg.png',
+        imagenSelect: 'img/albedoSl.webp', 
         lore: `Albedo es el naufragio de la identidad. Fue el espejo donde otros se vieron reflejados, hasta que se pulverizó bajo el peso de las expectativas ajenas. No tiene forma porque se la dieron toda, y en el proceso, no le dejaron nada.
         <br>
         Su silueta es un torbellino de rostros prestados, un coro de voces que ahogan la propia. Luchar contra ella es buscar la autenticidad en un mundo de ruido.
@@ -775,6 +786,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let breakRemaining = 0;
     let currentClassId = null; // Materia seleccionada para el pacto actual
     let currentBoss = null; // Para guardar el jefe actual
+    let selectedBossId = 'random'; // Por defecto, aleatorio
+
 
 
     // HOVER PARA TODOS LOS BOTONES Y SELECTS
@@ -954,6 +967,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         function showPactModal() {
+            playSound(clickSound);
+            
+            // ✅ CORRECCIÓN: Asegurar que la imagen de aleatorio esté cargada
+            const previewImg = document.getElementById('selected-boss-preview-img');
+            const previewName = document.getElementById('selected-boss-preview-name');
+            
+            if (previewImg && !previewImg.src.includes('random-icon.png') && selectedBossId === 'random') {
+                previewImg.src = 'img/random-icon.png';
+                previewName.textContent = 'ALEATORIO';
+            }
+            
             pactModal.style.transition = 'opacity 0.5s ease-in-out';
             pactModal.classList.remove('hidden');
         }
@@ -996,9 +1020,14 @@ document.addEventListener('DOMContentLoaded', () => {
             loadedSeconds = 0;
             dealtSeconds = 0;
             
-            // Elegir jefe aleatorio
-            currentBoss = getRandomBoss();
+            // ✅ CORRECCIÓN: Usar el jefe seleccionado en lugar de aleatorio
+            if (selectedBossId === 'random') {
+                currentBoss = getRandomBoss();
+            } else {
+                currentBoss = JEFES.find(jefe => jefe.id === selectedBossId);
+            }
             currentBossId = currentBoss.id; 
+            
             backgroundContainer.style.backgroundImage = `url('${currentBoss.fondoUrl}')`;
             bossImage.src = currentBoss.imagenUrl;
             bossImage.classList.remove('boss-appear');
@@ -1024,6 +1053,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             
             console.log(`🎓 Pacto iniciado para materia ID: ${currentClassId}`);
+            console.log(`🗡️ Jefe seleccionado: ${currentBoss.nombre}`);
         });
 
         cancelPactBtn.addEventListener('click', () => {
@@ -1243,7 +1273,25 @@ function addClass() {
     });
     playSound(toastSound);
 }
+function initializeBossPreview() {
+    const previewImg = document.getElementById('selected-boss-preview-img');
+    const previewName = document.getElementById('selected-boss-preview-name');
+    
+    if (previewImg && previewName) {
+        if (selectedBossId === 'random') {
+            previewImg.src = 'img/random-icon.png';
+            previewName.textContent = 'ALEATORIO';
+        } else {
+            const jefe = JEFES.find(j => j.id === selectedBossId);
+            if (jefe) {
+                previewImg.src = jefe.imagenSelect;
+                previewName.textContent = jefe.id.toUpperCase();
+            }
+        }
+    }
+}
 // Eliminar materia
+
 function deleteClass(id) {
     if (!confirm('¿Estás seguro de eliminar esta materia? Se perderán sus estadísticas.')) return;
     
@@ -1265,10 +1313,10 @@ function loadClassList() {
     // Actualizar contadores
     classCount.textContent = stats.clases.length;
     
-    // Calcular tiempo total
     const totalMinutes = stats.clases.reduce((sum, clase) => sum + (clase.minutos || 0), 0);
     const hours = Math.floor(totalMinutes / 60);
     const minutes = totalMinutes % 60;
+
     totalClassTime.textContent = `${hours}h ${minutes}m`;
 
     // Limpiar dashboard
@@ -1361,6 +1409,179 @@ function editClass(id) {
         });
     }
 }
+// --- FUNCIONES PARA EL SELECTOR DE JEFES ESTILO STREET FIGHTER ---
+function initializeBossSelectionModal() {
+    const openBossSelectorBtn = document.getElementById('open-boss-selector');
+    const bossSelectionModal = document.getElementById('boss-selection-modal');
+    const confirmBossSelectionBtn = document.getElementById('confirm-boss-selection');
+    const closeBossSelectionBtn = document.getElementById('close-boss-selection');
+    const bossSelectionGrid = document.getElementById('boss-selection-grid');
+
+    // Cargar opciones de jefes
+    loadBossSelectionGrid();
+
+    // Establecer "Aleatorio" como selección inicial
+    selectBossInModal('random');
+
+    // Abrir modal de selección
+    openBossSelectorBtn.addEventListener('click', () => {
+        playSound(clickSound);
+        bossSelectionModal.classList.remove('hidden');
+        updateBossSelectionDisplay();
+    });
+
+    // Confirmar selección
+    confirmBossSelectionBtn.addEventListener('click', () => {
+        playSound(clickSound);
+        saveBossSelection();
+        bossSelectionModal.classList.add('hidden');
+    });
+
+    // Cerrar modal sin confirmar
+    closeBossSelectionBtn.addEventListener('click', () => {
+        playSound(clickSound);
+        bossSelectionModal.classList.add('hidden');
+        // Restaurar selección anterior si no se confirmó
+        updateBossSelectionDisplay();
+    });
+
+    // Cerrar modal al hacer clic fuera del contenido
+    bossSelectionModal.addEventListener('click', (e) => {
+        if (e.target === bossSelectionModal) {
+            playSound(clickSound);
+            bossSelectionModal.classList.add('hidden');
+            updateBossSelectionDisplay();
+        }
+    });
+}
+
+function loadBossSelectionGrid() {
+    const bossSelectionGrid = document.getElementById('boss-selection-grid');
+
+    // Limpiar opciones (excepto la opción "Aleatorio")
+    const existingOptions = bossSelectionGrid.querySelectorAll('.boss-selection-option:not([data-boss-id="random"])');
+    existingOptions.forEach(option => option.remove());
+
+    // Agregar opciones para cada jefe
+    JEFES.forEach(jefe => {
+        const bossOption = document.createElement('div');
+        bossOption.className = 'boss-selection-option';
+        bossOption.dataset.bossId = jefe.id;
+
+        bossOption.innerHTML = `
+            <div class="boss-portrait">
+                <img src="${jefe.imagenSelect}" alt="${jefe.nombre}">
+                <div class="boss-selection-overlay">
+                    <span>${jefe.nombre.split(',')[0]}</span>
+                </div>
+            </div>
+        `;
+
+        bossOption.addEventListener('click', () => selectBossInModal(jefe.id));
+        bossSelectionGrid.appendChild(bossOption);
+    });
+}
+
+function selectBossInModal(bossId) {
+    // Remover clase active de todas las opciones
+    document.querySelectorAll('.boss-selection-option').forEach(option => {
+        option.classList.remove('active');
+    });
+
+    // Agregar clase active a la opción seleccionada
+    const selectedOption = document.querySelector(`[data-boss-id="${bossId}"]`);
+    if (selectedOption) {
+        selectedOption.classList.add('active');
+    }
+
+    // Actualizar display de selección
+    const modalSelectedBossImg = document.getElementById('modal-selected-boss-img');
+    const modalSelectedBossName = document.getElementById('modal-selected-boss-name');
+    const modalSelectedBossDesc = document.getElementById('modal-selected-boss-desc');
+
+    if (bossId === 'random') {
+        modalSelectedBossImg.src = 'img/random-icon.png';
+        modalSelectedBossName.textContent = 'ALEATORIO';
+        modalSelectedBossDesc.textContent = 'El destino elegirá tu oponente';
+    } else {
+        const jefe = JEFES.find(j => j.id === bossId);
+        modalSelectedBossImg.src = jefe.imagenSelect;
+        modalSelectedBossName.textContent = jefe.nombre;
+        // Tomar solo la primera línea del lore para la descripción
+        modalSelectedBossDesc.textContent = jefe.lore.split('<br>')[0].replace(/<strong>|<\/strong>/g, '');
+    }
+
+    // Efecto de sonido
+    playSound(clickSound);
+}
+
+function updateBossSelectionDisplay() {
+    // Remover clase active de todas las opciones
+    document.querySelectorAll('.boss-selection-option').forEach(option => {
+        option.classList.remove('active');
+    });
+
+    // Agregar clase active a la opción seleccionada
+    const selectedOption = document.querySelector(`[data-boss-id="${selectedBossId}"]`);
+    if (selectedOption) {
+        selectedOption.classList.add('active');
+    }
+
+    // Actualizar display de selección
+    const modalSelectedBossImg = document.getElementById('modal-selected-boss-img');
+    const modalSelectedBossName = document.getElementById('modal-selected-boss-name');
+    const modalSelectedBossDesc = document.getElementById('modal-selected-boss-desc');
+
+    if (selectedBossId === 'random') {
+        modalSelectedBossImg.src = 'img/random-icon.png';
+        modalSelectedBossName.textContent = 'ALEATORIO';
+        modalSelectedBossDesc.textContent = 'El destino elegirá tu oponente';
+    } else {
+        const jefe = JEFES.find(j => j.id === selectedBossId);
+        modalSelectedBossImg.src = jefe.imagenSelect;
+        modalSelectedBossName.textContent = jefe.nombre;
+        // Tomar solo la primera línea del lore para la descripción
+        modalSelectedBossDesc.textContent = jefe.lore.split('<br>')[0].replace(/<strong>|<\/strong>/g, '');
+    }
+
+    // Efecto de sonido
+    playSound(clickSound);
+}
+
+function saveBossSelection() {
+    const activeOption = document.querySelector('.boss-selection-option.active');
+    if (activeOption) {
+        selectedBossId = activeOption.dataset.bossId;
+        
+        // ACTUALIZAR VISTA PREVIA EN MODAL PRINCIPAL
+        const previewImg = document.getElementById('selected-boss-preview-img');
+        const previewName = document.getElementById('selected-boss-preview-name');
+        
+        if (selectedBossId === 'random') {
+            previewImg.src = 'img/random-icon.png';
+            previewName.textContent = 'ALEATORIO';
+        } else {
+            const jefe = JEFES.find(j => j.id === selectedBossId);
+            previewImg.src = jefe.imagenSelect;
+            previewName.textContent = jefe.id.toUpperCase();
+        }
+        
+        // Mostrar toast de confirmación
+        if (selectedBossId === 'random') {
+            showToast('SELECCIÓN CONFIRMADA', 'Tu oponente será elegido por el destino', {
+                type: 'gold',
+                duration: 3000
+            });
+        } else {
+            const jefe = JEFES.find(j => j.id === selectedBossId);
+            showToast('SELECCIÓN CONFIRMADA', `Te enfrentarás a ${jefe.nombre}`, {
+                type: 'gold',
+                duration: 3000
+            });
+        }
+    }
+}
+
 //Algoritmo Nuevo Jefe
 function getRandomBoss() {
     // Si no hay historial, elegir completamente aleatorio
@@ -1433,6 +1654,11 @@ newClassNameInput.addEventListener('keypress', (e) => {
 
 // Cargar materias al inicializar
 loadClassSelect();
+initializeBossSelectionModal();
+initializeBossPreview();
+
+
+
     // --- LOCAL STORAGE & BESTIARY FUNCTIONS ---
 
 
@@ -1851,7 +2077,6 @@ function restoreBossAppearance() {
 // ===================================================================================
 function showVictoryScreen() {
     playSound(bellSound)
-    // Detener todo
     stopTimerParticles();
     clearInterval(timerInterval);
     clearInterval(breakInterval);
@@ -1860,13 +2085,14 @@ function showVictoryScreen() {
     if (currentBossId) {
         const stats = getStats();
         stats.bestiasMatadas[currentBossId] = (stats.bestiasMatadas[currentBossId] || 0) + 1;
-        stats.totalMinutos = (stats.totalMinutos || 0) + Math.floor(dealtSeconds / 60);
+        
+        // ⚠️ CORREGIR: ELIMINAR ESTA LÍNEA QUE CAUSA DUPLICACIÓN
+        // stats.totalMinutos = (stats.totalMinutos || 0) + Math.floor(dealtSeconds / 60);
         
         // ✅ NUEVO: ACTUALIZAR PACTO MÁXIMO
-        const duracionPacto = Math.floor(pactInitialSeconds / 60); // Convertir a minutos
+        const duracionPacto = Math.floor(pactInitialSeconds / 60);
         if (duracionPacto > (stats.pactoMaximo || 0)) {
             stats.pactoMaximo = duracionPacto;
-            console.log(`📈 Nuevo pacto máximo: ${duracionPacto} minutos`);
         }
         
         saveStats(stats);
@@ -2314,14 +2540,16 @@ function showBreakScreen() {
     function confirmAbandon() {
         playSound(clickSound);
         
-        // SI EL TIMER NO ESTÁ CORRIENDO, VOLVER DIRECTAMENTE
-        if (!isTimerRunning) {
-            returnToMenu();
-            return;
+        if (isTimerRunning) {
+            isPaused = true;
         }
         
-        // SI ESTÁ CORRIENDO, PREGUNTAR CONFIRMACIÓN
-        isPaused = true;
+        // SI EL TIMER NO ESTÁ CORRIENDO, VOLVER DIRECTAMENTE
+        // if (!isTimerRunning) {
+        //     returnToMenu();
+        //     return;
+        // }
+        // isPaused = true;
         
         // Crear modal específico para romper pacto
         const abandonModal = document.createElement('div');
@@ -2376,24 +2604,29 @@ function showBreakScreen() {
         const stats = getStats();
         const favorite = findFavoriteVictim(stats.bestiasMatadas);
         const rank = getRank(stats.totalMinutos);
-        const totalHours = (stats.totalMinutos / 60).toFixed(1);
+        
+        // CORREGIR: Calcular horas y minutos correctamente
+        const totalHours = Math.floor(stats.totalMinutos / 60);
+        const totalMinutes = stats.totalMinutos % 60;
+        
         const totalKills = Object.values(stats.bestiasMatadas).reduce((sum, current) => sum + current, 0);
     
         let content = `
             <div class="bestiary-layout">
                 <!-- ENCABEZADO MEJORADO -->
                 <div class="bestiary-header-section">
-                                <div class="bestiary-rank-desc">
-                <div class="bestiary-rank-icon">${rank.icon}</div>
-                <div class="bestiary-rank-info">
-                    <h2>${rank.rango}</h2>
-                    <p>${rank.lore}</p>
-                </div>
-            </div>
+                    <div class="bestiary-rank-desc">
+                        <div class="bestiary-rank-icon">${rank.icon}</div>
+                        <div class="bestiary-rank-info">
+                            <h2>${rank.rango}</h2>
+                            <p>${rank.lore}</p>
+                        </div>
+                    </div>
                     <div class="bestiary-main-stats">
                         <div class="stat-item">
                             <h4>Tiempo Total</h4>
-                            <p>${totalHours}h</p>
+                            <!-- CORREGIDO: Mostrar en formato horas:minutos -->
+                            <p>${totalHours}h ${totalMinutes}m</p>
                         </div>
                         <div class="stat-item">
                             <h4>Bestias Cazadas</h4>
@@ -2409,6 +2642,7 @@ function showBreakScreen() {
         `;
         
 // En la sección de materias, cambiar a:
+// En la sección de materias, cambiar a:
 if (stats.clases.length === 0) {
     content += `
         <div class="class-grid-item" style="grid-column: 1 / -1; max-width: 280px; margin: 0 auto;">
@@ -2420,7 +2654,10 @@ if (stats.clases.length === 0) {
     const sortedClasses = [...stats.clases].sort((a, b) => b.minutos - a.minutos);
     
     sortedClasses.forEach(clase => {
-        const horas = (clase.minutos / 60).toFixed(1);
+        // CORREGIDO: Calcular horas y minutos separados
+        const horas = Math.floor(clase.minutos / 60);
+        const minutos = clase.minutos % 60;
+        
         // Acortar nombres muy largos
         const nombreDisplay = clase.nombre.length > 25 
             ? clase.nombre.substring(0, 22) + '...' 
@@ -2429,7 +2666,7 @@ if (stats.clases.length === 0) {
         content += `
             <div class="class-grid-item">
                 <span class="class-grid-title" title="${clase.nombre}">${nombreDisplay}</span>
-                <span class="class-grid-subtitle">${clase.minutos} min (${horas}h)</span>
+                <span class="class-grid-subtitle">${horas}h ${minutos}min (${clase.minutos} min)</span>
             </div>
         `;
     });

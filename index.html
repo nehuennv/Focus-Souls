@@ -64,6 +64,55 @@
             <button id="manage-classes-btn" class="ghost-button">
                 GESTIONAR DOMINIOS
             </button>
+            <label style="margin-top: 2rem;">¿A QUÉ BESTIA TE ENFRENTARÁS?</label>
+
+            <!-- Botón para abrir el selector estilo Street Fighter -->
+            <div class="boss-selector-trigger" id="open-boss-selector">
+                <div id="selected-boss-preview" class="selected-boss-preview">
+                    <div class="boss-preview-image">
+                        <!-- CAMBIO: src inicial con la imagen de aleatorio -->
+                        <img id="selected-boss-preview-img" src="img/random-icon.png" alt="Jefe seleccionado">
+                    </div>
+                    <span id="selected-boss-preview-name">ALEATORIO</span>
+                </div>
+            </div>
+
+            <!-- Modal de selección de jefes estilo Street Fighter -->
+            <div id="boss-selection-modal" class="screen hidden boss-selection-modal">
+                <div class="modal-content" style="max-width: 900px; width: 95%; align-items: stretch;">
+                    <h2 class="modal-title">SELECCIONA TU BESTIA</h2>
+                    <hr class="bestiary-divider">
+                    <div class="boss-selection-header">
+                        <div class="selected-boss-display">
+                            <div class="boss-portrait-large">
+                                <img id="modal-selected-boss-img" src="img/random-icon.png" alt="Jefe seleccionado">
+                            </div>
+                            <div class="boss-info-large">
+                                <h3 id="modal-selected-boss-name">Aleatorio</h3>
+                                <p id="modal-selected-boss-desc">El destino elegirá tu oponente</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="boss-selection-grid" class="boss-selection-grid">
+                        <!-- La opción Aleatorio -->
+                        <div class="boss-selection-option active" data-boss-id="random">
+                            <div class="boss-portrait">
+                                <img src="img/random-icon.png" alt="Aleatorio">
+                                <div class="boss-selection-overlay">
+                                    <span>Aleatorio</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Las opciones de jefes se cargarán dinámicamente -->
+                    </div>
+                    <hr class="bestiary-divider">
+                    <div class="boss-selection-actions">
+                        <button id="confirm-boss-selection" class="gold-button">CONFIRMAR SELECCIÓN</button>
+                        <button id="close-boss-selection" class="ghost-button">CANCELAR</button>
+                    </div>
+                </div>
+            </div>
             <hr class="bestiary-divider">
             <div class="modal-actions">
                 <button id="confirm-pact-btn" class="gold-button">INICIAR RITUAL</button>
@@ -156,8 +205,8 @@
         </div>
         
         <div id="confirmation-buttons" class="confirmation-buttons hidden">
-            <button id="confirm-yes-btn"></button>
-            <button id="confirm-no-btn"></button>
+            <button id="confirm-yes-btn" class="ghost-button" ></button>
+            <button id="confirm-no-btn" class="gold-button"></button>
         </div>
     </div>
 
@@ -208,7 +257,7 @@
         <div class="modal-content" style="width: 95vw; height: 95vh; max-width: 1400px; ">
             <h2 class="modal-title" style="margin-bottom: 2rem;">BESTIARIO DEL PACTO</h2>
             
-            <div id="bestiary-stats" style="height: 100%; overflow: hidden;">
+            <div id="bestiary-stats" style="flex: 1; overflow: hidden;">
                 <!-- El contenido se genera dinámicamente -->
             </div>
             
