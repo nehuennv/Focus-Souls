@@ -45,7 +45,18 @@
         <div class="modal-content">
             <h2 style="margin-bottom: 0;">SELLA TU PACTO</h2>
             <hr class="bestiary-divider">
-            <label for="hours-offering">¿CUÁL ES TU OFRENDA?</label>
+            <label ">¿A QUÉ BESTIA TE ENFRENTARÁS?</label>
+            <!-- Botón para abrir el selector estilo Street Fighter -->
+            <div class="boss-selector-trigger" id="open-boss-selector">
+                <div id="selected-boss-preview" class="selected-boss-preview">
+                    <div class="boss-preview-image">
+                        <!-- CAMBIO: src inicial con la imagen de aleatorio -->
+                        <img id="selected-boss-preview-img" src="img/random-icon.png" alt="Jefe seleccionado">
+                    </div>
+                    <span id="selected-boss-preview-name">ALEATORIO</span>
+                </div>
+            </div>
+            <label for="hours-offering" style="margin-top: 2rem;">¿CUÁL ES TU OFRENDA?</label>
             
             <div  class="select-wrapper">
                 <select id="hours-offering">
@@ -64,18 +75,7 @@
             <button id="manage-classes-btn" class="ghost-button">
                 GESTIONAR DOMINIOS
             </button>
-            <label style="margin-top: 2rem;">¿A QUÉ BESTIA TE ENFRENTARÁS?</label>
 
-            <!-- Botón para abrir el selector estilo Street Fighter -->
-            <div class="boss-selector-trigger" id="open-boss-selector">
-                <div id="selected-boss-preview" class="selected-boss-preview">
-                    <div class="boss-preview-image">
-                        <!-- CAMBIO: src inicial con la imagen de aleatorio -->
-                        <img id="selected-boss-preview-img" src="img/random-icon.png" alt="Jefe seleccionado">
-                    </div>
-                    <span id="selected-boss-preview-name">ALEATORIO</span>
-                </div>
-            </div>
 
             <!-- Modal de selección de jefes estilo Street Fighter -->
             <div id="boss-selection-modal" class="screen hidden boss-selection-modal">

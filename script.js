@@ -581,56 +581,56 @@ const LOGROS = [
     {
         id: 'primer_dominio',
         titulo: 'Primer Dominio',
-        descripcion: 'Crea tu primera materia',
+        descripcion: 'Crea tu primer dominio',
         icono: '📝',
         condicion: (stats) => stats.clases.length >= 1
     },
     {
         id: 'estudiante_multiple',
         titulo: 'Estudiante Múltiple',
-        descripcion: 'Crea 5 materias diferentes',
+        descripcion: 'Crea 5 dominios diferentes',
         icono: '📚',
         condicion: (stats) => stats.clases.length >= 5
     },
     {
         id: 'academico',
         titulo: 'Académico',
-        descripcion: 'Crea 10 materias diferentes',
+        descripcion: 'Crea 10 dominios diferentes',
         icono: '🎓',
         condicion: (stats) => stats.clases.length >= 10
     },
     {
         id: 'maestro_dominios',
         titulo: 'Maestro de Dominios',
-        descripcion: 'Crea 12 materias diferentes',
+        descripcion: 'Crea 12 dominios diferentes',
         icono: '🏛️',
         condicion: (stats) => stats.clases.length >= 12
     },
     {
         id: 'archivista',
         titulo: 'Archivista',
-        descripcion: 'Crea 15 materias diferentes',
+        descripcion: 'Crea 15 dominios diferentes',
         icono: '📊',
         condicion: (stats) => stats.clases.length >= 15
     },
     {
         id: 'bibliotecario',
         titulo: 'Bibliotecario Supremo',
-        descripcion: 'Crea 20 materias diferentes',
+        descripcion: 'Crea 20 dominios diferentes',
         icono: '📚',
         condicion: (stats) => stats.clases.length >= 20
     },
     {
         id: 'especialista',
         titulo: 'Especialista',
-        descripcion: 'Completa 5 horas en una sola materia',
+        descripcion: 'Completa 5 horas en un solo dominios',
         icono: '⭐',
         condicion: (stats) => stats.clases.some(c => c.minutos >= 300)
     },
     {
         id: 'gran_maestro',
         titulo: 'Gran Maestro',
-        descripcion: 'Completa 25 horas en una sola materia',
+        descripcion: 'Completa 25 horas en un solo dominio',
         icono: '🎯',
         condicion: (stats) => stats.clases.some(c => c.minutos >= 1500)
     },
@@ -1130,7 +1130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateTabTitle(0, 'lobby');
                 updateFavicon('lobby');
                 
-                console.log("🏠 Volviendo al menú - Materia actual reseteada");
+                console.log("🏠 Volviendo al menú - Dominio actual reseteada");
             }, 400);
             // ✅ NUEVO: Mostrar notificaciones pendientes al volver al menú
     setTimeout(() => {
@@ -1231,7 +1231,7 @@ function showLogros() {
     // Cargar materias en el select del pacto
     function loadClassSelect() {
         const stats = getStats();
-        classSelect.innerHTML = '<option value="" disabled selected>SELECCIONA TU MATERIA</option>';
+        classSelect.innerHTML = '<option value="" disabled selected>SELECCIONA DOMINIO</option>';
         
         stats.clases.forEach(clase => {
             const option = document.createElement('option');
@@ -1293,7 +1293,7 @@ function initializeBossPreview() {
 // Eliminar materia
 
 function deleteClass(id) {
-    if (!confirm('¿Estás seguro de eliminar esta materia? Se perderán sus estadísticas.')) return;
+    if (!confirm('¿Estás seguro de eliminar este dominio? Se perderán sus estadísticas.')) return;
     
     const stats = getStats();
     stats.clases = stats.clases.filter(c => c.id !== id);
@@ -2647,7 +2647,7 @@ if (stats.clases.length === 0) {
     content += `
         <div class="class-grid-item" style="grid-column: 1 / -1; max-width: 280px; margin: 0 auto;">
             <span class="class-grid-title">Aún no has conquistado dominios</span>
-            <span class="class-grid-subtitle">Crea materias para comenzar</span>
+            <span class="class-grid-subtitle">Crea un dominio para comenzar</span>
         </div>
     `;
 } else {
